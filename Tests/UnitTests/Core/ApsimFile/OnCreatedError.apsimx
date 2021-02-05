@@ -54,7 +54,7 @@
             },
             {
               "$type": "Models.Manager, Models",
-              "Code": "namespace Models\r\n{\r\n\tusing System;\r\n\tusing Core;\r\n\r\n\t[Serializable]\r\n\tpublic class Script : Model\r\n\t{\r\n\t\tpublic override void OnCreated()\r\n\t\t{\r\n\t\t\tthrow new Exception(\"Error thrown from manager script's OnCreated()\");\r\n\t\t}\r\n\t}\r\n}",
+              "Code": "namespace Models\r\n{\r\n\tusing System;\r\n\tusing Models.Core;\r\n\r\n\t[Serializable]\r\n\tpublic class Script : Model\r\n\t{\r\n\t\tpublic override void OnCreated()\r\n\t\t{\r\n\t\t\tthrow new Exception(\"Error thrown from manager script's OnCreated()\");\r\n\t\t}\r\n\t}\r\n}",
               "Parameters": [],
               "Name": "Manager",
               "IncludeInDocumentation": true,

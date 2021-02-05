@@ -545,7 +545,7 @@ namespace Models.Core.ApsimFile
 
                 foreach (var replacement in changes)
                 {
-                    if (manager.Replace(replacement.Item1, replacement.Item2))
+                    if (manager.Parser.Replace(replacement.Item1, replacement.Item2))
                         replacementMade = true;
                 }
                 if (replacementMade)

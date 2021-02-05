@@ -793,13 +793,9 @@
                     ChangeProperty command = new ChangeProperty(changes);
                     explorerPresenter.CommandHistory.Add(command);
 
-                    // Now call OnCreated() for all changed models. Note ToList() to force greedy evaluation.
+                    // Now call OnCreated() for all changed models.
                     if (model.Enabled)
-                    {
-                        model.OnCreated();
-                        foreach (IModel descendant in model.FindAllDescendants().ToList())
-                            descendant.OnCreated();
-                    }
+                        Simulations.InitialiseModel(model);
 
                     explorerPresenter.PopulateContextMenu(explorerPresenter.CurrentNodePath);
                     explorerPresenter.Refresh();

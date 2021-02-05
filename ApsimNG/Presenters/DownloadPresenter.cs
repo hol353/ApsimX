@@ -276,7 +276,7 @@ namespace UserInterface.Presenters
                         var xml = webService.SoilXML(soilInfo.Name);
                         var soil = FileFormat.ReadFromString<Soil>(xml, out List<Exception> errors);
                         soil.Children.Add(new CERESSoilTemperature());
-                        soil.OnCreated();
+                        Simulations.InitialiseModel(soil);
                         soils.Add(new SoilFromDataSource()
                         {
                             Soil = soil,
@@ -311,7 +311,7 @@ namespace UserInterface.Presenters
                 {
                     var soil = FileFormat.ReadFromString<Soil>(soilNodes[0].OuterXml, out List<Exception> errors);
                     soil.Children.Add(new CERESSoilTemperature());
-                    soil.OnCreated();
+                    Simulations.InitialiseModel(soil);
 
                     soils.Add(new SoilFromDataSource()
                     {
@@ -348,7 +348,7 @@ namespace UserInterface.Presenters
                 {
                     var soil = FileFormat.ReadFromString<Soil>(soilNodes[0].OuterXml, out List<Exception> errors);
                     soil.Children.Add(new CERESSoilTemperature());
-                    soil.OnCreated();
+                    Simulations.InitialiseModel(soil);
 
                     soils.Add(new SoilFromDataSource()
                     {
@@ -630,7 +630,7 @@ namespace UserInterface.Presenters
                 newSoil.Children.Add(initialNitrogen);
                 newSoil.Children.Add(new CERESSoilTemperature());
                 newSoil.ParentAllDescendants();
-                newSoil.OnCreated();
+                Simulations.InitialiseModel(newSoil);
 
                 newSoil.Name = "Synthetic soil derived from ISRIC SoilGrids REST API";
                 newSoil.DataSource = "ISRIC SoilGrids";
@@ -775,7 +775,7 @@ namespace UserInterface.Presenters
                 organicMatter.SoilCNRatio = Enumerable.Repeat(11.0, layerCount).ToArray(); // Is there any good way to estimate this? ISRIC provides no N data
 
                 newSoil.Children.Add(new CERESSoilTemperature());
-                newSoil.OnCreated();
+                Simulations.InitialiseModel(newSoil);
 
                 soils.Add(new SoilFromDataSource()
                 {

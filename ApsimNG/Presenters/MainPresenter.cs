@@ -9,6 +9,7 @@
     using Interfaces;
     using Models;
     using Models.Core;
+    using Models.Core.Script;
     using Views;
     using System.Linq;
     using System.Diagnostics;
@@ -185,13 +186,19 @@
                 typeof(GLib.Log).Assembly.Location,
             };
 
-            var compiler = new ScriptCompiler();
-            var results = compiler.Compile(code, new Model(), assemblies);
-            if (results.ErrorMessages != null)
-                throw new Exception($"Script compile errors: {results.ErrorMessages}");
+            var compiler = ScriptCompiler.Instance;
+            compiler.ReferencedAssemblies = assemblies;
+            compiler.AddScript(code, null, OnInstanceCreated);
+            var errorMessages = compiler.Compile();
+            if (errorMessages != null)
+                throw new Exception($"Script compile errors: {errorMessages}");
+        }
 
+        /// <summary>An instance of the expression function has been compiled.</summary>
+        private void OnInstanceCreated(object instance)
+        {
             // Create a new script model.
-            object script = results.Instance;
+            object script = instance;
 
             // Look for a method called Execute
             MethodInfo executeMethod = script.GetType().GetMethod("Execute");

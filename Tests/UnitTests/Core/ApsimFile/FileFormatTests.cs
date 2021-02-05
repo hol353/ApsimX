@@ -102,7 +102,7 @@
             List<Exception> creationExceptions;
             var simulations = FileFormat.ReadFromString<Simulations>(json, out creationExceptions);
             Assert.AreEqual(creationExceptions.Count, 1);
-            Assert.IsTrue(creationExceptions[0].Message.StartsWith("Errors found"));
+            Assert.IsTrue(creationExceptions[0].Message.Contains("A namespace cannot directly contain members"));
 
             // Even though the manager model threw an exception we should still have
             // a valid simulation.

@@ -152,6 +152,7 @@
     <Compile Include="Core\Run\GenerateApsimXFilesTests.cs" />
     <Compile Include="Core\Run\RunnerTests.cs" />
     <Compile Include="Core\Run\SimulationTests.cs" />
+    <Compile Include="Core\Script\ScriptCompilerTests.cs" />
     <Compile Include="Functions\HoldFunctionTests.cs" />
     <Compile Include="Graph\MockSimulationDescriptionGenerator.cs" />
     <Compile Include="Graph\SeriesTests.cs" />
@@ -185,7 +186,7 @@
     <Compile Include="Weather\WeatherTests.cs" />
     <Compile Include="Core\ApsimFile\XMLToJSONTests.cs" />
     <Compile Include="Core\DocumentationTests.cs" />
-    <Compile Include="Core\ApsimFile\ManagerConverterTests.cs" />
+    <Compile Include="Core\Script\ScriptParserTests.cs" />
     <Compile Include="APSIMShared\IndexedDataTableTests.cs" />
     <Compile Include="Functions\TrackerFunctionTests.cs" />
     <Compile Include="FertiliserTests.cs" />
@@ -273,9 +274,7 @@
     <EmbeddedResource Include="Core\ApsimFile\JsonUtilitiesTestsEnsureTypeWorks.json" />
     <EmbeddedResource Include="Core\ApsimFile\JsonUtilitiesTestsDescendantsByType.json" />
     <EmbeddedResource Include="Core\ApsimFile\JsonUtilitiesTestsEnsurePropertyWorks.json" />
-    <EmbeddedResource Include="Core\ApsimFile\ManagerConverterTestsReplaceManagerText.json" />
     <EmbeddedResource Include="Weather\WeatherTestsExcelFile.xlsx" />
-    <EmbeddedResource Include="Core\ApsimFile\ManagerConverterTestsReplaceManagerTextRegex.json" />
     <EmbeddedResource Include="Sensitivity\MorrisTestsBroken.apsimx" />
     <EmbeddedResource Include="Report\ReportOnEvents.apsimx" />
     <EmbeddedResource Include="Resources\WheatModel.apsimx" />

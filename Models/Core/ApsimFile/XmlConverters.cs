@@ -3,6 +3,7 @@
 namespace Models.Core.ApsimFile
 {
     using APSIM.Shared.Utilities;
+    using Models.Core.Script;
     using Models.Factorial;
     using System;
     using System.Collections.Generic;
@@ -598,13 +599,13 @@ namespace Models.Core.ApsimFile
             {
                 ManagerConverter manager = new ManagerConverter();
                 manager.Read(managerNode);
-                List<MethodCall> methods = manager.FindMethodCalls("SoluteManager", "Add");
-                foreach (MethodCall method in methods)
+                var methods = manager.Parser.FindMethodCalls("SoluteManager", "Add");
+                foreach (var method in methods)
                 {
                     if (method.Arguments.Count == 2)
                     {
                         method.Arguments.Insert(1, "SoluteSetterType.Fertiliser");
-                        manager.SetMethodCall(method);
+                        manager.Parser.SetMethodCall(method);
                     }
                 }
                 manager.Write(managerNode);

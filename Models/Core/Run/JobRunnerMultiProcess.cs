@@ -2,6 +2,7 @@
 {
     using APSIM.Shared.JobRunning;
     using APSIM.Shared.Utilities;
+    using Models.Core.Script;
     using Models.Storage;
     using System;
     using System.Collections.Concurrent;

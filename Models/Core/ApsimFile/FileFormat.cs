@@ -94,21 +94,18 @@
 
             // Parent all models.
             newModel.Parent = null;
-            newModel.ParentAllDescendants();
 
             // Call created in all models.
             creationExceptions = new List<Exception>();
-            foreach (var model in newModel.FindAllDescendants().ToList())
+            try
             {
-                try
-                {
-                    model.OnCreated();
-                }
-                catch (Exception err)
-                {
-                    creationExceptions.Add(err);
-                }
+                Simulations.InitialiseModel(newModel);
             }
+            catch (Exception err)
+            {
+                creationExceptions.Add(err);
+            }
+
             return newModel;
         }
 

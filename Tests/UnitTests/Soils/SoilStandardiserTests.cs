@@ -65,7 +65,7 @@
                     }
                 }
             };
-            Utilities.InitialiseModel(soil);
+            Simulations.InitialiseModel(soil);
 
             SoilStandardiser.Standardise(soil);
 
@@ -142,7 +142,7 @@
                     }
                 }
             };
-            Utilities.InitialiseModel(soil);
+            Simulations.InitialiseModel(soil);
 
             SoilStandardiser.Standardise(soil);
 
@@ -207,7 +207,7 @@
                     }
                 }
             };
-            Utilities.InitialiseModel(soil);
+            Simulations.InitialiseModel(soil);
 
             SoilStandardiser.Standardise(soil);
 

@@ -13,6 +13,7 @@ using Models.Storage;
 using Newtonsoft.Json.Serialization;
 using Models.Core.ApsimFile;
 using Models.Core.Run;
+using Models.Core.Script;
 
 namespace Models.Core
 {
@@ -56,9 +57,6 @@ namespace Models.Core
             }
         }
 
-        /// <summary>Gets a c# script compiler.</summary>
-        public ScriptCompiler ScriptCompiler { get; } = new ScriptCompiler();
-
         /// <summary>Returns an instance of an events service</summary>
         /// <param name="model">The model the service is for</param>
         public IEvent GetEventService(IModel model)
@@ -88,13 +86,9 @@ namespace Models.Core
             Simulations newSimulations = new Core.Simulations();
             newSimulations.Children.AddRange(children.Cast<Model>());
 
-            // Parent all models.
+            // Initialise model
             newSimulations.Parent = null;
-            newSimulations.ParentAllDescendants();
-
-            // Call OnCreated in all models.
-            foreach (IModel model in newSimulations.FindAllDescendants().ToList())
-                model.OnCreated();
+            Simulations.InitialiseModel(newSimulations);
 
             return newSimulations;
         }
@@ -211,7 +205,6 @@ namespace Models.Core
             var storage = this.FindInScope<IDataStore>();
             if (storage != null)
                 services.Add(storage);
-            services.Add(ScriptCompiler);
             return services;
         }
 
@@ -247,6 +240,19 @@ namespace Models.Core
                     fileNames.Add(PathUtilities.GetAbsolutePath(fileName, FileName));
             
             return fileNames;
+        }
+
+        /// <summary>Initialise a model and all child models. Will throw on script compile errors.</summary>
+        /// <param name="modelToInitialise">The model to initialise.</param>
+        public static void InitialiseModel(IModel modelToInitialise)
+        {
+            // Create parent child relationship.
+            modelToInitialise.ParentAllDescendants();
+
+            // Call OnCreated in all models.
+            var allModelsToInitialise = new IModel[] { modelToInitialise }.Concat(modelToInitialise.FindAllDescendants());
+            foreach (var model in allModelsToInitialise)
+                model.OnCreated();
         }
 
         /// <summary>Documents the specified model.</summary>

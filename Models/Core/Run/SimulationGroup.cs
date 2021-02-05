@@ -192,14 +192,7 @@
                     bool hasBeenDeserialised = relativeTo.Children.Count > 0 &&
                                                relativeTo.Children[0].Parent == relativeTo;
                     if (!hasBeenDeserialised)
-                    {
-                        // Parent all models.
-                        relativeTo.ParentAllDescendants();
-
-                        // Call OnCreated in all models.
-                        foreach (IModel model in relativeTo.FindAllDescendants().ToList())
-                            model.OnCreated();
-                    }
+                        Simulations.InitialiseModel(relativeTo);
 
                     // Find the root model.
                     rootModel = relativeTo;

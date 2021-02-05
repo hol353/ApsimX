@@ -9,6 +9,7 @@
     using System.Drawing;
     using System.Reflection;
     using Newtonsoft.Json;
+    using Models.Core.Script;
 
     /// <summary>
     /// The manager model
@@ -26,45 +27,11 @@
     [ValidParent(ParentType = typeof(Soils.Soil))]
     public class Manager : Model, IOptionallySerialiseChildren, ICustomDocumentation
     {
-        [NonSerialized]
-        [Link]
-        private ScriptCompiler scriptCompiler = null;
-
         /// <summary>The code to compile.</summary>
         private string cSharpCode = ReflectionUtilities.GetResourceAsString("Models.Resources.Scripts.BlankManager.cs");
 
         /// <summary>Is the model after creation.</summary>
         private bool afterCreation = false;
-
-        /// <summary>
-        /// At design time the [Link] above will be null. In that case search for a 
-        /// Simulations object and get its compiler.
-        /// 
-        /// </summary>
-        private ScriptCompiler Compiler()
-        {
-            if (TryGetCompiler())
-                return scriptCompiler;
-            else
-                throw new Exception("Cannot find a script compiler in manager.");
-        }
-
-        /// <summary>
-        /// At design time the [Link] above will be null. In that case search for a 
-        /// Simulations object and get its compiler.
-        /// </summary>
-        /// <returns>True if compiler was found.</returns>
-        private bool TryGetCompiler()
-        {
-            if (scriptCompiler == null)
-            {
-                var simulations = FindAncestor<Simulations>();
-                if (simulations == null)
-                    return false;
-                scriptCompiler = simulations.ScriptCompiler;
-            }
-            return true;
-        }
 
         /// <summary>Gets or sets the code to compile.</summary>
         public string Code
@@ -108,12 +75,7 @@
         public override void OnCreated()
         {
             afterCreation = true;
-
-            // During ModelReplacement.cs, OnCreated is called. When this happens links haven't yet been
-            // resolved and there is no parent Simulations object which leads to no ScriptCompiler
-            // instance. This needs to be fixed.
-            if (TryGetCompiler())
-                RebuildScriptModel();
+            RebuildScriptModel();
         }
 
         /// <summary>
@@ -140,22 +102,27 @@
                 if (Children.Count != 0)
                     GetParametersFromScriptModel();
 
-                var results = Compiler().Compile(Code, this);
-                if (results.ErrorMessages == null)
-                {
-                    if (Children.Count != 0)
-                        Children.Clear();
-                    var newModel = results.Instance as IModel;
-                    if (newModel != null)
-                    {
-                        newModel.IsHidden = true;
-                        Structure.Add(newModel, this);
-                    }
-                }
-                else
-                    throw new Exception($"Errors found in manager model {Name}{Environment.NewLine}{results.ErrorMessages}");
-                SetParametersInScriptModel();
+                ScriptCompiler.Instance.AddScript(Code, FullPath, OnInstanceCreated);
             }
+        }
+
+        /// <summary>
+        /// An instance of the expression function has been compiled.
+        /// </summary>
+        /// <param name="instance"></param>
+        private void OnInstanceCreated(object instance)
+        {
+            if (Children.Count != 0)
+                Children.Clear();
+            var newModel = instance as IModel;
+            if (newModel != null)
+            {
+                newModel.IsHidden = true;
+                Children.Add(newModel);
+                newModel.Parent = this;
+                newModel.OnCreated();
+            }
+            SetParametersInScriptModel();
         }
 
         /// <summary>Set the scripts parameters from the 'xmlElement' passed in.</summary>

@@ -7,6 +7,7 @@ namespace UnitTests.ManagerTests
 {
     using Models.Core.ApsimFile;
     using Models.Core.Run;
+    using Models.Core.Script;
     using System.Collections.Generic;
     using System.IO;
     using UnitTests.Storage;
@@ -84,9 +85,7 @@ namespace UnitTests.ManagerTests
         public void ManagerScriptOnCreated()
         {
             string json = ReflectionUtilities.GetResourceAsString("UnitTests.Core.ApsimFile.OnCreatedError.apsimx");
-            List<Exception> errors = new List<Exception>();
-            FileFormat.ReadFromString<IModel>(json, out errors);
-
+            FileFormat.ReadFromString<IModel>(json, out List<Exception> errors);
             Assert.NotNull(errors);
             Assert.AreEqual(1, errors.Count, "Encountered the wrong number of errors when opening OnCreatedError.apsimx.");
             Assert.That(errors[0].ToString().Contains("Error thrown from manager script's OnCreated()"), "Encountered an error while opening OnCreatedError.apsimx, but it appears to be the wrong error: {0}.", errors[0].ToString());
@@ -105,13 +104,10 @@ namespace UnitTests.ManagerTests
             if (errors != null && errors.Count > 0)
                 throw errors[0];
 
-            foreach (Runner.RunTypeEnum runType in Enum.GetValues(typeof(Runner.RunTypeEnum)))
-            {
-                Runner runner = new Runner(sims);
-                errors = runner.Run();
-                if (errors != null && errors.Count > 0)
-                    throw errors[0];
-            }
+            Runner runner = new Runner(sims);
+            errors = runner.Run();
+            if (errors != null && errors.Count > 0)
+                throw errors[0];
         }
 
         /// <summary>

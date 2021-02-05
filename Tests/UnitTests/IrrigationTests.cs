@@ -161,9 +161,8 @@
                 }
             };
 
-            zone.ParentAllDescendants();
-            foreach (IModel model in zone.FindAllDescendants())
-                model.OnCreated();
+            Simulations.InitialiseModel(zone);
+
             var links = new Links();
             links.Resolve(zone, true);
             var events = new Events(zone);

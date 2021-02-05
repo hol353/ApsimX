@@ -22,7 +22,14 @@ namespace UnitTests
         [OneTimeTearDown]
         public static void TearDown()
         {
-            Directory.Delete(tempPath, true);
+            try
+            {
+                Directory.Delete(tempPath, true);
+            }
+            catch
+            {
+
+            }
         }
 
         [OneTimeSetUp]
@@ -32,18 +39,6 @@ namespace UnitTests
             Environment.SetEnvironmentVariable("TMP", tempPath);
             if (!Directory.Exists(tempPath))
                 Directory.CreateDirectory(tempPath);
-        }
-
-        /// <summary>
-        /// Parent all children of 'model' and call 'OnCreated' in each child.
-        /// </summary>
-        /// <param name="model">The model to parent</param>
-        public static void InitialiseModel(IModel model)
-        {
-            model.ParentAllDescendants();
-            model.OnCreated();
-            foreach (var child in model.FindAllDescendants())
-                child.OnCreated();
         }
 
         /// <summary>

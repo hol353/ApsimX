@@ -1,5 +1,6 @@
 ﻿using APSIM.Shared.JobRunning;
 using Models.Core.Run;
+using Models.Core.Script;
 using Models.Factorial;
 using Models.Storage;
 using Newtonsoft.Json;
@@ -222,14 +223,7 @@ namespace Models.Core
             // to parent all child models correctly and call OnCreated for each model.
             bool hasBeenDeserialised = Children.Count > 0 && Children[0].Parent == this;
             if (!hasBeenDeserialised)
-            {
-                // Parent all models.
-                this.ParentAllDescendants();
-
-                // Call OnCreated in all models.
-                foreach (IModel model in FindAllDescendants().ToList())
-                    model.OnCreated();
-            }
+                Simulations.InitialiseModel(this);
 
             // Call OnPreLink in all models.
             // Note the ToList(). This is important because some models can
@@ -248,7 +242,6 @@ namespace Models.Core
                     IDataStore storage = this.FindInScope<IDataStore>();
                     if (storage != null)
                         Services.Add(this.FindInScope<IDataStore>());
-                    Services.Add(new ScriptCompiler());
                 }
             }
 

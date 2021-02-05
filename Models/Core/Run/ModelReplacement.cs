@@ -92,9 +92,7 @@
             // a child of a resource model, the resource model's OnCreated event
             // will make it reread the resource string and replace this child with
             // the 'official' child from the resource.
-            newModel.OnCreated();
-            foreach (var model in newModel.FindAllDescendants().ToList())
-                model.OnCreated();
+            Simulations.InitialiseModel(newModel);
         }
     }
 

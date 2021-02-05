@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 using Models.Core;
 using APSIM.Shared.Utilities;
+using Models.Core.Script;
 
 namespace Models.Functions
 {
@@ -16,10 +16,6 @@ namespace Models.Functions
     [PresenterName("UserInterface.Presenters.PropertyPresenter")]
     public class CSharpExpressionFunction : Model, IFunction, ICustomDocumentation
     {
-        [NonSerialized]
-        [Link]
-        private ScriptCompiler scriptCompiler = null;
-
         /// <summary>An instance of an IFunction that is our compiled expression.</summary>
         private IFunction expressionFunction;
 
@@ -27,34 +23,10 @@ namespace Models.Functions
         [Description("C# expression")]
         public string Expression { get; set; }
 
-        /// <summary>the script compiler.</summary>
-        /// <param name="compiler"></param>
-        public void SetCompiler(ScriptCompiler compiler)
-        {
-            scriptCompiler = compiler;
-        }
-
         /// <summary>Gets the value of the expression.</summary>
         public double Value(int arrayIndex = -1)
         {
             return expressionFunction.Value(arrayIndex);
-        }
-
-        /// <summary>
-        /// At design time the [Link] above will be null. In that case search for a 
-        /// Simulations object and get its compiler.
-        /// 
-        /// </summary>
-        private ScriptCompiler Compiler()
-        {
-            if (scriptCompiler == null)
-            {
-                var simulations = FindAncestor<Simulations>();
-                if (simulations == null)
-                    throw new Exception("Cannot find a script compiler in manager.");
-                scriptCompiler = simulations.ScriptCompiler;
-            }
-            return scriptCompiler;
         }
 
         /// <summary>Writes documentation for this function by adding to the list of documentation tags.</summary>
@@ -122,26 +94,21 @@ namespace Models.Functions
             template = template.Replace("return 123456;", "return " + Expression + ";");
 
             // Create a new manager that will compile the expression.
-            var result = Compiler().Compile(template, this);
-            if (result.ErrorMessages == null)
-            {
-                if (expressionFunction == null || result.WasCompiled)
-                {
-                    expressionFunction = result.Instance as IFunction;
-                    (expressionFunction as IModel).Parent = this;
+            ScriptCompiler.Instance.AddScript(template, FullPath, OnInstanceCreated);
+        }
 
-                    // Resolve links
-                    var linkResolver = new Links();
-                    linkResolver.Resolve(expressionFunction as IModel, true);
-                }
-            }
-            else
-            {
-                var st = $"Cannot compile expression: {Expression}{Environment.NewLine}" +
-                         $"{result.ErrorMessages}{Environment.NewLine}" +
-                         $"Generated code: {Environment.NewLine}{template}";
-                throw new Exception(st);
-            }
+        /// <summary>
+        /// An instance of the expression function has been compiled.
+        /// </summary>
+        /// <param name="instance"></param>
+        private void OnInstanceCreated(object instance)
+        {
+            expressionFunction = instance as IFunction;
+            (expressionFunction as IModel).Parent = this;
+
+            // Resolve links
+            var linkResolver = new Links();
+            linkResolver.Resolve(expressionFunction as IModel, true);
         }
 
         /// <summary>
@@ -153,10 +120,6 @@ namespace Models.Functions
         private void OnStartOfSimulation(object sender, EventArgs e)
         {
             CompileExpression();
-
         }
-
     }
 }
-
-

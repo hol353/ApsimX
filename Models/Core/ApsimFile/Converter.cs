@@ -308,39 +308,39 @@
                 {
                     if (originalCode.Contains("SoilNitrogen.NO3"))
                     {
-                        manager.Replace("Soil.SoilNitrogen.NO3", "NO3.kgha");
-                        manager.Replace("SoilNitrogen.NO3", "NO3.kgha");
-                        manager.AddDeclaration("ISolute", "NO3", new string[] { "[ScopedLinkByName]" });
+                        manager.Parser.Replace("Soil.SoilNitrogen.NO3", "NO3.kgha");
+                        manager.Parser.Replace("SoilNitrogen.NO3", "NO3.kgha");
+                        manager.Parser.AddDeclaration("ISolute", "NO3", new string[] { "[ScopedLinkByName]" });
                     }
                     if (originalCode.Contains("SoilNitrogen.NH4"))
                     {
-                        manager.Replace("Soil.SoilNitrogen.NH4", "NH4.kgha");
-                        manager.Replace("SoilNitrogen.NH4", "NH4.kgha");
-                        manager.AddDeclaration("ISolute", "NH4", new string[] { "[ScopedLinkByName]" });
+                        manager.Parser.Replace("Soil.SoilNitrogen.NH4", "NH4.kgha");
+                        manager.Parser.Replace("SoilNitrogen.NH4", "NH4.kgha");
+                        manager.Parser.AddDeclaration("ISolute", "NH4", new string[] { "[ScopedLinkByName]" });
                     }
                     if (originalCode.Contains("SoilNitrogen.urea"))
                     {
-                        manager.Replace("Soil.SoilNitrogen.urea", "Urea.kgha");
-                        manager.Replace("SoilNitrogen.urea", "Urea.kgha");
-                        manager.AddDeclaration("ISolute", "Urea", new string[] { "[ScopedLinkByName]" });
+                        manager.Parser.Replace("Soil.SoilNitrogen.urea", "Urea.kgha");
+                        manager.Parser.Replace("SoilNitrogen.urea", "Urea.kgha");
+                        manager.Parser.AddDeclaration("ISolute", "Urea", new string[] { "[ScopedLinkByName]" });
                     }
                     if (originalCode.Contains("SoilNitrogen.PlantAvailableNO3"))
                     {
-                        manager.Replace("Soil.SoilNitrogen.PlantAvailableNO3", "PlantAvailableNO3.kgha");
-                        manager.Replace("SoilNitrogen.PlantAvailableNO3", "PlantAvailableNO3.kgha");
-                        manager.AddDeclaration("ISolute", "PlantAvailableNO3", new string[] { "[ScopedLinkByName]" });
+                        manager.Parser.Replace("Soil.SoilNitrogen.PlantAvailableNO3", "PlantAvailableNO3.kgha");
+                        manager.Parser.Replace("SoilNitrogen.PlantAvailableNO3", "PlantAvailableNO3.kgha");
+                        manager.Parser.AddDeclaration("ISolute", "PlantAvailableNO3", new string[] { "[ScopedLinkByName]" });
                     }
                     if (originalCode.Contains("SoilNitrogen.PlantAvailableNH4"))
                     {
-                        manager.Replace("Soil.SoilNitrogen.PlantAvailableNH4", "PlantAvailableNH4.kgha");
-                        manager.Replace("SoilNitrogen.PlantAvailableNH4", "PlantAvailableNH4.kgha");
-                        manager.AddDeclaration("ISolute", "PlantAvailableNH4", new string[] { "[ScopedLinkByName]" });
+                        manager.Parser.Replace("Soil.SoilNitrogen.PlantAvailableNH4", "PlantAvailableNH4.kgha");
+                        manager.Parser.Replace("SoilNitrogen.PlantAvailableNH4", "PlantAvailableNH4.kgha");
+                        manager.Parser.AddDeclaration("ISolute", "PlantAvailableNH4", new string[] { "[ScopedLinkByName]" });
                     }
                     if (originalCode != manager.ToString())
                     {
-                        var usingLines = manager.GetUsingStatements().ToList();
+                        var usingLines = manager.Parser.GetUsingStatements().ToList();
                         usingLines.Add("Models.Interfaces");
-                        manager.SetUsingStatements(usingLines);
+                        manager.Parser.SetUsingStatements(usingLines);
                         manager.Save();
                     }
                 }
@@ -387,68 +387,68 @@
             foreach (var manager in JsonUtilities.ChildManagers(root))
             {
                 bool managerChanged = false;
-                if (manager.Replace("mySoil.NO3N", "NO3.kgha"))
+                if (manager.Parser.Replace("mySoil.NO3N", "NO3.kgha"))
                 {
-                    manager.AddDeclaration("ISolute", "NO3", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.AddDeclaration("ISolute", "NO3", new string[] { "[ScopedLinkByName]" });
                     managerChanged = true;
                 }
-                if (manager.Replace("mySoil.NH4N", "NH4.kgha"))
+                if (manager.Parser.Replace("mySoil.NH4N", "NH4.kgha"))
                 {
-                    manager.AddDeclaration("ISolute", "NH4", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.AddDeclaration("ISolute", "NH4", new string[] { "[ScopedLinkByName]" });
                     managerChanged = true;
                 }
-                if (manager.Replace("mySoil.UreaN", "Urea.kgha"))
+                if (manager.Parser.Replace("mySoil.UreaN", "Urea.kgha"))
                 {
-                    manager.AddDeclaration("ISolute", "Urea", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.AddDeclaration("ISolute", "Urea", new string[] { "[ScopedLinkByName]" });
                     managerChanged = true;
                 }
-                if (manager.Replace("Soil.NO3N", "NO3.kgha"))
+                if (manager.Parser.Replace("Soil.NO3N", "NO3.kgha"))
                 {
-                    manager.AddDeclaration("ISolute", "NO3", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.AddDeclaration("ISolute", "NO3", new string[] { "[ScopedLinkByName]" });
                     managerChanged = true;
                 }
-                if (manager.Replace("Soil.NH4N", "NH4.kgha"))
+                if (manager.Parser.Replace("Soil.NH4N", "NH4.kgha"))
                 {
-                    manager.AddDeclaration("ISolute", "NH4", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.AddDeclaration("ISolute", "NH4", new string[] { "[ScopedLinkByName]" });
                     managerChanged = true;
                 }
-                if (manager.Replace("Soil.UreaN", "Urea.kgha"))
+                if (manager.Parser.Replace("Soil.UreaN", "Urea.kgha"))
                 {
-                    manager.AddDeclaration("ISolute", "Urea", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.AddDeclaration("ISolute", "Urea", new string[] { "[ScopedLinkByName]" });
                     managerChanged = true;
                 }
-                if (manager.Replace("mySoil.SoilNitrogen.", "SoilNitrogen."))
+                if (manager.Parser.Replace("mySoil.SoilNitrogen.", "SoilNitrogen."))
                 {
-                    manager.AddDeclaration("SoilNitrogen", "SoilNitrogen", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.AddDeclaration("SoilNitrogen", "SoilNitrogen", new string[] { "[ScopedLinkByName]" });
                     managerChanged = true;
                 }
-                if (manager.Replace("Soil.SoilNitrogen.", "SoilNitrogen."))
+                if (manager.Parser.Replace("Soil.SoilNitrogen.", "SoilNitrogen."))
                 {
-                    manager.AddDeclaration("SoilNitrogen", "SoilNitrogen", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.AddDeclaration("SoilNitrogen", "SoilNitrogen", new string[] { "[ScopedLinkByName]" });
                     managerChanged = true;
                 }
-                if (manager.Replace("soil.SoilNitrogen.", "SoilNitrogen."))
+                if (manager.Parser.Replace("soil.SoilNitrogen.", "SoilNitrogen."))
                 {
-                    manager.AddDeclaration("SoilNitrogen", "SoilNitrogen", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.AddDeclaration("SoilNitrogen", "SoilNitrogen", new string[] { "[ScopedLinkByName]" });
                     managerChanged = true;
                 }
-                if (manager.Replace("soil1.SoilNitrogen.", "SoilNitrogen."))
+                if (manager.Parser.Replace("soil1.SoilNitrogen.", "SoilNitrogen."))
                 {
-                    manager.AddDeclaration("SoilNitrogen", "SoilNitrogen", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.AddDeclaration("SoilNitrogen", "SoilNitrogen", new string[] { "[ScopedLinkByName]" });
                     managerChanged = true;
                 }
-                var declarations = manager.GetDeclarations();
+                var declarations = manager.Parser.GetDeclarations();
                 if (declarations.RemoveAll(declaration => declaration.TypeName == "SoluteManager") > 0)
                 {
-                    manager.SetDeclarations(declarations);
+                    manager.Parser.SetDeclarations(declarations);
                     managerChanged = true;
                 }
 
                 if (managerChanged)
                 {
-                    var usingLines = manager.GetUsingStatements().ToList();
+                    var usingLines = manager.Parser.GetUsingStatements().ToList();
                     usingLines.Add("Models.Interfaces");
-                    manager.SetUsingStatements(usingLines);
+                    manager.Parser.SetUsingStatements(usingLines);
                     manager.Save();
                 }
             }
@@ -590,7 +590,7 @@
 
             foreach (var manager in JsonUtilities.ChildManagers(root))
             {
-                if (manager.Replace(".SWAtWaterThickness", ".Thickness"))
+                if (manager.Parser.Replace(".SWAtWaterThickness", ".Thickness"))
                     manager.Save();
             }
         }
@@ -669,12 +669,12 @@
 
             foreach (var manager in JsonUtilities.ChildManagers(root))
             {
-                var changeMade = manager.Replace("Soil.ToCumThickness(soil.Thickness)", "soil.ThicknessCumulative");
+                var changeMade = manager.Parser.Replace("Soil.ToCumThickness(soil.Thickness)", "soil.ThicknessCumulative");
 
-                if (manager.Replace("mySoil.Depth.Length", "mySoil.Thickness.Length"))
+                if (manager.Parser.Replace("mySoil.Depth.Length", "mySoil.Thickness.Length"))
                     changeMade = true;
 
-                if (manager.Replace("soil.Depth.Length", "soil.Thickness.Length"))
+                if (manager.Parser.Replace("soil.Depth.Length", "soil.Thickness.Length"))
                     changeMade = true;
 
                 if (changeMade)
@@ -930,7 +930,7 @@
                     {
                         string toReplace = $"{modelName}.{old}";
                         string replaceWith = $"{modelName}.{newName}";
-                        changed |= manager.Replace(toReplace, replaceWith, true);
+                        changed |= manager.Parser.Replace(toReplace, replaceWith, true);
 
                         foreach (KeyValuePair<string, string> parameter in manager.Parameters)
                         {
@@ -940,7 +940,7 @@
 
                         toReplace = $"[{modelName}].{old}";
                         replaceWith = $"[{modelName}].{newName}";
-                        changed |= manager.Replace(toReplace, replaceWith, true);
+                        changed |= manager.Parser.Replace(toReplace, replaceWith, true);
 
                         foreach (KeyValuePair<string, string> parameter in manager.Parameters)
                         {
@@ -1347,44 +1347,44 @@
                 // from the link resolution code, which means that all such links must be adjusted accordingly.
 
                 // [Link(...)] [Units] [...] Biomass -> [Link(ByName = true, ...)] [Units] [...] Biomass
-                manager.ReplaceRegex(@"\[Link\(([^\)]+)\)\]((\s*\[[^\]]+\])*\s*(public|private|protected|internal|static|readonly| )*\s*(IFunction|Biomass|CNReductionForCover|CNReductionForTillage|RunoffModel|WaterTableModel|HeightFunction|DecumulateFunction|EndOfDayFunction|LiveOnEventFunction|AccumulateAtEvent|DailyMeanVPD|CERESDenitrificationWaterFactor|CERESDenitrificationTemperatureFactor|CERESMineralisationFOMCNRFactor|DayCentN2OFractionModel|CERESNitrificationpHFactor|CERESNitrificationWaterFactor|CERESUreaHydrolysisModel|CERESMineralisationWaterFactor|CERESMineralisationTemperatureFactor|CERESNitrificationModel|StringComparisonFunction|AccumulateByDate|AccumulateByNumericPhase|TrackerFunction|ArrayFunction|WangEngelTempFunction|BoundFunction|LinearAfterThresholdFunction|SoilWaterScale|MovingAverageFunction|HoldFunction|DeltaFunction|MovingSumFunction|QualitativePPEffect|AccumulateFunction|AddFunction|AgeCalculatorFunction|AirTemperatureFunction|BellCurveFunction|Constant|DivideFunction|ExponentialFunction|ExpressionFunction|ExternalVariable|LessThanFunction|LinearInterpolationFunction|MaximumFunction|MinimumFunction|MultiplyFunction|OnEventFunction|PhaseBasedSwitch|PhaseLookup|PhaseLookupValue|PhotoperiodDeltaFunction|PhotoperiodFunction|PowerFunction|SigmoidFunction|SoilTemperatureDepthFunction|SoilTemperatureFunction|SoilTemperatureWeightedFunction|SplineInterpolationFunction|StageBasedInterpolation|SubtractFunction|VariableReference|WeightedTemperatureFunction|XYPairs|CanopyPhotosynthesis|RUECO2Function|RUEModel|StorageDMDemandFunction|StorageNDemandFunction|InternodeCohortDemandFunction|BerryFillingRateFunction|TEWaterDemandFunction|FillingRateFunction|AllometricDemandFunction|InternodeDemandFunction|PartitionFractionDemandFunction|PopulationBasedDemandFunction|PotentialSizeDemandFunction|RelativeGrowthRateDemandFunction))", @"[Link(Type = LinkType.Child, ByName = true, $1)]$2");
+                manager.Parser.ReplaceRegex(@"\[Link\(([^\)]+)\)\]((\s*\[[^\]]+\])*\s*(public|private|protected|internal|static|readonly| )*\s*(IFunction|Biomass|CNReductionForCover|CNReductionForTillage|RunoffModel|WaterTableModel|HeightFunction|DecumulateFunction|EndOfDayFunction|LiveOnEventFunction|AccumulateAtEvent|DailyMeanVPD|CERESDenitrificationWaterFactor|CERESDenitrificationTemperatureFactor|CERESMineralisationFOMCNRFactor|DayCentN2OFractionModel|CERESNitrificationpHFactor|CERESNitrificationWaterFactor|CERESUreaHydrolysisModel|CERESMineralisationWaterFactor|CERESMineralisationTemperatureFactor|CERESNitrificationModel|StringComparisonFunction|AccumulateByDate|AccumulateByNumericPhase|TrackerFunction|ArrayFunction|WangEngelTempFunction|BoundFunction|LinearAfterThresholdFunction|SoilWaterScale|MovingAverageFunction|HoldFunction|DeltaFunction|MovingSumFunction|QualitativePPEffect|AccumulateFunction|AddFunction|AgeCalculatorFunction|AirTemperatureFunction|BellCurveFunction|Constant|DivideFunction|ExponentialFunction|ExpressionFunction|ExternalVariable|LessThanFunction|LinearInterpolationFunction|MaximumFunction|MinimumFunction|MultiplyFunction|OnEventFunction|PhaseBasedSwitch|PhaseLookup|PhaseLookupValue|PhotoperiodDeltaFunction|PhotoperiodFunction|PowerFunction|SigmoidFunction|SoilTemperatureDepthFunction|SoilTemperatureFunction|SoilTemperatureWeightedFunction|SplineInterpolationFunction|StageBasedInterpolation|SubtractFunction|VariableReference|WeightedTemperatureFunction|XYPairs|CanopyPhotosynthesis|RUECO2Function|RUEModel|StorageDMDemandFunction|StorageNDemandFunction|InternodeCohortDemandFunction|BerryFillingRateFunction|TEWaterDemandFunction|FillingRateFunction|AllometricDemandFunction|InternodeDemandFunction|PartitionFractionDemandFunction|PopulationBasedDemandFunction|PotentialSizeDemandFunction|RelativeGrowthRateDemandFunction))", @"[Link(Type = LinkType.Child, ByName = true, $1)]$2");
 
                 // [Link] IFunction -> [Link(ByName = true)] IFunction
-                manager.ReplaceRegex(@"\[Link\]((\s*\[[^\]]+\])*\s*(public|private|protected|internal|static|readonly| )*\s*(IFunction|Biomass|CNReductionForCover|CNReductionForTillage|RunoffModel|WaterTableModel|HeightFunction|DecumulateFunction|EndOfDayFunction|LiveOnEventFunction|AccumulateAtEvent|DailyMeanVPD|CERESDenitrificationWaterFactor|CERESDenitrificationTemperatureFactor|CERESMineralisationFOMCNRFactor|DayCentN2OFractionModel|CERESNitrificationpHFactor|CERESNitrificationWaterFactor|CERESUreaHydrolysisModel|CERESMineralisationWaterFactor|CERESMineralisationTemperatureFactor|CERESNitrificationModel|StringComparisonFunction|AccumulateByDate|AccumulateByNumericPhase|TrackerFunction|ArrayFunction|WangEngelTempFunction|BoundFunction|LinearAfterThresholdFunction|SoilWaterScale|MovingAverageFunction|HoldFunction|DeltaFunction|MovingSumFunction|QualitativePPEffect|AccumulateFunction|AddFunction|AgeCalculatorFunction|AirTemperatureFunction|BellCurveFunction|Constant|DivideFunction|ExponentialFunction|ExpressionFunction|ExternalVariable|LessThanFunction|LinearInterpolationFunction|MaximumFunction|MinimumFunction|MultiplyFunction|OnEventFunction|PhaseBasedSwitch|PhaseLookup|PhaseLookupValue|PhotoperiodDeltaFunction|PhotoperiodFunction|PowerFunction|SigmoidFunction|SoilTemperatureDepthFunction|SoilTemperatureFunction|SoilTemperatureWeightedFunction|SplineInterpolationFunction|StageBasedInterpolation|SubtractFunction|VariableReference|WeightedTemperatureFunction|XYPairs|CanopyPhotosynthesis|RUECO2Function|RUEModel|StorageDMDemandFunction|StorageNDemandFunction|InternodeCohortDemandFunction|BerryFillingRateFunction|TEWaterDemandFunction|FillingRateFunction|AllometricDemandFunction|InternodeDemandFunction|PartitionFractionDemandFunction|PopulationBasedDemandFunction|PotentialSizeDemandFunction|RelativeGrowthRateDemandFunction))", @"[Link(Type = LinkType.Child, ByName = true)]$1");
+                manager.Parser.ReplaceRegex(@"\[Link\]((\s*\[[^\]]+\])*\s*(public|private|protected|internal|static|readonly| )*\s*(IFunction|Biomass|CNReductionForCover|CNReductionForTillage|RunoffModel|WaterTableModel|HeightFunction|DecumulateFunction|EndOfDayFunction|LiveOnEventFunction|AccumulateAtEvent|DailyMeanVPD|CERESDenitrificationWaterFactor|CERESDenitrificationTemperatureFactor|CERESMineralisationFOMCNRFactor|DayCentN2OFractionModel|CERESNitrificationpHFactor|CERESNitrificationWaterFactor|CERESUreaHydrolysisModel|CERESMineralisationWaterFactor|CERESMineralisationTemperatureFactor|CERESNitrificationModel|StringComparisonFunction|AccumulateByDate|AccumulateByNumericPhase|TrackerFunction|ArrayFunction|WangEngelTempFunction|BoundFunction|LinearAfterThresholdFunction|SoilWaterScale|MovingAverageFunction|HoldFunction|DeltaFunction|MovingSumFunction|QualitativePPEffect|AccumulateFunction|AddFunction|AgeCalculatorFunction|AirTemperatureFunction|BellCurveFunction|Constant|DivideFunction|ExponentialFunction|ExpressionFunction|ExternalVariable|LessThanFunction|LinearInterpolationFunction|MaximumFunction|MinimumFunction|MultiplyFunction|OnEventFunction|PhaseBasedSwitch|PhaseLookup|PhaseLookupValue|PhotoperiodDeltaFunction|PhotoperiodFunction|PowerFunction|SigmoidFunction|SoilTemperatureDepthFunction|SoilTemperatureFunction|SoilTemperatureWeightedFunction|SplineInterpolationFunction|StageBasedInterpolation|SubtractFunction|VariableReference|WeightedTemperatureFunction|XYPairs|CanopyPhotosynthesis|RUECO2Function|RUEModel|StorageDMDemandFunction|StorageNDemandFunction|InternodeCohortDemandFunction|BerryFillingRateFunction|TEWaterDemandFunction|FillingRateFunction|AllometricDemandFunction|InternodeDemandFunction|PartitionFractionDemandFunction|PopulationBasedDemandFunction|PotentialSizeDemandFunction|RelativeGrowthRateDemandFunction))", @"[Link(Type = LinkType.Child, ByName = true)]$1");
 
                 // Here I assume that all [LinkByPath] links will have a path argument supplied.
                 // [LinkByPath(...)] -> [Link(Type = LinkType.Path, ...)]
-                manager.ReplaceRegex(@"\[LinkByPath\(([^\)]+)\)", @"[Link(Type = LinkType.Path, $1)");
+                manager.Parser.ReplaceRegex(@"\[LinkByPath\(([^\)]+)\)", @"[Link(Type = LinkType.Path, $1)");
 
                 // [ParentLink(...)] -> [Link(Type = LinkType.Ancestor, ...)]
-                manager.ReplaceRegex(@"\[ParentLink\(([^\)]+)\)", @"[Link(Type = LinkType.Ancestor, $1)");
+                manager.Parser.ReplaceRegex(@"\[ParentLink\(([^\)]+)\)", @"[Link(Type = LinkType.Ancestor, $1)");
 
                 // [ParentLink] -> [Link(Type = LinkType.Ancestor, ByName = false)]
-                manager.Replace("[ParentLink]", "[Link(Type = LinkType.Ancestor)]", caseSensitive: true);
+                manager.Parser.Replace("[ParentLink]", "[Link(Type = LinkType.Ancestor)]", caseSensitive: true);
 
                 // [ScopedLinkByName(...)] -> [Link(ByName = true, ...)]
-                manager.ReplaceRegex(@"\[ScopedLinkByName\(([^\)]+)\)", @"[Link(ByName = true, $1)");
+                manager.Parser.ReplaceRegex(@"\[ScopedLinkByName\(([^\)]+)\)", @"[Link(ByName = true, $1)");
 
                 // [ScopedLinkByName] -> [Link(ByName = true)]
-                manager.Replace("[ScopedLinkByName]", "[Link(ByName = true)]", caseSensitive: true);
+                manager.Parser.Replace("[ScopedLinkByName]", "[Link(ByName = true)]", caseSensitive: true);
 
                 // [ScopedLink(...)] -> [Link(...)]
-                manager.ReplaceRegex(@"\[ScopedLink\(([^\)]+)\)", @"[Link($1)");
+                manager.Parser.ReplaceRegex(@"\[ScopedLink\(([^\)]+)\)", @"[Link($1)");
 
                 // [ScopedLink] -> [Link]
-                manager.Replace("[ScopedLink]", "[Link]", caseSensitive: true);
+                manager.Parser.Replace("[ScopedLink]", "[Link]", caseSensitive: true);
 
                 // [ChildLinkByName(...)] -> [Link(Type = LinkType.Child, ByName = true, ...)]
-                manager.ReplaceRegex(@"\[ChildLinkByName\(([^\)]+)\)", @"[Link(Type = LinkType.Child, ByName = true, $1)");
+                manager.Parser.ReplaceRegex(@"\[ChildLinkByName\(([^\)]+)\)", @"[Link(Type = LinkType.Child, ByName = true, $1)");
 
                 // [ChildLinkByName] -> [Link(Type = LinkType.Child, ByName = true)]
-                manager.Replace("[ChildLinkByName]", "[Link(Type = LinkType.Child, ByName = true)]", caseSensitive: true);
+                manager.Parser.Replace("[ChildLinkByName]", "[Link(Type = LinkType.Child, ByName = true)]", caseSensitive: true);
 
                 // [ChildLink(...)] -> [Link(Type = LinkType.Child, ...)]
-                manager.ReplaceRegex(@"\[ChildLink\(([^\)]+)\)", @"[Link(Type = LinkType.Child, $1)");
+                manager.Parser.ReplaceRegex(@"\[ChildLink\(([^\)]+)\)", @"[Link(Type = LinkType.Child, $1)");
 
                 // [ChildLink] -> [Link(Type = LinkType.Child)]
-                manager.Replace("[ChildLink]", "[Link(Type = LinkType.Child)]", caseSensitive: true);
+                manager.Parser.Replace("[ChildLink]", "[Link(Type = LinkType.Child)]", caseSensitive: true);
 
                 manager.Save();
             }
@@ -1522,7 +1522,7 @@
         {
             foreach (var manager in JsonUtilities.ChildManagers(root))
             {
-                if (manager.Replace(".flow_urea", ".FlowUrea"))
+                if (manager.Parser.Replace(".flow_urea", ".FlowUrea"))
                     manager.Save();
             }
             foreach (var report in JsonUtilities.ChildrenOfType(root, "Report"))
@@ -1540,7 +1540,7 @@
         {
             foreach (var manager in JsonUtilities.ChildManagers(root))
             {
-                if (manager.Replace(".GenoTypes", ".Genotypes"))
+                if (manager.Parser.Replace(".GenoTypes", ".Genotypes"))
                     manager.Save();
             }
             foreach (var stock in JsonUtilities.ChildrenOfType(root, "Stock"))
@@ -1833,19 +1833,19 @@
             // Replace ExcelMultiInput with an ExcelInput.
             foreach (ManagerConverter manager in JsonUtilities.ChildManagers(root))
             {
-                manager.Replace("Models.Report", "Models");
-                manager.Replace("using Report", "using Models");
+                manager.Parser.Replace("Models.Report", "Models");
+                manager.Parser.Replace("using Report", "using Models");
                 //manager.ReplaceRegex("(using Models.+)using Models", "$1");
-                manager.Replace("Report.Report", "Report");
+                manager.Parser.Replace("Report.Report", "Report");
 
-                manager.Replace("Models.Graph", "Models");
-                manager.Replace("Graph.Graph", "Graph");
+                manager.Parser.Replace("Models.Graph", "Models");
+                manager.Parser.Replace("Graph.Graph", "Graph");
 
-                List<string> usingStatements = manager.GetUsingStatements().ToList();
+                List<string> usingStatements = manager.Parser.GetUsingStatements().ToList();
                 usingStatements.Remove("Models.Graph");
                 usingStatements.Remove("Graph");
 
-                manager.SetUsingStatements(usingStatements.Distinct());
+                manager.Parser.SetUsingStatements(usingStatements.Distinct());
 
                 manager.Save();
             }
@@ -1872,7 +1872,7 @@
             {
                 bool managerChanged = false;
 
-                var declarations = manager.GetDeclarations();
+                var declarations = manager.Parser.GetDeclarations();
                 foreach (var declaration in declarations)
                 {
                     if (declaration.TypeName == "SoilWater")
@@ -1884,23 +1884,23 @@
 
                 if (managerChanged)
                 {
-                    manager.SetDeclarations(declarations);
+                    manager.Parser.SetDeclarations(declarations);
 
-                    var usings = manager.GetUsingStatements().ToList();
+                    var usings = manager.Parser.GetUsingStatements().ToList();
                     if (!usings.Contains("Models.Interfaces"))
                     {
                         usings.Add("Models.Interfaces");
-                        manager.SetUsingStatements(usings);
+                        manager.Parser.SetUsingStatements(usings);
                     }
                 }
 
-                if (manager.Replace(" as SoilWater", ""))
+                if (manager.Parser.Replace(" as SoilWater", ""))
                     managerChanged = true;
-                if (manager.Replace("solute_flow_eff", "SoluteFlowEfficiency"))
+                if (manager.Parser.Replace("solute_flow_eff", "SoluteFlowEfficiency"))
                     managerChanged = true;
-                if (manager.Replace("solute_flux_eff", "SoluteFluxEfficiency"))
+                if (manager.Parser.Replace("solute_flux_eff", "SoluteFluxEfficiency"))
                     managerChanged = true;
-                if (manager.Replace("[EventSubscribe(\"Commencing\")", "[EventSubscribe(\"StartOfSimulation\")"))
+                if (manager.Parser.Replace("[EventSubscribe(\"Commencing\")", "[EventSubscribe(\"StartOfSimulation\")"))
                     managerChanged = true;
 
                 if (managerChanged)
@@ -2067,11 +2067,11 @@
                 // because the .ToArray() depends on it.
                 foreach (var manager in JsonUtilities.ChildManagers(root))
                 {
-                    var usings = manager.GetUsingStatements().ToList();
+                    var usings = manager.Parser.GetUsingStatements().ToList();
                     if (usings.Find(u => u.Contains("System.Linq")) == null)
                     {
                         usings.Add("System.Linq");
-                        manager.SetUsingStatements(usings);
+                        manager.Parser.SetUsingStatements(usings);
                         manager.Save();
                     }
                 }
@@ -2373,9 +2373,9 @@
                 var code = manager.ToString();
                 if (code != null && (code.Contains("Nutrient") || code.Contains("Solute")))
                 {
-                    var usingLines = manager.GetUsingStatements().ToList();
+                    var usingLines = manager.Parser.GetUsingStatements().ToList();
                     usingLines.Add("Models.Soils.Nutrients");
-                    manager.SetUsingStatements(usingLines);
+                    manager.Parser.SetUsingStatements(usingLines);
                     manager.Save();
                 }
             }
@@ -2453,9 +2453,9 @@
                 {
                     if (code.Contains(type.Name))
                     {
-                        List<string> usings = manager.GetUsingStatements().ToList();
+                        List<string> usings = manager.Parser.GetUsingStatements().ToList();
                         usings.Add("Models.Climate");
-                        manager.SetUsingStatements(usings);
+                        manager.Parser.SetUsingStatements(usings);
                         manager.Save();
                         break;
                     }
@@ -2542,7 +2542,7 @@
             void FixApsimGet(ManagerConverter manager)
             {
                 string pattern = @"Apsim\.Get\(([^,]+),\s*((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                manager.ReplaceRegex(pattern, match =>
+                manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string replace = @"$1.FindByPath($2).Value";
                     if (match.Groups[1].Value.Contains(" "))
@@ -2556,7 +2556,7 @@
             {
                 string pattern = @"Apsim\.FullPath\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
                 string replacement = "$1.FullPath";
-                manager.ReplaceRegex(pattern, match =>
+                manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     if (match.Groups[1].Value.Contains(" "))
                         replacement = replacement.Replace("$1", "($1)");
@@ -2568,7 +2568,7 @@
             void FixGetVariableObject(ManagerConverter manager)
             {
                 string pattern = @"Apsim\.GetVariableObject\(([^,]+),\s*((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                manager.ReplaceRegex(pattern, match =>
+                manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string replace = @"$1.FindByPath($2)";
                     if (match.Groups[1].Value.Contains(" "))
@@ -2582,7 +2582,7 @@
             void FixAncestor(ManagerConverter manager)
             {
                 string pattern = @"Apsim\.Ancestor<([^>]+)>\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                manager.ReplaceRegex(pattern, match =>
+                manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string replace = @"$2.FindAncestor<$1>($3)";
                     if (match.Groups[2].Value.Contains(" "))
@@ -2596,7 +2596,7 @@
             {
                 bool replaced = false;
                 string pattern = @"Apsim\.Siblings\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                manager.ReplaceRegex(pattern, match =>
+                manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     replaced = true;
 
@@ -2609,17 +2609,17 @@
 
                 if (replaced)
                 {
-                    List<string> usings = manager.GetUsingStatements().ToList();
+                    List<string> usings = manager.Parser.GetUsingStatements().ToList();
                     if (!usings.Contains("System.Linq"))
                         usings.Add("System.Linq");
-                    manager.SetUsingStatements(usings);
+                    manager.Parser.SetUsingStatements(usings);
                 }
             }
 
             void FixParentAllChildren(ManagerConverter manager)
             {
                 string pattern = @"Apsim\.ParentAllChildren\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                manager.ReplaceRegex(pattern, match =>
+                manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string replace = @"$1.ParentAllDescendants()";
                     if (match.Groups[1].Value.Contains(" "))
@@ -2632,7 +2632,7 @@
             void FixParent(ManagerConverter manager)
             {
                 string pattern = @"Apsim\.Parent\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                manager.ReplaceRegex(pattern, match =>
+                manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string argsRegex = @"(?:[^,()]+((?:\((?>[^()]+|\((?<c>)|\)(?<-c>))*\)))*)+";
                     var args = Regex.Matches(match.Groups[1].Value, argsRegex);
@@ -2653,7 +2653,7 @@
             void FixSet(ManagerConverter manager)
             {
                 string pattern = @"Apsim\.Set\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                manager.ReplaceRegex(pattern, match =>
+                manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string argsRegex = @"(?:[^,()]+((?:\((?>[^()]+|\((?<c>)|\)(?<-c>))*\)))*)+";
                     var args = Regex.Matches(match.Groups[1].Value, argsRegex);
@@ -2675,7 +2675,7 @@
             void FixFind(ManagerConverter manager)
             {
                 string pattern = @"Apsim\.Find\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                manager.ReplaceRegex(pattern, match =>
+                manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string argsRegex = @"(?:[^,()]+((?:\((?>[^()]+|\((?<c>)|\)(?<-c>))*\)))*)+";
                     var args = Regex.Matches(match.Groups[1].Value, argsRegex);
@@ -2701,7 +2701,7 @@
             void FixFindAll(ManagerConverter manager)
             {
                 string pattern = @"Apsim\.FindAll\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                bool replaced = manager.ReplaceRegex(pattern, match =>
+                bool replaced = manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string argsRegex = @"(?:[^,()]+((?:\((?>[^()]+|\((?<c>)|\)(?<-c>))*\)))*)+";
                     var args = Regex.Matches(match.Groups[1].Value, argsRegex);
@@ -2736,7 +2736,7 @@
             void FixChild(ManagerConverter manager)
             {
                 string pattern = @"Apsim\.Child\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                manager.ReplaceRegex(pattern, match =>
+                manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string argsRegex = @"(?:[^,()]+((?:\((?>[^()]+|\((?<c>)|\)(?<-c>))*\)))*)+";
                     var args = Regex.Matches(match.Groups[1].Value, argsRegex);
@@ -2759,14 +2759,14 @@
                 });
 
                 pattern = @"(FindChild<([^>]+)>\(\)) as \2";
-                manager.ReplaceRegex(pattern, "$1");
+                manager.Parser.ReplaceRegex(pattern, "$1");
             }
 
             void FixChildren(ManagerConverter manager)
             {
 
                 string pattern = @"Apsim\.Children\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                bool replaced = manager.ReplaceRegex(pattern, match =>
+                bool replaced = manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string argsRegex = @"(?:[^,()]+((?:\((?>[^()]+|\((?<c>)|\)(?<-c>))*\)))*)+";
                     var args = Regex.Matches(match.Groups[1].Value, argsRegex);
@@ -2808,7 +2808,7 @@
             void FixChildrenRecursively(ManagerConverter manager)
             {
                 string pattern = @"Apsim\.ChildrenRecursively\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                bool replaced = manager.ReplaceRegex(pattern, match =>
+                bool replaced = manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string argsRegex = @"(?:[^,()]+((?:\((?>[^()]+|\((?<c>)|\)(?<-c>))*\)))*)+";
                     var args = Regex.Matches(match.Groups[1].Value, argsRegex);
@@ -2851,16 +2851,16 @@
 
             void AddLinqIfNotExist(ManagerConverter manager)
             {
-                List<string> usings = manager.GetUsingStatements().ToList();
+                List<string> usings = manager.Parser.GetUsingStatements().ToList();
                 if (!usings.Contains("System.Linq"))
                     usings.Add("System.Linq");
-                manager.SetUsingStatements(usings);
+                manager.Parser.SetUsingStatements(usings);
             }
 
             void FixChildrenRecursivelyVisible(ManagerConverter manager)
             {
                 string pattern = @"Apsim\.ChildrenRecursivelyVisible\(((?>\((?<c>)|[^()]+|\)(?<-c>))*(?(c)(?!)))\)";
-                bool replaced = manager.ReplaceRegex(pattern, match =>
+                bool replaced = manager.Parser.ReplaceRegex(pattern, match =>
                 {
                     string argsRegex = @"(?:[^,()]+((?:\((?>[^()]+|\((?<c>)|\)(?<-c>))*\)))*)+";
                     var args = Regex.Matches(match.Groups[1].Value, argsRegex);
@@ -2946,10 +2946,10 @@
                     int numPlantsInZone = JsonUtilities.ChildrenRecursively(zone, "Plant").Count;
                     if (numPlantsInZone > 0)
                     {
-                        manager.AddUsingStatement(nameSpace);
+                        manager.Parser.AddUsingStatement(nameSpace);
 
                         bool isOptional = false;
-                        Declaration plantLink = manager.GetDeclarations().Find(d => d.InstanceName == plantName);
+                        var plantLink = manager.Parser.GetDeclarations().Find(d => d.InstanceName == plantName);
                         if (plantLink != null)
                         {
                             string linkAttribute = plantLink.Attributes.Find(a => a.Contains("[Link"));
@@ -2965,10 +2965,10 @@
                             link = $"[Link(Type = LinkType.Path, Path = \"[{plantName}].{property}\"{(isOptional ? ", IsOptional = true" : "")})]";
 
                         string memberName = property[0].ToString().ToLower() + property.Substring(1);
-                        manager.AddDeclaration(property, memberName, new string[1] { link });
+                        manager.Parser.AddDeclaration(property, memberName, new string[1] { link });
 
                         if (!string.IsNullOrEmpty(plantName))
-                            manager.ReplaceRegex($"([^\"]){plantName}\\.{property}", $"$1{memberName}");
+                            manager.Parser.ReplaceRegex($"([^\"]){plantName}\\.{property}", $"$1{memberName}");
                         manager.Save();
                     }
                 }
@@ -2983,7 +2983,7 @@
         private static void UpgradeToVersion113(JObject root, string fileName)
         {
             foreach (ManagerConverter manager in JsonUtilities.ChildManagers(root))
-                if (manager.Replace("SowPlant2Type", "SowingParameters"))
+                if (manager.Parser.Replace("SowPlant2Type", "SowingParameters"))
                     manager.Save();
         }
 
@@ -2995,7 +2995,7 @@
         private static void UpgradeToVersion114(JObject root, string fileName)
         {
             foreach (ManagerConverter manager in JsonUtilities.ChildManagers(root))
-                if (manager.ReplaceRegex(@"(\w+)\.IsC4", "$1.FindByPath(\"Leaf.Photosynthesis.FCO2.PhotosyntheticPathway\")?.Value?.ToString() == \"C4\""))
+                if (manager.Parser.ReplaceRegex(@"(\w+)\.IsC4", "$1.FindByPath(\"Leaf.Photosynthesis.FCO2.PhotosyntheticPathway\")?.Value?.ToString() == \"C4\""))
                     manager.Save();
         }
 
@@ -3133,7 +3133,7 @@
 
                 if (changesMade)
                 {
-                    manager.AddUsingStatement("Models.Interfaces");
+                    manager.Parser.AddUsingStatement("Models.Interfaces");
                     manager.Save();
                 }
             }
@@ -3260,7 +3260,7 @@
             {
                 bool changed = false;
                 foreach (Tuple<string, string> change in changes)
-                    changed |= manager.Replace(change.Item1, change.Item2, true);
+                    changed |= manager.Parser.Replace(change.Item1, change.Item2, true);
                 if (changed)
                     manager.Save();
             }
@@ -3523,7 +3523,7 @@
 
             foreach (var manager in JsonUtilities.ChildManagers(root))
             {
-                manager.Replace("LifeCycle.LifeStage", "LifeCycle.LifeCyclePhase");
+                manager.Parser.Replace("LifeCycle.LifeStage", "LifeCycle.LifeCyclePhase");
                 manager.Save();
             }
         }
@@ -3546,43 +3546,43 @@
 
             foreach (var manager in JsonUtilities.ChildManagers(root))
             {
-                manager.Replace("using Models.Soils;", "using Models.Soils;\r\nusing Models.Soils.Nutrients;");
+                manager.Parser.Replace("using Models.Soils;", "using Models.Soils;\r\nusing Models.Soils.Nutrients;");
 
-                manager.Replace("SoilNitrogen.FOMN", ".Nutrient.FOMN");
-                manager.Replace("SoilNitrogen.FOMC", ".Nutrient.FOMC");
+                manager.Parser.Replace("SoilNitrogen.FOMN", ".Nutrient.FOMN");
+                manager.Parser.Replace("SoilNitrogen.FOMC", ".Nutrient.FOMC");
 
-                if (manager.Replace("Soil.SoilNitrogen.HumicN", "Humic.N"))
-                    manager.AddDeclaration("NutrientPool", "Humic", new string[] { "[ScopedLinkByName]" });
-                if (manager.Replace("Soil.SoilNitrogen.HumicC", "Humic.C"))
-                    manager.AddDeclaration("NutrientPool", "Humic", new string[] { "[ScopedLinkByName]" });
+                if (manager.Parser.Replace("Soil.SoilNitrogen.HumicN", "Humic.N"))
+                    manager.Parser.AddDeclaration("NutrientPool", "Humic", new string[] { "[ScopedLinkByName]" });
+                if (manager.Parser.Replace("Soil.SoilNitrogen.HumicC", "Humic.C"))
+                    manager.Parser.AddDeclaration("NutrientPool", "Humic", new string[] { "[ScopedLinkByName]" });
 
-                if (manager.Replace("Soil.SoilNitrogen.MicrobialN", "Microbial.N"))
-                    manager.AddDeclaration("NutrientPool", "Microbial", new string[] { "[ScopedLinkByName]" });
-                if (manager.Replace("Soil.SoilNitrogen.MicrobialC", "Microbial.C"))
-                    manager.AddDeclaration("NutrientPool", "Microbial", new string[] { "[ScopedLinkByName]" });
+                if (manager.Parser.Replace("Soil.SoilNitrogen.MicrobialN", "Microbial.N"))
+                    manager.Parser.AddDeclaration("NutrientPool", "Microbial", new string[] { "[ScopedLinkByName]" });
+                if (manager.Parser.Replace("Soil.SoilNitrogen.MicrobialC", "Microbial.C"))
+                    manager.Parser.AddDeclaration("NutrientPool", "Microbial", new string[] { "[ScopedLinkByName]" });
 
-                if (manager.Replace("Soil.SoilNitrogen.dlt_n_min_res", "SurfaceResidueDecomposition.MineralisedN"))
-                    manager.AddDeclaration("CarbonFlow", "SurfaceResidueDecomposition", new string[] { "[LinkByPath(Path=\"[Nutrient].SurfaceResidue.Decomposition\")]" });
+                if (manager.Parser.Replace("Soil.SoilNitrogen.dlt_n_min_res", "SurfaceResidueDecomposition.MineralisedN"))
+                    manager.Parser.AddDeclaration("CarbonFlow", "SurfaceResidueDecomposition", new string[] { "[LinkByPath(Path=\"[Nutrient].SurfaceResidue.Decomposition\")]" });
 
-                manager.Replace("SoilNitrogen.MineralisedN", "Nutrient.MineralisedN");
+                manager.Parser.Replace("SoilNitrogen.MineralisedN", "Nutrient.MineralisedN");
 
-                manager.Replace("SoilNitrogen.TotalN", "Nutrient.TotalN");
-                if (manager.Replace("SoilNitrogen.TotalN", "Nutrient.TotalN"))
+                manager.Parser.Replace("SoilNitrogen.TotalN", "Nutrient.TotalN");
+                if (manager.Parser.Replace("SoilNitrogen.TotalN", "Nutrient.TotalN"))
                 {
-                    manager.RemoveDeclaration("SoilNitrogen");
-                    manager.AddDeclaration("INutrient", "Nutrient", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.RemoveDeclaration("SoilNitrogen");
+                    manager.Parser.AddDeclaration("INutrient", "Nutrient", new string[] { "[ScopedLinkByName]" });
                 }
 
-                manager.Replace("SoilNitrogen.TotalC", "Nutrient.TotalC");
-                if (manager.Replace("SoilNitrogen.TotalC", "Nutrient.TotalC"))
+                manager.Parser.Replace("SoilNitrogen.TotalC", "Nutrient.TotalC");
+                if (manager.Parser.Replace("SoilNitrogen.TotalC", "Nutrient.TotalC"))
                 {
-                    manager.RemoveDeclaration("SoilNitrogen");
-                    manager.AddDeclaration("INutrient", "Nutrient", new string[] { "[ScopedLinkByName]" });
+                    manager.Parser.RemoveDeclaration("SoilNitrogen");
+                    manager.Parser.AddDeclaration("INutrient", "Nutrient", new string[] { "[ScopedLinkByName]" });
                 }
 
-                manager.Replace("SoilNitrogen.mineral_n", "Nutrient.MineralN");
-                manager.Replace("SoilNitrogen.Denitrification", "Nutrient.Natm");
-                manager.Replace("SoilNitrogen.n2o_atm", "Nutrient.N2Oatm");
+                manager.Parser.Replace("SoilNitrogen.mineral_n", "Nutrient.MineralN");
+                manager.Parser.Replace("SoilNitrogen.Denitrification", "Nutrient.Natm");
+                manager.Parser.Replace("SoilNitrogen.n2o_atm", "Nutrient.N2Oatm");
                 manager.Save();
             }
 

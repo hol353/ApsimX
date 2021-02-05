@@ -207,7 +207,7 @@
             Exception caughtException = null;
             try
             {
-                dbReader.SetConnection(connection);
+                dbReader?.SetConnection(connection);
             }
             catch (Exception e)
             {
@@ -215,7 +215,7 @@
             }
             try
             {
-                dbWriter.SetConnection(connection);
+                dbWriter?.SetConnection(connection);
             }
             catch (Exception e)
             {

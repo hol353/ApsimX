@@ -1,24 +1,17 @@
-﻿
-
-namespace UnitTests.Core.ApsimFile
+﻿namespace UnitTests.Core.Script
 {
-    using APSIM.Shared.Utilities;
-    using Models.Core.ApsimFile;
-    using Newtonsoft.Json.Linq;
+    using Models.Core.Script;
     using NUnit.Framework;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
-    /// <summary>
-    /// Test the writer's load/save .apsimx capability 
-    /// </summary>
+    /// <summary>Test the script parser. </summary>
     [TestFixture]
-    public class ManagerConverterTests
+    public class ScriptParserTests
     {
-        /// <summary>Ensure we can get using statements from manager</summary>
+        /// <summary>Ensure we can get using statements from parser.</summary>
         [Test]
-        public void ManagerConverter_GetUsingStatements()
+        public void GetUsingStatements()
         {
             string script =
                 "// Comment 1" + Environment.NewLine +
@@ -33,15 +26,14 @@ namespace UnitTests.Core.ApsimFile
                 "{" + Environment.NewLine +
                 "}" + Environment.NewLine;
 
-            ManagerConverter converter = new ManagerConverter();
-            converter.Read(script);
-            Assert.AreEqual(converter.GetUsingStatements(), 
+            var parser = new ScriptParser(script);
+            Assert.AreEqual(parser.GetUsingStatements(), 
                             new string[] { "System", "Models.Soils", "APSIM.Shared.Utilities" });
         }
 
-        /// <summary>Ensure we can set using statements</summary>
+        /// <summary>Ensure we can set using statements.</summary>
         [Test]
-        public void ManagerConverter_SetUsingStatements()
+        public void SetUsingStatements()
         {
             string script =
                 "// Comment 1" + Environment.NewLine +
@@ -56,10 +48,9 @@ namespace UnitTests.Core.ApsimFile
                 "{" + Environment.NewLine +
                 "}" + Environment.NewLine;
 
-            ManagerConverter converter = new ManagerConverter();
-            converter.Read(script);
-            converter.SetUsingStatements(new string[] { "System" });
-            Assert.AreEqual(converter.ToString(),
+            var parser = new ScriptParser(script);
+            parser.SetUsingStatements(new string[] { "System" });
+            Assert.AreEqual(parser.ToString(),
                 "// Comment 1" + Environment.NewLine +
                 "// Comment 2" + Environment.NewLine +
                 Environment.NewLine +
@@ -73,7 +64,7 @@ namespace UnitTests.Core.ApsimFile
 
         /// <summary>Ensure we can find declarations</summary>
         [Test]
-        public void ManagerConverter_Declarations()
+        public void GetDeclarations()
         {
             string script =
                 "using System" + Environment.NewLine +
@@ -90,10 +81,9 @@ namespace UnitTests.Core.ApsimFile
                 "    }" + Environment.NewLine +
                 "}" + Environment.NewLine;
 
-            ManagerConverter converter = new ManagerConverter();
-            converter.Read(script);
+            var parser = new ScriptParser(script);
 
-            var declarations = converter.GetDeclarations();
+            var declarations = parser.GetDeclarations();
 
             Assert.AreEqual(declarations[0].LineIndex, 5);
             Assert.AreEqual(declarations[0].InstanceName, "mySolutes1");
@@ -114,7 +104,7 @@ namespace UnitTests.Core.ApsimFile
 
         /// <summary>Ensure we can find method calls</summary>
         [Test]
-        public void ManagerConverter_FindMethodCalls()
+        public void FindMethodCalls()
         {
             string script =
                 "using System" + Environment.NewLine +
@@ -136,9 +126,9 @@ namespace UnitTests.Core.ApsimFile
                 "    }" + Environment.NewLine +
                 "}" + Environment.NewLine;
 
-            ManagerConverter converter = new ManagerConverter();
-            converter.Read(script);
-            List<MethodCall> methods = converter.FindMethodCalls("SoluteManager", "Add");
+            var parser = new ScriptParser(script);
+            
+            var methods = parser.FindMethodCalls("SoluteManager", "Add");
             Assert.AreEqual(methods.Count, 2);
             Assert.AreEqual(methods[0].InstanceName, "mySolutes1");
             Assert.AreEqual(methods[0].MethodName, "Add");
@@ -150,7 +140,7 @@ namespace UnitTests.Core.ApsimFile
 
         /// <summary>Ensure we can set method call</summary>
         [Test]
-        public void ManagerConverter_SetMethodCall()
+        public void SetMethodCall()
         {
             string script =
                 "using System" + Environment.NewLine +
@@ -166,23 +156,23 @@ namespace UnitTests.Core.ApsimFile
                 "    }" + Environment.NewLine +
                 "}" + Environment.NewLine;
 
-            ManagerConverter converter = new ManagerConverter();
-            converter.Read(script);
+            var parser = new ScriptParser(script);
 
-            MethodCall method = new MethodCall();
-            method.LineIndex = 8;
-            method.InstanceName = "mySolutes1";
-            method.MethodName = "Add2";
-            method.Arguments = new List<string>();
+            var method = new ScriptParser.MethodCall
+            {
+                LineIndex = 8,
+                InstanceName = "mySolutes1",
+                MethodName = "Add2",
+                Arguments = new List<string>()
+            };
             method.Arguments.Add("10");
-
-            converter.SetMethodCall(method);
+            parser.SetMethodCall(method);
 
             // Make sure we can't find old one.
-            Assert.AreEqual(converter.FindMethodCalls("SoluteManager", "Add").Count, 0);
+            Assert.AreEqual(parser.FindMethodCalls("SoluteManager", "Add").Count, 0);
 
             // Make sure we find new one.
-            var foundMethod = converter.FindMethodCalls("SoluteManager", "Add2")[0];
+            var foundMethod = parser.FindMethodCalls("SoluteManager", "Add2")[0];
             Assert.AreEqual(foundMethod.LineIndex, 8);
             Assert.AreEqual(foundMethod.InstanceName, "mySolutes1");
             Assert.AreEqual(foundMethod.MethodName, "Add2");
@@ -193,60 +183,53 @@ namespace UnitTests.Core.ApsimFile
         /// Ensures the SearchReplaceManagerText method works correctly.
         /// </summary>
         [Test]
-        public void ReplaceManagerTextTests()
+        public void ReplaceTextTests()
         {
-            string json = ReflectionUtilities.GetResourceAsString("UnitTests.Core.ApsimFile.ManagerConverterTestsReplaceManagerText.json");
-            JObject rootNode = JObject.Parse(json);
-
-            var manager = new ManagerConverter(rootNode);
+            var parser = new ScriptParser("original text");
 
             string newText = "new text";
-            manager.Replace("original text", newText);
+            parser.Replace("original text", newText);
 
             // Ensure the code was modified correctly.
-            Assert.AreEqual(newText + Environment.NewLine, manager.ToString());
+            Assert.AreEqual(newText + Environment.NewLine, parser.ToString());
 
             // Ensure that passing in a null search string causes no changes.
-            manager.Replace(null, "test");
-            Assert.AreEqual(newText + Environment.NewLine, manager.ToString());
+            parser.Replace(null, "test");
+            Assert.AreEqual(newText + Environment.NewLine, parser.ToString());
 
             // Attempt to replace code of a node which doesn't have a code
             // property. Ensure that no code property is created (and that
             // no exception is thrown).
-            var childWithNoCode = new ManagerConverter(JsonUtilities.Children(rootNode).First());
-            childWithNoCode.Replace("test1", "test2");
-            Assert.Null(childWithNoCode.ToString());
+            var parserWithNoCode = new ScriptParser("");
+            parserWithNoCode.Replace("test1", "test2");
+            Assert.Null(parserWithNoCode.ToString());
         }
 
         /// <summary>
         /// Ensures the ReplaceManagerCodeUsingRegex method works correctly.
         /// </summary>
         [Test]
-        public void ReplaceManagerCodeRegexTests()
+        public void ReplaceCodeRegexTests()
         {
-            string json = ReflectionUtilities.GetResourceAsString("UnitTests.Core.ApsimFile.ManagerConverterTestsReplaceManagerTextRegex.json");
-            JObject rootNode = JObject.Parse(json);
+            var parser = new ScriptParser("original text");
 
-            var manager = new ManagerConverter(rootNode);
-
-            // The manager's code is "original text".
             // This regular expression will effectively remove the first space.
             // There are simpler ways to achieve this but this method tests
             // backreferencing.
             string newText = "originaltext" + Environment.NewLine;
-            manager.ReplaceRegex(@"([^\s]*)\s", @"$1");
-            Assert.AreEqual(manager.ToString(), newText);
+            parser.ReplaceRegex(@"([^\s]*)\s", @"$1");
+            Assert.AreEqual(parser.ToString(), newText);
 
             // Ensure that passing in a null search string causes no changes.
-            manager.ReplaceRegex(null, "test");
-            Assert.AreEqual(manager.ToString(), newText);
+            parser.ReplaceRegex(null, "test");
+            Assert.AreEqual(parser.ToString(), newText);
 
             // Attempt to replace code of a node which doesn't have a code
             // property. Ensure that no code property is created (and that
             // no exception is thrown).
-            var childWithNoCode = new ManagerConverter(JsonUtilities.Children(rootNode).First());
-            childWithNoCode.ReplaceRegex("test1", "test2");
-            Assert.Null(childWithNoCode.ToString());
+            var parserWithNoCode = new ScriptParser("");
+            parserWithNoCode.ReplaceRegex("test1", "test2");
+            Assert.Null(parserWithNoCode.ToString());
         }
 
         /// <summary>
@@ -254,16 +237,14 @@ namespace UnitTests.Core.ApsimFile
         /// the manager object has an empty script.
         /// </summary>
         [Test]
-        public void AddManagerDeclarationToEmptyScript()
+        public void AddDeclarationToEmptyScript()
         {
-            JObject rootNode = new JObject();
-            rootNode["Code"] = "using System;";
-            var manager = new ManagerConverter(rootNode);
+            var parser = new ScriptParser("using System;");
 
-            manager.AddDeclaration("NutrientPool", "Humic", new string[] { "[Link]" });
+            parser.AddDeclaration("NutrientPool", "Humic", new string[] { "[Link]" });
 
             // Ensure the link has been added below the using statement.
-            Assert.AreEqual(manager.ToString(),
+            Assert.AreEqual(parser.ToString(),
                 "using System;" + Environment.NewLine +
                 "namespace Models" + Environment.NewLine +
                 "{" + Environment.NewLine +
@@ -281,10 +262,9 @@ namespace UnitTests.Core.ApsimFile
         /// the manager object has no declarations.
         /// </summary>
         [Test]
-        public void AddManagerDeclarationToEmptyDeclarationSection()
+        public void AddDeclarationToEmptyDeclarationSection()
         {
-            JObject rootNode = new JObject();
-            rootNode["Code"] =
+            var parser = new ScriptParser(
                 "using System;" + Environment.NewLine +
                 "namespace Models" + Environment.NewLine +
                 "{" + Environment.NewLine +
@@ -292,13 +272,12 @@ namespace UnitTests.Core.ApsimFile
                 "    public class Script : Model" + Environment.NewLine +
                 "    {" + Environment.NewLine +
                 "    }" + Environment.NewLine +
-                "}" + Environment.NewLine;
-            var manager = new ManagerConverter(rootNode);
+                "}" + Environment.NewLine);
 
-            manager.AddDeclaration("NutrientPool", "Humic", new string[] { "[Link]" });
+            parser.AddDeclaration("NutrientPool", "Humic", new string[] { "[Link]" });
 
             // Ensure the link has been added below the using statement.
-            Assert.AreEqual(manager.ToString(),
+            Assert.AreEqual(parser.ToString(),
                 "using System;" + Environment.NewLine +
                 "namespace Models" + Environment.NewLine +
                 "{" + Environment.NewLine +
@@ -313,13 +292,12 @@ namespace UnitTests.Core.ApsimFile
 
         /// <summary>
         /// Ensures the AddDeclaration method works correctly when
-        /// the manager object has no declarations.
+        /// the parser object has no declarations.
         /// </summary>
         [Test]
-        public void AddManagerDeclarationToExistingDeclarationSection()
+        public void AddDeclarationToExistingDeclarationSection()
         {
-            JObject rootNode = new JObject();
-            rootNode["Code"] =
+            var parser = new ScriptParser(
                 "using System;" + Environment.NewLine +
                 "namespace Models" + Environment.NewLine +
                 "{" + Environment.NewLine +
@@ -329,13 +307,12 @@ namespace UnitTests.Core.ApsimFile
                 "        [Link]" + Environment.NewLine +
                 "        A B;" + Environment.NewLine + 
                 "    }" + Environment.NewLine +
-                "}" + Environment.NewLine;
-            var manager = new ManagerConverter(rootNode);
+                "}" + Environment.NewLine);
 
-            manager.AddDeclaration("NutrientPool", "Humic", new string[] { "[Link]" });
+            parser.AddDeclaration("NutrientPool", "Humic", new string[] { "[Link]" });
 
             // Ensure the link has been added below the using statement.
-            Assert.AreEqual(manager.ToString(),
+            Assert.AreEqual(parser.ToString(),
                 "using System;" + Environment.NewLine +
                 "namespace Models" + Environment.NewLine +
                 "{" + Environment.NewLine +
@@ -352,13 +329,12 @@ namespace UnitTests.Core.ApsimFile
 
         /// <summary>
         /// Ensures the AddDeclaration method works correctly when
-        /// the manager object has no declarations.
+        /// the parser object has no declarations.
         /// </summary>
         [Test]
-        public void AddManagerDeclarationHandleProperties()
+        public void AddDeclarationHandleProperties()
         {
-            JObject rootNode = new JObject();
-            rootNode["Code"] =
+            var parser = new ScriptParser(
                 "using System;" + Environment.NewLine +
                 "namespace Models" + Environment.NewLine +
                 "{" + Environment.NewLine +
@@ -372,13 +348,12 @@ namespace UnitTests.Core.ApsimFile
                 "        [Description(\"Turn ferliser applications on? \")]" + Environment.NewLine +
                 "        public yesnoType AllowFertiliser { get; set; }" + Environment.NewLine +
                 "    }" + Environment.NewLine +
-                "}" + Environment.NewLine;
-            var manager = new ManagerConverter(rootNode);
+                "}" + Environment.NewLine);
 
-            manager.AddDeclaration("NutrientPool", "Humic", new string[] { "[Link]" });
+            parser.AddDeclaration("NutrientPool", "Humic", new string[] { "[Link]" });
 
             // Ensure the link has been added below the using statement.
-            Assert.AreEqual(manager.ToString(),
+            Assert.AreEqual(parser.ToString(),
                 "using System;" + Environment.NewLine +
                 "namespace Models" + Environment.NewLine +
                 "{" + Environment.NewLine +

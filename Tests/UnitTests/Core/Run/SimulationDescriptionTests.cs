@@ -246,12 +246,10 @@
                     }
                 }
             };
-            sim.ParentAllDescendants();
+            Simulations.InitialiseModel(sim);
 
             var originalSoil = sim.Children[0] as Soil;
             var originalWater = originalSoil.Children[0] as Physical;
-
-            originalSoil.OnCreated();
             
             var simulationDescription = new SimulationDescription(sim);
 

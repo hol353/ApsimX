@@ -134,8 +134,7 @@
                     // recompile their scripts. This is to work around an issue
                     // where scripts will change during deserialization. See issue
                     // #4463 and the TestMultipleChildren test inside ReportTests.
-                    foreach (Manager script in newSimulation.FindAllDescendants<Manager>())
-                        script.OnCreated();
+                    Simulations.InitialiseModel(newSimulation);
                 }
                 else
                     newSimulation = baseSimulation;

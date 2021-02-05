@@ -59,7 +59,7 @@
                 }
             };
 
-            Utilities.InitialiseModel(simulations);
+            Simulations.InitialiseModel(simulations);
             simulation = simulations.Children[0] as Simulation;
             runner = new Runner(simulation);
             storage = simulation.Children[0] as MockStorage;
@@ -99,9 +99,8 @@
                 "[Clock].DoReport"
             };
             simulation.Children.AddRange(new[] { m1, m2 });
-            simulation.ParentAllDescendants();
-            m1.OnCreated();
-            m2.OnCreated();
+
+            Simulations.InitialiseModel(simulation);
 
             var runners = new[]
             {
@@ -479,7 +478,7 @@
         {
             var model = new MockModel() { Z = new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 } };
             simulation.Children.Add(model);
-            Utilities.InitialiseModel(simulation);
+            Simulations.InitialiseModel(simulation);
 
             report.VariableNames = new string[] { "[MockModel].Z[3]", "[MockModel].Z[10]" };
 
@@ -502,7 +501,7 @@
             simulation.Children.Remove(storage);
             var datastore = new DataStore();
             simulation.Children.Add(datastore);
-            Utilities.InitialiseModel(simulation);
+            Simulations.InitialiseModel(simulation);
 
             report.VariableNames = new string[] { "[MockModel].Z[3:]" };
 
@@ -534,7 +533,7 @@
             simulation.Children.Remove(storage);
             var datastore = new DataStore();
             simulation.Children.Add(datastore);
-            Utilities.InitialiseModel(simulation);
+            Simulations.InitialiseModel(simulation);
 
             report.VariableNames = new string[] { "[MockModel].Z[:2]" };
 
@@ -565,7 +564,7 @@
             simulation.Children.Remove(storage);
             var datastore = new DataStore();
             simulation.Children.Add(datastore);
-            Utilities.InitialiseModel(simulation);
+            Simulations.InitialiseModel(simulation);
 
             report.VariableNames = new string[] { "[MockModel].Z[2:3]" };
 
@@ -621,8 +620,8 @@ namespace Models
 }";
 
             paddock.Children.Add(script);
-            script.Parent = paddock;
-            script.OnCreated();
+
+            Simulations.InitialiseModel(paddock);
 
             Report report = sims.FindInScope<Report>();
             report.VariableNames = new string[]
@@ -661,7 +660,7 @@ namespace Models
             };
 
             simulation.Children.Add(model);
-            Utilities.InitialiseModel(simulation);
+            Simulations.InitialiseModel(simulation);
 
             report.VariableNames = new string[] 
             { 
