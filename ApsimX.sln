@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeepCloner.Core", "DeepClon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gtk.Sheet", "Gtk.Sheet\Gtk.Sheet.csproj", "{94D1379D-F504-4177-936A-AB48C2D3737A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crop2ML.Interop", "Crop2ML.Interop\Crop2ML.Interop.csproj", "{7DC625F3-908C-48B5-9967-8E9D9A323C7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		DebugAnyCPU|Any CPU = DebugAnyCPU|Any CPU
@@ -177,6 +179,18 @@ Global
 		{94D1379D-F504-4177-936A-AB48C2D3737A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{94D1379D-F504-4177-936A-AB48C2D3737A}.Release|x86.ActiveCfg = Release|Any CPU
 		{94D1379D-F504-4177-936A-AB48C2D3737A}.Release|x86.Build.0 = Release|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.DebugAnyCPU|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.DebugAnyCPU|Any CPU.Build.0 = Debug|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.DebugAnyCPU|x86.ActiveCfg = Debug|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.DebugAnyCPU|x86.Build.0 = Debug|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.Debug|x86.Build.0 = Debug|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.Release|x86.ActiveCfg = Release|Any CPU
+		{7DC625F3-908C-48B5-9967-8E9D9A323C7E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

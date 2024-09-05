@@ -47,4 +47,8 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
     <PackageReference Include="Moq" Version="4.20.70" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Crop2ML.Interop\Crop2ML.Interop.csproj" />
+  </ItemGroup>
 </Project>

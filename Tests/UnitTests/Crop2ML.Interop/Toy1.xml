@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ModelUnit PUBLIC " " "https://raw.githubusercontent.com/AgriculturalModelExchangeInitiative/crop2ml/master/ModelUnit.dtd">
+<ModelUnit modelid="APSIM_.TOY1" name="TOY1" timestep=" 1" version=" 1.0">
+    <Description>
+        <Title>Model of Toy1</Title>
+        <Authors>APSIM</Authors>
+        <Institution>APSIM Initiative</Institution>
+        <URI></URI>
+        <Reference></Reference>
+        <ExtendedDescription></ExtendedDescription>
+        <ShortDescription>Calculates vapour pressure deficit</ShortDescription></Description>
+    <Inputs>
+        <Input name="MinT" description="Minimum temperature" inputtype="variable" variablecategory="exogenous" datatype="DOUBLE" max="" min="" default="" unit="oC"/>
+        <Input name="MaxT" description="Maximum temperature" inputtype="variable" variablecategory="exogenous" datatype="DOUBLE" max="" min="" default="" unit="oC"/>
+        <Input name="VP" description="Vapour pressure deficit" inputtype="variable" variablecategory="exogenous" datatype="DOUBLE" max="" min="" default="" unit="hPa"/>
+    </Inputs>
+    <Outputs>
+        <Output name="VPD" description="Vapour pressure deficit" datatype="DOUBLE" variablecategory="state" max="" min="" unit="hPa"/>
+    </Outputs>
+    <Initialization name="init_TOY1" language="cyml" filename="algo/pyx/init.TOY1.pyx"/>
+    <Function name="TOY1" description="" language="cyml" type="external" filename="algo/pyx/TOY1.pyx"/>
+    <Algorithm language="cyml" platform="" filename="algo/pyx/TOY1.pyx"/>
+    <Parametersets/>
+    <Testsets/>
+</ModelUnit>
