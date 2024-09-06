@@ -82,7 +82,7 @@ namespace APSIM.Shared.Utilities
             AddColumn(table, columnName, values, 0, Count);
         }
 
-        /// <summary> 
+        /// <summary>
         /// Add a column of values to the specified data table
         /// </summary>
         static public void AddColumn(DataTable table, string columnName, string[] values)
@@ -685,6 +685,49 @@ namespace APSIM.Shared.Utilities
             return monthlyData;
         }
 
+/// <summary>
+/// Read a file into a datatable.
+/// </summary>
+/// <param name="filePath"></param>
+/// <param name="convertFunc">Optional function to convert data types</param>
+/// <param name="delimiter">Delimiter to use</param>
+/// <param name="linesToSkip"></param>
+public static DataTable ReadDataTable(string filePath, char delimiter = ' ', int linesToSkip = 0,
+                                      Func<int, string, object> convertFunc = null)
+{
+    DataTable tbl = new DataTable();
+
+    string[] lines = File.ReadAllLines(filePath)
+                         .Skip(linesToSkip)
+                         .ToArray();
+    var headings = lines[0].Split(delimiter);
+    for(int col = 0; col < headings.Length; col++)
+        tbl.Columns.Add(new DataColumn(headings[col]));
+
+    foreach(string line in lines.Skip(1))
+    {
+        var cols = line.Split(delimiter);
+
+        DataRow dr = tbl.NewRow();
+        for(int cIndex=0; cIndex < headings.Length; cIndex++)
+        {
+            string word = cols[cIndex];
+            object value;
+            if (convertFunc == null)
+                value = word;
+            else
+                value = convertFunc(cIndex, word);
+
+            dr[cIndex] = value;
+        }
+
+        tbl.Rows.Add(dr);
+    }
+
+    return tbl;
+}
+
+
         /// <summary>
         /// Write the specified DataTable to a CSV string, excluding the specified column names.
         /// </summary>
@@ -999,7 +1042,7 @@ namespace APSIM.Shared.Utilities
         }
 
         /// <summary>
-        /// Convert a csv string into a data table. Note that the datatable of each 
+        /// Convert a csv string into a data table. Note that the datatable of each
         /// column will be string.
         /// </summary>
         /// <param name="tableName">Name of the table to create.</param>
@@ -1024,8 +1067,8 @@ namespace APSIM.Shared.Utilities
                 line = sr.ReadLine();
             }
 
-            // Go through all columns and see if the column datatype can be made more 
-            // specific than string e.g. convert string to double 
+            // Go through all columns and see if the column datatype can be made more
+            // specific than string e.g. convert string to double
             for (int colIndex = 0; colIndex < dt.Columns.Count; colIndex++)
             {
                 Type typeToConvertTo = null;
@@ -1081,7 +1124,7 @@ namespace APSIM.Shared.Utilities
         }
 
         /// <summary>
-        /// Convert a csv string into a data table. Note that the datatable of each 
+        /// Convert a csv string into a data table. Note that the datatable of each
         /// column will be string.
         /// </summary>
         /// <param name="table">The data table.</param>
@@ -1192,11 +1235,11 @@ namespace APSIM.Shared.Utilities
         }
 
         /// <summary>
-        /// Return longterm average monthly totals for the given variable. 
+        /// Return longterm average monthly totals for the given variable.
         /// </summary>
         /// <remarks>
-        /// 
-        /// Assumes a a date can be derived from the data table using the 
+        ///
+        /// Assumes a a date can be derived from the data table using the
         /// DataTable.GetDateFromRow function.
         /// </remarks>
         /// <param name="table">The data table containing the data</param>
@@ -1249,11 +1292,11 @@ namespace APSIM.Shared.Utilities
 
 
         /// <summary>
-        /// Return longterm average monthly averages for the given variable. 
+        /// Return longterm average monthly averages for the given variable.
         /// </summary>
         /// <remarks>
-        /// 
-        /// Assumes a a date can be derived from the data table using the 
+        ///
+        /// Assumes a a date can be derived from the data table using the
         /// DataTable.GetDateFromRow function.
         /// </remarks>
         /// <param name="table">The data table containing the data</param>
@@ -1305,10 +1348,10 @@ namespace APSIM.Shared.Utilities
         }
 
         /// <summary>
-        /// Return yearly totals for the given variable. 
+        /// Return yearly totals for the given variable.
         /// </summary>
         /// <remarks>
-        /// Assumes a a date can be derived from the data table using the 
+        /// Assumes a a date can be derived from the data table using the
         /// DataTable.GetDateFromRow function.
         /// </remarks>
         /// <param name="table">The data table containing the data</param>
@@ -1344,10 +1387,10 @@ namespace APSIM.Shared.Utilities
         }
 
         /// <summary>
-        /// Return yearly averages for the given variable. 
+        /// Return yearly averages for the given variable.
         /// </summary>
         /// <remarks>
-        /// Assumes a a date can be derived from the data table using the 
+        /// Assumes a a date can be derived from the data table using the
         /// DataTable.GetDateFromRow function.
         /// </remarks>
         /// <param name="table">The data table containing the data</param>
@@ -1383,10 +1426,10 @@ namespace APSIM.Shared.Utilities
         }
 
         /// <summary>
-        /// Return average daily totals for each month for the the given variable. 
+        /// Return average daily totals for each month for the the given variable.
         /// </summary>
         /// <remarks>
-        /// Assumes a a date can be derived from the data table using the 
+        /// Assumes a a date can be derived from the data table using the
         /// DataTable.GetDateFromRow function.
         /// </remarks>
         /// <param name="table">The data table containing the data</param>
