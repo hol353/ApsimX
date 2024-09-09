@@ -10,13 +10,13 @@ using Models.Storage;
 namespace Models.PostSimulationTools
 {
     /// <summary>
-    /// This is a post simulation tool that transforms a table into a 'depth' table with layers 
+    /// This is a post simulation tool that transforms a table into a 'depth' table with layers
     /// going down the rows rather than across the fields. e.g.
     /// SOURCE TABLE:
     ///    Year     Col1(1)  Col1(2)  Col2(1)  Col2(2)
-    ///    1970          10       11       12       13 
-    ///    1971          14       15       16       17 
-    /// TO:   
+    ///    1970          10       11       12       13
+    ///    1971          14       15       16       17
+    /// TO:
     ///    Year     Col1  Col2
     ///    1970       10    12
     ///    1970       11    13
@@ -64,7 +64,7 @@ namespace Models.PostSimulationTools
                 foreach (DataColumn col in layeredColumns)
                     table.Columns.Add(col);
 
-                foreach (DataRow row  in sourceData.Rows) 
+                foreach (DataRow row  in sourceData.Rows)
                 {
                     for (int layerIndex =  1; layerIndex <= numLayers; layerIndex++)
                     {
@@ -106,7 +106,9 @@ namespace Models.PostSimulationTools
             foreach (DataColumn column in dataRow.Table.Columns)
             {
                 string newColumnName = column.ColumnName;
-                if (StringUtilities.SplitOffBracketedValue(ref newColumnName, '(', ')') != string.Empty &&
+                string bracketedValue = StringUtilities.SplitOffBracketedValue(ref newColumnName, '(', ')');
+                if (newColumnName!= string.Empty &&
+                    int.TryParse(bracketedValue, out int index) &&
                     !columnNames.Select(col => col.ColumnName).Contains(newColumnName))
                     columnNames.Add(new DataColumn(newColumnName, column.DataType));
             }
