@@ -91,7 +91,7 @@ namespace Models.PostSimulationTools
                     if (Delimiter == "\\t")
                         Delimiter = "\t";  // tab character
                     using StreamWriter writer = new(Path.Combine(Path.GetDirectoryName(dataStore.FileName), fileName));
-                    DataTableUtilities.DataTableToText(dt, 0, Delimiter, WriteHeaderRow, writer);
+                    DataTableUtilities.DataTableToText(dt, 0, Delimiter, WriteHeaderRow, writer, decimalFormatString: "F6");
                 }
             }
         }
