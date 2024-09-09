@@ -11,5 +11,11 @@ namespace UnitTests.Soils
     internal class MockSoilTemperature : Model, ISoilTemperature
     {
         public double[] Value { get; set; }
+        public double[] AverageSoilTemperature { get; }
+        public double AverageSoilSurfaceTemperature { get; }
+        public double[] MinimumSoilTemperature { get; }
+        public double MinimumSoilSurfaceTemperature { get; }
+        public double[] MaximumSoilTemperature { get; }
+        public double MaximumSoilSurfaceTemperature { get; }
     }
 }

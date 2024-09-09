@@ -15,7 +15,7 @@ namespace UnitTests.Core
     public class PlantTests
     {
         /// <summary>
-        /// Test that the plant model leaf detachment variable has values during the crop, rather than just when the 
+        /// Test that the plant model leaf detachment variable has values during the crop, rather than just when the
         /// crop gets harvested. Issue #3559
         /// </summary>
         /// <param name="fileName"></param>
@@ -27,7 +27,7 @@ namespace UnitTests.Core
             path = PathUtilities.GetAbsolutePath(path, null);
             Simulations sims = FileFormat.ReadFromFile<Simulations>(path, e => throw e, false).NewModel as Simulations;
             foreach (Soil soil in sims.FindAllDescendants<Soil>())
-                soil.Standardise();
+                soil.Sanitise();
             DataStore storage = sims.FindDescendant<DataStore>();
             storage.UseInMemoryDB = true;
             Simulation sim = sims.FindDescendant<Simulation>();

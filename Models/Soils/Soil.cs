@@ -2,8 +2,6 @@
 using System.Text;
 using APSIM.Shared.Utilities;
 using Models.Core;
-using Models.Interfaces;
-using Models.Soils.Nutrients;
 
 namespace Models.Soils
 {
@@ -125,33 +123,6 @@ namespace Models.Soils
             Check(summary);
         }
 
-        /// <summary>Gets the soil ready for running in a simulation.</summary>
-        public void Standardise()
-        {
-            var physical = FindChild<IPhysical>();
-            var chemical = FindChild<Chemical>();
-            var layerStructure = FindChild<LayerStructure>();
-            var organic = FindChild<Organic>();
-            var water = FindChild<Water>();
-            var waterBalance = FindInScope<ISoilWater>();
-            var temperature = FindInScope<SoilTemp.SoilTemperature>();
-
-            // Determine the target layer structure.
-            var targetThickness = physical.Thickness;
-            if (layerStructure != null)
-                targetThickness = layerStructure.Thickness;
-
-            physical.Standardise(targetThickness);
-            chemical?.Standardise(targetThickness);
-            organic.Standardise(targetThickness);
-            water.Standardise(targetThickness);
-            waterBalance.Standardise(targetThickness);
-            temperature?.Standardise(targetThickness);
-
-            foreach (var solute in FindAllChildren<Solute>())
-                solute.Standardise(targetThickness);
-        }
-
         /// <summary>
         /// Checks validity of soil parameters. Throws if soil is invalid.
         /// Standardises the soil before performing tests.
@@ -160,7 +131,7 @@ namespace Models.Soils
         public void CheckWithStandardisation(ISummary summary)
         {
             var soil = Apsim.Clone(this) as Soil;
-            soil.Standardise();
+            soil.Sanitise();
 
             Check(summary);
         }

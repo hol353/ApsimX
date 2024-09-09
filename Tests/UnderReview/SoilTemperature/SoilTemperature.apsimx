@@ -1,6 +1,6 @@
 {
   "$type": "Models.Core.Simulations, Models",
-  "Version": 175,
+  "Version": 180,
   "Name": "Simulations",
   "ResourceName": null,
   "Children": [
@@ -146,7 +146,6 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": false,
-      "GraphsPerPage": 6,
       "Name": "ValidationTests",
       "ResourceName": null,
       "Children": [
@@ -167,14 +166,12 @@
         {
           "$type": "Models.Core.Folder, Models",
           "ShowInDocs": true,
-          "GraphsPerPage": 6,
           "Name": "ForestHill",
           "ResourceName": null,
           "Children": [
             {
               "$type": "Models.Core.Folder, Models",
               "ShowInDocs": true,
-              "GraphsPerPage": 6,
               "Name": "ForestHillWeatherStation",
               "ResourceName": null,
               "Children": [
@@ -322,6 +319,8 @@
                                 400.0,
                                 300.0
                               ],
+                              "ParticleSizeSand": null,
+                              "ParticleSizeSilt": null,
                               "ParticleSizeClay": [
                                 40.0,
                                 40.0,
@@ -332,8 +331,6 @@
                                 10.0,
                                 10.0
                               ],
-                              "ParticleSizeSand": null,
-                              "ParticleSizeSilt": null,
                               "Rocks": null,
                               "Texture": null,
                               "BD": [
@@ -474,6 +471,8 @@
                               "A": 1.0,
                               "DTHC": 0.0,
                               "DTHP": 1.0,
+                              "eo_time": "06:00",
+                              "eo_durn": 720.0,
                               "Diagnostics": false,
                               "Name": "Swim3",
                               "ResourceName": null,
@@ -620,7 +619,6 @@
                             },
                             {
                               "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                              "CONSTANT_TEMPdepth": 10.0,
                               "Thickness": [
                                 10.0,
                                 20.0,
@@ -842,15 +840,15 @@
                           "$type": "Models.Report, Models",
                           "VariableNames": [
                             "[Clock].Today",
-                            "[Soil].Temperature.AverageSoilTemp[5] as AverageSoilTemp@0100mm",
-                            "[Soil].Temperature.MaxSoilTemp[5] as MaxSoilTemp@0100mm",
-                            "[Soil].Temperature.MinSoilTemp[5] as MinSoilTemp@0100mm",
-                            "[Soil].Temperature.AverageSoilTemp[8] as AverageSoilTemp@0500mm",
-                            "[Soil].Temperature.MaxSoilTemp[8] as MaxSoilTemp@0500mm",
-                            "[Soil].Temperature.MinSoilTemp[8] as MinSoilTemp@0500mm",
-                            "[Soil].Temperature.AverageSoilTemp[10] as AverageSoilTemp@1000mm",
-                            "[Soil].Temperature.MaxSoilTemp[10] as MaxSoilTemp@1000mm",
-                            "[Soil].Temperature.MinSoilTemp[10] as MinSoilTemp@1000mm"
+                            "[Soil].Temperature.AverageSoilTemperature[5] as AverageSoilTemp@0100mm",
+                            "[Soil].Temperature.MaximumSoilTemperature[5] as MaxSoilTemp@0100mm",
+                            "[Soil].Temperature.MinimumSoilTemperature[5] as MinSoilTemp@0100mm",
+                            "[Soil].Temperature.AverageSoilTemperature[8] as AverageSoilTemp@0500mm",
+                            "[Soil].Temperature.MaximumSoilTemperature[8] as MaxSoilTemp@0500mm",
+                            "[Soil].Temperature.MinimumSoilTemperature[8] as MinSoilTemp@0500mm",
+                            "[Soil].Temperature.AverageSoilTemperature[10] as AverageSoilTemp@1000mm",
+                            "[Soil].Temperature.MaximumSoilTemperature[10] as MaxSoilTemp@1000mm",
+                            "[Soil].Temperature.MinimumSoilTemperature[10] as MinSoilTemp@1000mm"
                           ],
                           "EventNames": [
                             "[Clock].DoReport"
@@ -1634,8 +1632,8 @@
                       "Line": 4,
                       "LineThickness": 0,
                       "TableName": "PredictedObserved",
-                      "XFieldName": "Observed.AverageSoilTemp@0100mm",
-                      "YFieldName": "Predicted.AverageSoilTemp@0100mm",
+                      "XFieldName": "Observed.AverageSoilTemperature@0100mm",
+                      "YFieldName": "Predicted.AverageSoilTemperature@0100mm",
                       "X2FieldName": null,
                       "Y2FieldName": null,
                       "ShowInLegend": false,
@@ -1672,7 +1670,6 @@
             {
               "$type": "Models.Core.Folder, Models",
               "ShowInDocs": true,
-              "GraphsPerPage": 6,
               "Name": "ForestHillWheat",
               "ResourceName": null,
               "Children": [
@@ -1737,6 +1734,8 @@
                                     400.0,
                                     400.0
                                   ],
+                                  "ParticleSizeSand": null,
+                                  "ParticleSizeSilt": null,
                                   "ParticleSizeClay": [
                                     100.0,
                                     100.0,
@@ -1750,8 +1749,6 @@
                                     100.0,
                                     100.0
                                   ],
-                                  "ParticleSizeSand": null,
-                                  "ParticleSizeSilt": null,
                                   "Rocks": null,
                                   "Texture": null,
                                   "BD": [
@@ -2217,6 +2214,8 @@
                                   "A": 2.0,
                                   "DTHC": 0.1,
                                   "DTHP": 2.0,
+                                  "eo_time": "06:00",
+                                  "eo_durn": 720.0,
                                   "Diagnostics": true,
                                   "Name": "Swim3",
                                   "ResourceName": null,
@@ -2253,7 +2252,6 @@
                                 },
                                 {
                                   "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                                  "CONSTANT_TEMPdepth": 10.0,
                                   "Thickness": [
                                     100.0,
                                     100.0,
@@ -2339,6 +2337,8 @@
                                     400.0,
                                     400.0
                                   ],
+                                  "ParticleSizeSand": null,
+                                  "ParticleSizeSilt": null,
                                   "ParticleSizeClay": [
                                     1.0,
                                     1.0,
@@ -2353,8 +2353,6 @@
                                     1.0,
                                     1.0
                                   ],
-                                  "ParticleSizeSand": null,
-                                  "ParticleSizeSilt": null,
                                   "Rocks": null,
                                   "Texture": null,
                                   "BD": [
@@ -2825,6 +2823,8 @@
                                   "A": 2.0,
                                   "DTHC": 0.1,
                                   "DTHP": 2.0,
+                                  "eo_time": "06:00",
+                                  "eo_durn": 720.0,
                                   "Diagnostics": true,
                                   "Name": "Swim3",
                                   "ResourceName": null,
@@ -2861,7 +2861,6 @@
                                 },
                                 {
                                   "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                                  "CONSTANT_TEMPdepth": 10.0,
                                   "Thickness": [
                                     100.0,
                                     100.0,
@@ -3099,7 +3098,7 @@
                             },
                             {
                               "$type": "Models.Operations, Models",
-                              "Operation": [],
+                              "OperationsList": [],
                               "Name": "Operations",
                               "ResourceName": null,
                               "Children": [],
@@ -3154,6 +3153,8 @@
                                     800.0,
                                     400.0
                                   ],
+                                  "ParticleSizeSand": null,
+                                  "ParticleSizeSilt": null,
                                   "ParticleSizeClay": [
                                     40.0,
                                     40.0,
@@ -3161,8 +3162,6 @@
                                     40.0,
                                     40.0
                                   ],
-                                  "ParticleSizeSand": null,
-                                  "ParticleSizeSilt": null,
                                   "Rocks": null,
                                   "Texture": null,
                                   "BD": [
@@ -3568,6 +3567,8 @@
                                   "A": 2.0,
                                   "DTHC": 0.1,
                                   "DTHP": 2.0,
+                                  "eo_time": "06:00",
+                                  "eo_durn": 720.0,
                                   "Diagnostics": true,
                                   "Name": "Swim3",
                                   "ResourceName": null,
@@ -3604,7 +3605,6 @@
                                 },
                                 {
                                   "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                                  "CONSTANT_TEMPdepth": 10.0,
                                   "Thickness": [
                                     100.0,
                                     100.0,
@@ -3674,30 +3674,30 @@
                                 "sum([Soil].Water.MM) as TotalSW",
                                 "[EMCalculator].Script.EMp100 as EMp100",
                                 "[EMCalculator].Script.FASW",
-                                "[Soil].Temperature.AverageSoilTemp[3] as AverageSoilTemp@050mm",
-                                "[Soil].Temperature.AverageSoilTemp[5] as AverageSoilTemp@150mm",
-                                "[Soil].Temperature.AverageSoilTemp[6] as AverageSoilTemp@250mm",
-                                "[Soil].Temperature.AverageSoilTemp[7] as AverageSoilTemp@350mm",
-                                "[Soil].Temperature.AverageSoilTemp[8] as AverageSoilTemp@450mm",
-                                "[Soil].Temperature.AverageSoilTemp[9] as AverageSoilTemp@550mm",
-                                "[Soil].Temperature.AverageSoilTemp[10] as AverageSoilTemp@650mm",
-                                "[Soil].Temperature.AverageSoilTemp[11] as AverageSoilTemp@750mm",
-                                "[Soil].Temperature.MinSoilTemp[3] as MinSoilTemp@050mm",
-                                "[Soil].Temperature.MinSoilTemp[5] as MinSoilTemp@150mm",
-                                "[Soil].Temperature.MinSoilTemp[6] as MinSoilTemp@250mm",
-                                "[Soil].Temperature.MinSoilTemp[7] as MinSoilTemp@350mm",
-                                "[Soil].Temperature.MinSoilTemp[8] as MinSoilTemp@450mm",
-                                "[Soil].Temperature.MinSoilTemp[9] as MinSoilTemp@550mm",
-                                "[Soil].Temperature.MinSoilTemp[10] as MinSoilTemp@650mm",
-                                "[Soil].Temperature.MinSoilTemp[11] as MinSoilTemp@750mm",
-                                "[Soil].Temperature.MaxSoilTemp[3] as MaxSoilTemp@050mm",
-                                "[Soil].Temperature.MaxSoilTemp[5] as MaxSoilTemp@150mm",
-                                "[Soil].Temperature.MaxSoilTemp[6] as MaxSoilTemp@250mm",
-                                "[Soil].Temperature.MaxSoilTemp[7] as MaxSoilTemp@350mm",
-                                "[Soil].Temperature.MaxSoilTemp[8] as MaxSoilTemp@450mm",
-                                "[Soil].Temperature.MaxSoilTemp[9] as MaxSoilTemp@550mm",
-                                "[Soil].Temperature.MaxSoilTemp[10] as MaxSoilTemp@650mm",
-                                "[Soil].Temperature.MaxSoilTemp[11] as MaxSoilTemp@750mm"
+                                "[Soil].Temperature.AverageSoilTemperature[3] as AverageSoilTemp@050mm",
+                                "[Soil].Temperature.AverageSoilTemperature[5] as AverageSoilTemp@150mm",
+                                "[Soil].Temperature.AverageSoilTemperature[6] as AverageSoilTemp@250mm",
+                                "[Soil].Temperature.AverageSoilTemperature[7] as AverageSoilTemp@350mm",
+                                "[Soil].Temperature.AverageSoilTemperature[8] as AverageSoilTemp@450mm",
+                                "[Soil].Temperature.AverageSoilTemperature[9] as AverageSoilTemp@550mm",
+                                "[Soil].Temperature.AverageSoilTemperature[10] as AverageSoilTemp@650mm",
+                                "[Soil].Temperature.AverageSoilTemperature[11] as AverageSoilTemp@750mm",
+                                "[Soil].Temperature.MinimumSoilTemperature[3] as MinSoilTemp@050mm",
+                                "[Soil].Temperature.MinimumSoilTemperature[5] as MinSoilTemp@150mm",
+                                "[Soil].Temperature.MinimumSoilTemperature[6] as MinSoilTemp@250mm",
+                                "[Soil].Temperature.MinimumSoilTemperature[7] as MinSoilTemp@350mm",
+                                "[Soil].Temperature.MinimumSoilTemperature[8] as MinSoilTemp@450mm",
+                                "[Soil].Temperature.MinimumSoilTemperature[9] as MinSoilTemp@550mm",
+                                "[Soil].Temperature.MinimumSoilTemperature[10] as MinSoilTemp@650mm",
+                                "[Soil].Temperature.MinimumSoilTemperature[11] as MinSoilTemp@750mm",
+                                "[Soil].Temperature.MaximumSoilTemperature[3] as MaxSoilTemp@050mm",
+                                "[Soil].Temperature.MaximumSoilTemperature[5] as MaxSoilTemp@150mm",
+                                "[Soil].Temperature.MaximumSoilTemperature[6] as MaxSoilTemp@250mm",
+                                "[Soil].Temperature.MaximumSoilTemperature[7] as MaxSoilTemp@350mm",
+                                "[Soil].Temperature.MaximumSoilTemperature[8] as MaxSoilTemp@450mm",
+                                "[Soil].Temperature.MaximumSoilTemperature[9] as MaxSoilTemp@550mm",
+                                "[Soil].Temperature.MaximumSoilTemperature[10] as MaxSoilTemp@650mm",
+                                "[Soil].Temperature.MaximumSoilTemperature[11] as MaxSoilTemp@750mm"
                               ],
                               "EventNames": [
                                 "[CLock].DoReport"
@@ -3920,14 +3920,12 @@
                     {
                       "$type": "Models.Core.Folder, Models",
                       "ShowInDocs": false,
-                      "GraphsPerPage": 6,
                       "Name": "Graphs",
                       "ResourceName": null,
                       "Children": [
                         {
                           "$type": "Models.Core.Folder, Models",
                           "ShowInDocs": false,
-                          "GraphsPerPage": 6,
                           "Name": "Crop",
                           "ResourceName": null,
                           "Children": [
@@ -4453,7 +4451,6 @@
                 {
                   "$type": "Models.Core.Folder, Models",
                   "ShowInDocs": true,
-                  "GraphsPerPage": 6,
                   "Name": "Comparison of averages soil temperature",
                   "ResourceName": null,
                   "Children": [
@@ -5240,7 +5237,6 @@
                 {
                   "$type": "Models.Core.Folder, Models",
                   "ShowInDocs": true,
-                  "GraphsPerPage": 6,
                   "Name": "Comparison of diurnal ranges",
                   "ResourceName": null,
                   "Children": [
@@ -6537,7 +6533,6 @@
         {
           "$type": "Models.Core.Folder, Models",
           "ShowInDocs": true,
-          "GraphsPerPage": 6,
           "Name": "Wagga",
           "ResourceName": null,
           "Children": [
@@ -6669,6 +6664,8 @@
                             1000.0,
                             1000.0
                           ],
+                          "ParticleSizeSand": null,
+                          "ParticleSizeSilt": null,
                           "ParticleSizeClay": [
                             9.0,
                             11.0,
@@ -6679,8 +6676,6 @@
                             42.0,
                             40.0
                           ],
-                          "ParticleSizeSand": null,
-                          "ParticleSizeSilt": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -7005,7 +7000,6 @@
                         },
                         {
                           "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                          "CONSTANT_TEMPdepth": 10.0,
                           "Thickness": null,
                           "InitialValues": null,
                           "Name": "SoilTemperature",
@@ -7292,7 +7286,7 @@
                     },
                     {
                       "$type": "Models.Operations, Models",
-                      "Operation": [
+                      "OperationsList": [
                         {
                           "$type": "Models.Operation, Models",
                           "Enabled": true,
@@ -7309,7 +7303,7 @@
                     },
                     {
                       "$type": "Models.Operations, Models",
-                      "Operation": [
+                      "OperationsList": [
                         {
                           "$type": "Models.Operation, Models",
                           "Enabled": true,
@@ -7384,8 +7378,8 @@
                       "$type": "Models.Report, Models",
                       "VariableNames": [
                         "[Clock].Today",
-                        "[Soil].SoilTemperature.AverageSoilTemp[2] as AverageSoilTemp@0003mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[5] as AverageSoilTemp@0025mm"
+                        "[Soil].SoilTemperature.AverageSoilTemperature[2] as AverageSoilTemp@0003mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[5] as AverageSoilTemp@0025mm"
                       ],
                       "EventNames": [
                         "[Clock].DoReport"
@@ -7661,7 +7655,7 @@
                   "FactorToVaryMarkers": null,
                   "FactorToVaryLines": null,
                   "Marker": 0,
-                  "MarkerSize": 0,
+                  "MarkerSize": 1,
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "Observed",
@@ -7758,7 +7752,7 @@
                   "FactorToVaryMarkers": null,
                   "FactorToVaryLines": null,
                   "Marker": 0,
-                  "MarkerSize": 0,
+                  "MarkerSize": 1,
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "Observed",
@@ -7830,8 +7824,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "PredictedObserved",
-                  "XFieldName": "Observed.AverageSoilTemp@0003mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0003mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0003mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0003mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -7910,8 +7904,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "PredictedObserved",
-                  "XFieldName": "Observed.AverageSoilTemp@0025mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0025mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0025mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0025mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -7948,7 +7942,6 @@
         {
           "$type": "Models.Core.Folder, Models",
           "ShowInDocs": true,
-          "GraphsPerPage": 6,
           "Name": "Norwin",
           "ResourceName": null,
           "Children": [
@@ -8100,6 +8093,8 @@
                             300.0,
                             300.0
                           ],
+                          "ParticleSizeSand": null,
+                          "ParticleSizeSilt": null,
                           "ParticleSizeClay": [
                             70.0,
                             70.0,
@@ -8107,8 +8102,6 @@
                             70.0,
                             70.0
                           ],
-                          "ParticleSizeSand": null,
-                          "ParticleSizeSilt": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -8223,6 +8216,8 @@
                           "A": 1.0,
                           "DTHC": 0.0,
                           "DTHP": 1.0,
+                          "eo_time": "06:00",
+                          "eo_durn": 720.0,
                           "Diagnostics": false,
                           "Name": "Swim3",
                           "ResourceName": null,
@@ -8458,7 +8453,6 @@
                         },
                         {
                           "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                          "CONSTANT_TEMPdepth": 10.0,
                           "Thickness": null,
                           "InitialValues": null,
                           "Name": "Temperature",
@@ -8892,7 +8886,6 @@
         {
           "$type": "Models.Core.Folder, Models",
           "ShowInDocs": true,
-          "GraphsPerPage": 6,
           "Name": "USA BareSoil",
           "ResourceName": null,
           "Children": [
@@ -9028,20 +9021,20 @@
                       "ReadOnly": false
                     },
                     {
-                      "$type": "Models.Summary, Models",
-                      "Verbosity": 100,
-                      "Name": "Summary",
+                      "$type": "Models.Climate.Weather, Models",
+                      "ConstantsFile": null,
+                      "FileName": "WeatherFiles\\AmesSoilTempAllYears.met",
+                      "ExcelWorkSheetName": "",
+                      "Name": "Weather",
                       "ResourceName": null,
                       "Children": [],
                       "Enabled": true,
                       "ReadOnly": false
                     },
                     {
-                      "$type": "Models.Climate.Weather, Models",
-                      "ConstantsFile": null,
-                      "FileName": "AmesSoilTempAllYears.met",
-                      "ExcelWorkSheetName": "",
-                      "Name": "Weather",
+                      "$type": "Models.Summary, Models",
+                      "Verbosity": 100,
+                      "Name": "Summary",
                       "ResourceName": null,
                       "Children": [],
                       "Enabled": true,
@@ -9147,16 +9140,6 @@
                                 400.0,
                                 100.0
                               ],
-                              "ParticleSizeClay": [
-                                18.0,
-                                18.0,
-                                22.0,
-                                22.0,
-                                21.0,
-                                21.0,
-                                17.0,
-                                17.0
-                              ],
                               "ParticleSizeSand": [
                                 51.0,
                                 51.0,
@@ -9176,6 +9159,16 @@
                                 28.0,
                                 32.0,
                                 32.0
+                              ],
+                              "ParticleSizeClay": [
+                                18.0,
+                                18.0,
+                                22.0,
+                                22.0,
+                                21.0,
+                                21.0,
+                                17.0,
+                                17.0
                               ],
                               "Rocks": null,
                               "Texture": null,
@@ -9549,7 +9542,6 @@
                             },
                             {
                               "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                              "CONSTANT_TEMPdepth": 10.0,
                               "Thickness": null,
                               "InitialValues": null,
                               "Name": "Temperature",
@@ -9640,7 +9632,7 @@
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
                   "XFieldName": "Date",
-                  "YFieldName": "Predicted.AverageSoilTemp@0025mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0025mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -9669,7 +9661,7 @@
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
                   "XFieldName": "Date",
-                  "YFieldName": "Observed.AverageSoilTemp@0025mm",
+                  "YFieldName": "Observed.AverageSoilTemperature@0025mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -9737,7 +9729,7 @@
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
                   "XFieldName": "Date",
-                  "YFieldName": "Predicted.AverageSoilTemp@0100mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0100mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -9766,7 +9758,7 @@
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
                   "XFieldName": "Date",
-                  "YFieldName": "Observed.AverageSoilTemp@0100mm",
+                  "YFieldName": "Observed.AverageSoilTemperature@0100mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -9834,7 +9826,7 @@
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
                   "XFieldName": "Date",
-                  "YFieldName": "Predicted.AverageSoilTemp@0200mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0200mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -9863,7 +9855,7 @@
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
                   "XFieldName": "Date",
-                  "YFieldName": "Observed.AverageSoilTemp@0200mm",
+                  "YFieldName": "Observed.AverageSoilTemperature@0200mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -9931,7 +9923,7 @@
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
                   "XFieldName": "Date",
-                  "YFieldName": "Predicted.AverageSoilTemp@0400mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0400mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -9960,7 +9952,7 @@
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
                   "XFieldName": "Date",
-                  "YFieldName": "Observed.AverageSoilTemp@0400mm",
+                  "YFieldName": "Observed.AverageSoilTemperature@0400mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -10028,7 +10020,7 @@
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
                   "XFieldName": "Date",
-                  "YFieldName": "Predicted.AverageSoilTemp@0850mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0850mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -10057,7 +10049,7 @@
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
                   "XFieldName": "Date",
-                  "YFieldName": "Observed.AverageSoilTemp@0850mm",
+                  "YFieldName": "Observed.AverageSoilTemperature@0850mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -10124,8 +10116,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
-                  "XFieldName": "Observed.AverageSoilTemp@0025mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0025mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0025mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0025mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -10204,8 +10196,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
-                  "XFieldName": "Observed.AverageSoilTemp@0100mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0100mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0100mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0100mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -10284,8 +10276,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
-                  "XFieldName": "Observed.AverageSoilTemp@0200mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0200mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0200mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0200mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -10364,8 +10356,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
-                  "XFieldName": "Observed.AverageSoilTemp@0400mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0400mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0400mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0400mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -10444,8 +10436,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "USAPredictedObserved",
-                  "XFieldName": "Observed.AverageSoilTemp@0850mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0850mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0850mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0850mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -10482,7 +10474,6 @@
         {
           "$type": "Models.Core.Folder, Models",
           "ShowInDocs": true,
-          "GraphsPerPage": 6,
           "Name": "USA CornSoybean",
           "ResourceName": null,
           "Children": [
@@ -10493,21 +10484,21 @@
               "ResourceName": null,
               "Children": [
                 {
-                  "$type": "Models.Climate.Weather, Models",
-                  "ConstantsFile": null,
-                  "FileName": "COBS.met",
-                  "ExcelWorkSheetName": "",
-                  "Name": "Weather",
+                  "$type": "Models.Clock, Models",
+                  "Start": "2008-01-01T00:00:00",
+                  "End": "2013-12-31T00:00:00",
+                  "Name": "Clock",
                   "ResourceName": null,
                   "Children": [],
                   "Enabled": true,
                   "ReadOnly": false
                 },
                 {
-                  "$type": "Models.Clock, Models",
-                  "Start": "2008-01-01T00:00:00",
-                  "End": "2013-12-31T00:00:00",
-                  "Name": "Clock",
+                  "$type": "Models.Climate.Weather, Models",
+                  "ConstantsFile": null,
+                  "FileName": "WeatherFiles\\COBS.met",
+                  "ExcelWorkSheetName": "",
+                  "Name": "Weather",
                   "ResourceName": null,
                   "Children": [],
                   "Enabled": true,
@@ -10661,19 +10652,6 @@
                             320.0,
                             300.0
                           ],
-                          "ParticleSizeClay": [
-                            25.67,
-                            25.67,
-                            26.43,
-                            28.09,
-                            28.5,
-                            29.0,
-                            29.0,
-                            27.0,
-                            27.0,
-                            27.0,
-                            27.0
-                          ],
                           "ParticleSizeSand": [
                             38.29,
                             38.29,
@@ -10699,6 +10677,19 @@
                             36.0,
                             36.0,
                             36.0
+                          ],
+                          "ParticleSizeClay": [
+                            25.67,
+                            25.67,
+                            26.43,
+                            28.09,
+                            28.5,
+                            29.0,
+                            29.0,
+                            27.0,
+                            27.0,
+                            27.0,
+                            27.0
                           ],
                           "Rocks": null,
                           "Texture": null,
@@ -11086,6 +11077,8 @@
                           "A": 0.0,
                           "DTHC": 0.0,
                           "DTHP": 0.0,
+                          "eo_time": "06:00",
+                          "eo_durn": 720.0,
                           "Diagnostics": false,
                           "Name": "Swim",
                           "ResourceName": null,
@@ -11318,7 +11311,6 @@
                         },
                         {
                           "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                          "CONSTANT_TEMPdepth": 10.0,
                           "Thickness": [],
                           "InitialValues": null,
                           "Name": "Temperature",
@@ -11333,7 +11325,7 @@
                     },
                     {
                       "$type": "Models.Operations, Models",
-                      "Operation": [
+                      "OperationsList": [
                         {
                           "$type": "Models.Operation, Models",
                           "Enabled": true,
@@ -11520,7 +11512,6 @@
                 {
                   "$type": "Models.Core.Folder, Models",
                   "ShowInDocs": false,
-                  "GraphsPerPage": 6,
                   "Name": "soil water graphs",
                   "ResourceName": null,
                   "Children": [
@@ -12416,7 +12407,6 @@
                 {
                   "$type": "Models.Core.Folder, Models",
                   "ShowInDocs": false,
-                  "GraphsPerPage": 6,
                   "Name": "Crop",
                   "ResourceName": null,
                   "Children": [
@@ -13214,8 +13204,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "USASoilPredObs",
-                  "XFieldName": "Observed.AverageSoilTemp@0038mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0038mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0038mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0038mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": true,
@@ -13294,8 +13284,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "USASoilPredObs",
-                  "XFieldName": "Observed.AverageSoilTemp@0100mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0100mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0100mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0100mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": true,
@@ -13374,8 +13364,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "USASoilPredObs",
-                  "XFieldName": "Observed.AverageSoilTemp@0170mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0170mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0170mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0170mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": true,
@@ -13454,8 +13444,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "USASoilPredObs",
-                  "XFieldName": "Observed.AverageSoilTemp@0350mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0350mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0350mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0350mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": true,
@@ -13534,8 +13524,8 @@
                   "Line": 4,
                   "LineThickness": 0,
                   "TableName": "USASoilPredObs",
-                  "XFieldName": "Observed.AverageSoilTemp@0500mm",
-                  "YFieldName": "Predicted.AverageSoilTemp@0500mm",
+                  "XFieldName": "Observed.AverageSoilTemperature@0500mm",
+                  "YFieldName": "Predicted.AverageSoilTemperature@0500mm",
                   "X2FieldName": null,
                   "Y2FieldName": null,
                   "ShowInLegend": false,
@@ -13901,7 +13891,6 @@
         {
           "$type": "Models.Core.Folder, Models",
           "ShowInDocs": true,
-          "GraphsPerPage": 6,
           "Name": "NewZealand",
           "ResourceName": null,
           "Children": [
@@ -13962,7 +13951,7 @@
                               "Children": [
                                 {
                                   "$type": "Models.Operations, Models",
-                                  "Operation": null,
+                                  "OperationsList": null,
                                   "Name": "0",
                                   "ResourceName": null,
                                   "Children": [],
@@ -13987,7 +13976,7 @@
                               "Children": [
                                 {
                                   "$type": "Models.Operations, Models",
-                                  "Operation": [
+                                  "OperationsList": [
                                     {
                                       "$type": "Models.Operation, Models",
                                       "Enabled": true,
@@ -14044,7 +14033,7 @@
                               "Children": [
                                 {
                                   "$type": "Models.Operations, Models",
-                                  "Operation": [
+                                  "OperationsList": [
                                     {
                                       "$type": "Models.Operation, Models",
                                       "Enabled": true,
@@ -14234,7 +14223,7 @@
                               "Children": [
                                 {
                                   "$type": "Models.Operations, Models",
-                                  "Operation": null,
+                                  "OperationsList": null,
                                   "Name": "Nil",
                                   "ResourceName": null,
                                   "Children": [
@@ -14339,13 +14328,12 @@
                         {
                           "$type": "Models.Core.Folder, Models",
                           "ShowInDocs": true,
-                          "GraphsPerPage": 6,
                           "Name": "Manager folder",
                           "ResourceName": null,
                           "Children": [
                             {
                               "$type": "Models.Operations, Models",
-                              "Operation": [
+                              "OperationsList": [
                                 {
                                   "$type": "Models.Operation, Models",
                                   "Enabled": true,
@@ -14432,7 +14420,7 @@
                             },
                             {
                               "$type": "Models.Operations, Models",
-                              "Operation": null,
+                              "OperationsList": null,
                               "Name": "IrrigationSchedule",
                               "ResourceName": null,
                               "Children": [],
@@ -14441,7 +14429,7 @@
                             },
                             {
                               "$type": "Models.Operations, Models",
-                              "Operation": null,
+                              "OperationsList": null,
                               "Name": "FertiliserSchedule",
                               "ResourceName": null,
                               "Children": [],
@@ -14971,7 +14959,6 @@
                             },
                             {
                               "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                              "CONSTANT_TEMPdepth": 10.0,
                               "Thickness": null,
                               "InitialValues": null,
                               "Name": "SoilTemperature",
@@ -14993,18 +14980,6 @@
                                 100.0,
                                 200.0,
                                 250.0
-                              ],
-                              "ParticleSizeClay": [
-                                24.0,
-                                23.2,
-                                17.9,
-                                13.3,
-                                12.0,
-                                16.7,
-                                12.7,
-                                12.8,
-                                11.5,
-                                11.8
                               ],
                               "ParticleSizeSand": [
                                 15.9,
@@ -15029,6 +15004,18 @@
                                 52.0,
                                 50.9,
                                 50.3
+                              ],
+                              "ParticleSizeClay": [
+                                24.0,
+                                23.2,
+                                17.9,
+                                13.3,
+                                12.0,
+                                16.7,
+                                12.7,
+                                12.8,
+                                11.5,
+                                11.8
                               ],
                               "Rocks": null,
                               "Texture": null,
@@ -15547,13 +15534,13 @@
                           "$type": "Models.Report, Models",
                           "VariableNames": [
                             "[Clock].Today as Date",
-                            "[Soil].SoilTemperature.AverageSoilTemp[1] as AveSoilTemp@0075mm",
-                            "[Soil].SoilTemperature.AverageSoilTemp[2] as AveSoilTemp@0225mm",
-                            "[Soil].SoilTemperature.AverageSoilTemp[3] as AveSoilTemp@0450mm",
-                            "[Soil].SoilTemperature.AverageSoilTemp[4] as AveSoilTemp@0750mm",
-                            "[Soil].SoilTemperature.AverageSoilTemp[5] as AveSoilTemp@1050mm",
-                            "[Soil].SoilTemperature.AverageSoilTemp[6] as AveSoilTemp@1350mm",
-                            "[Soil].SoilTemperature.AverageSoilTemp[6] as AveSoilTemp@1650mm"
+                            "[Soil].SoilTemperature.AverageSoilTemperature[1] as AveSoilTemp@0075mm",
+                            "[Soil].SoilTemperature.AverageSoilTemperature[2] as AveSoilTemp@0225mm",
+                            "[Soil].SoilTemperature.AverageSoilTemperature[3] as AveSoilTemp@0450mm",
+                            "[Soil].SoilTemperature.AverageSoilTemperature[4] as AveSoilTemp@0750mm",
+                            "[Soil].SoilTemperature.AverageSoilTemperature[5] as AveSoilTemp@1050mm",
+                            "[Soil].SoilTemperature.AverageSoilTemperature[6] as AveSoilTemp@1350mm",
+                            "[Soil].SoilTemperature.AverageSoilTemperature[6] as AveSoilTemp@1650mm"
                           ],
                           "EventNames": [
                             "[Clock].DoReport"
@@ -15566,6 +15553,41 @@
                           "ReadOnly": false
                         }
                       ],
+                      "Enabled": true,
+                      "ReadOnly": false
+                    },
+                    {
+                      "$type": "Models.Manager, Models",
+                      "CodeArray": [
+                        "using System;",
+                        "using Models.Core;",
+                        "using Models.Interfaces;",
+                        "using Models.PMF;",
+                        "using APSIM.Shared.Utilities;",
+                        "using Models.Climate;",
+                        "",
+                        "namespace Models",
+                        "{",
+                        "    [Serializable]",
+                        "    public class Script : Model",
+                        "    {",
+                        "        [Link] IClock Clock;",
+                        "        [Link] Weather weather;",
+                        "         [Link] ISummary Summary;",
+                        "",
+                        "        [EventSubscribe(\"PreparingNewWeatherData\")]",
+                        "        private void OnPreparingNewWeatherData(object sender, EventArgs e)",
+                        "        {",
+                        "            weather.Wind = 3.0;",
+                        "        }",
+                        "    }",
+                        "}",
+                        ""
+                      ],
+                      "Parameters": [],
+                      "Name": "Manager",
+                      "ResourceName": null,
+                      "Children": [],
                       "Enabled": true,
                       "ReadOnly": false
                     }
@@ -16650,7 +16672,6 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
-      "GraphsPerPage": 6,
       "Name": "Effect of Soil Layering",
       "ResourceName": null,
       "Children": [
@@ -16991,14 +17012,14 @@
                         200.0,
                         300.0
                       ],
+                      "ParticleSizeSand": null,
+                      "ParticleSizeSilt": null,
                       "ParticleSizeClay": [
                         9.0,
                         9.0,
                         9.0,
                         9.0
                       ],
-                      "ParticleSizeSand": null,
-                      "ParticleSizeSilt": null,
                       "Rocks": null,
                       "Texture": null,
                       "BD": [
@@ -17159,7 +17180,6 @@
                     },
                     {
                       "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                      "CONSTANT_TEMPdepth": 10.0,
                       "Thickness": null,
                       "InitialValues": null,
                       "Name": "SoilTemperature",
@@ -17266,16 +17286,16 @@
                   "$type": "Models.Report, Models",
                   "VariableNames": [
                     "[Clock].Today as Date",
-                    "[Soil].SoilTemperature.AverageSoilTemp[1] as AverageSoilTemp@0001mm",
-                    "[Soil].SoilTemperature.AverageSoilTemp[3] as AverageSoilTemp@0008mm",
-                    "[Soil].SoilTemperature.AverageSoilTemp[4] as AverageSoilTemp@0015mm",
-                    "[Soil].SoilTemperature.AverageSoilTemp[8] as AverageSoilTemp@0150mm",
-                    "[Soil].SoilTemperature.AverageSoilTemp[11] as AverageSoilTemp@1000mm",
-                    "[Soil].SoilTemperature.MaxSoilTemp[1] as MaxSoilTemp@0001mm",
-                    "[Soil].SoilTemperature.MaxSoilTemp[3] as MaxSoilTemp@0008mm",
-                    "[Soil].SoilTemperature.MaxSoilTemp[4] as MaxSoilTemp@0015mm",
-                    "[Soil].SoilTemperature.MaxSoilTemp[8] as MaxSoilTemp@0150mm",
-                    "[Soil].SoilTemperature.MaxSoilTemp[11] as MaxSoilTemp@1000mm"
+                    "[Soil].SoilTemperature.AverageSoilTemperature[1] as AverageSoilTemp@0001mm",
+                    "[Soil].SoilTemperature.AverageSoilTemperature[3] as AverageSoilTemp@0008mm",
+                    "[Soil].SoilTemperature.AverageSoilTemperature[4] as AverageSoilTemp@0015mm",
+                    "[Soil].SoilTemperature.AverageSoilTemperature[8] as AverageSoilTemp@0150mm",
+                    "[Soil].SoilTemperature.AverageSoilTemperature[11] as AverageSoilTemp@1000mm",
+                    "[Soil].SoilTemperature.MaximumSoilTemperature[1] as MaxSoilTemp@0001mm",
+                    "[Soil].SoilTemperature.MaximumSoilTemperature[3] as MaxSoilTemp@0008mm",
+                    "[Soil].SoilTemperature.MaximumSoilTemperature[4] as MaxSoilTemp@0015mm",
+                    "[Soil].SoilTemperature.MaximumSoilTemperature[8] as MaxSoilTemp@0150mm",
+                    "[Soil].SoilTemperature.MaximumSoilTemperature[11] as MaxSoilTemp@1000mm"
                   ],
                   "EventNames": [
                     "[Clock].DoReport"
@@ -17623,14 +17643,14 @@
                         200.0,
                         300.0
                       ],
+                      "ParticleSizeSand": null,
+                      "ParticleSizeSilt": null,
                       "ParticleSizeClay": [
                         9.0,
                         9.0,
                         9.0,
                         9.0
                       ],
-                      "ParticleSizeSand": null,
-                      "ParticleSizeSilt": null,
                       "Rocks": null,
                       "Texture": null,
                       "BD": [
@@ -17791,7 +17811,6 @@
                     },
                     {
                       "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                      "CONSTANT_TEMPdepth": 10.0,
                       "Thickness": null,
                       "InitialValues": null,
                       "Name": "SoilTemperature",
@@ -17893,16 +17912,16 @@
                   "$type": "Models.Report, Models",
                   "VariableNames": [
                     "[Clock].Today as Date",
-                    "[Soil].SoilTemperature.AverageSoilTemp[1] as AverageSoilTemp@0001mm",
-                    "[Soil].SoilTemperature.AverageSoilTemp[1] as AverageSoilTemp@0008mm",
-                    "[Soil].SoilTemperature.AverageSoilTemp[1] as AverageSoilTemp@0015mm",
-                    "[Soil].SoilTemperature.AverageSoilTemp[2] as AverageSoilTemp@0150mm",
-                    "[Soil].SoilTemperature.AverageSoilTemp[6] as AverageSoilTemp@1000mm",
-                    "[Soil].SoilTemperature.MaxSoilTemp[1] as MaxSoilTemp@0001mm",
-                    "[Soil].SoilTemperature.MaxSoilTemp[1] as MaxSoilTemp@0008mm",
-                    "[Soil].SoilTemperature.MaxSoilTemp[1] as MaxSoilTemp@0015mm",
-                    "[Soil].SoilTemperature.MaxSoilTemp[2] as MaxSoilTemp@0150mm",
-                    "[Soil].SoilTemperature.MaxSoilTemp[6] as MaxSoilTemp@1000mm"
+                    "[Soil].SoilTemperature.AverageSoilTemperature[1] as AverageSoilTemp@0001mm",
+                    "[Soil].SoilTemperature.AverageSoilTemperature[1] as AverageSoilTemp@0008mm",
+                    "[Soil].SoilTemperature.AverageSoilTemperature[1] as AverageSoilTemp@0015mm",
+                    "[Soil].SoilTemperature.AverageSoilTemperature[2] as AverageSoilTemp@0150mm",
+                    "[Soil].SoilTemperature.AverageSoilTemperature[6] as AverageSoilTemp@1000mm",
+                    "[Soil].SoilTemperature.MaximumSoilTemperature[1] as MaxSoilTemp@0001mm",
+                    "[Soil].SoilTemperature.MaximumSoilTemperature[1] as MaxSoilTemp@0008mm",
+                    "[Soil].SoilTemperature.MaximumSoilTemperature[1] as MaxSoilTemp@0015mm",
+                    "[Soil].SoilTemperature.MaximumSoilTemperature[2] as MaxSoilTemp@0150mm",
+                    "[Soil].SoilTemperature.MaximumSoilTemperature[6] as MaxSoilTemp@1000mm"
                   ],
                   "EventNames": [
                     "[Clock].DoReport"
@@ -18243,8 +18262,8 @@
               "Line": 4,
               "LineThickness": 0,
               "TableName": "SimulationComparison",
-              "XFieldName": "LayeringEffectThick.AverageSoilTemp@0001mm",
-              "YFieldName": "LayeringEffectThin.AverageSoilTemp@0001mm",
+              "XFieldName": "LayeringEffectThick.AverageSoilTemperature@0001mm",
+              "YFieldName": "LayeringEffectThin.AverageSoilTemperature@0001mm",
               "X2FieldName": null,
               "Y2FieldName": null,
               "ShowInLegend": false,
@@ -18323,8 +18342,8 @@
               "Line": 4,
               "LineThickness": 0,
               "TableName": "SimulationComparison",
-              "XFieldName": "LayeringEffectThick.AverageSoilTemp@0015mm",
-              "YFieldName": "LayeringEffectThin.AverageSoilTemp@0015mm",
+              "XFieldName": "LayeringEffectThick.AverageSoilTemperature@0015mm",
+              "YFieldName": "LayeringEffectThin.AverageSoilTemperature@0015mm",
               "X2FieldName": null,
               "Y2FieldName": null,
               "ShowInLegend": false,
@@ -18403,8 +18422,8 @@
               "Line": 4,
               "LineThickness": 0,
               "TableName": "SimulationComparison",
-              "XFieldName": "LayeringEffectThick.AverageSoilTemp@0150mm",
-              "YFieldName": "LayeringEffectThick.AverageSoilTemp@0150mm",
+              "XFieldName": "LayeringEffectThick.AverageSoilTemperature@0150mm",
+              "YFieldName": "LayeringEffectThick.AverageSoilTemperature@0150mm",
               "X2FieldName": null,
               "Y2FieldName": null,
               "ShowInLegend": false,
@@ -18483,8 +18502,8 @@
               "Line": 4,
               "LineThickness": 0,
               "TableName": "SimulationComparison",
-              "XFieldName": "LayeringEffectThin.AverageSoilTemp@1000mm",
-              "YFieldName": "LayeringEffectThick.MaxSoilTemp@1000mm",
+              "XFieldName": "LayeringEffectThin.AverageSoilTemperature@1000mm",
+              "YFieldName": "LayeringEffectThick.MaximumSoilTemperature@1000mm",
               "X2FieldName": null,
               "Y2FieldName": null,
               "ShowInLegend": false,
@@ -18631,8 +18650,8 @@
               "Line": 4,
               "LineThickness": 0,
               "TableName": "SimulationComparison",
-              "XFieldName": "LayeringEffectThin.MaxSoilTemp@0001mm",
-              "YFieldName": "LayeringEffectThick.MaxSoilTemp@0001mm",
+              "XFieldName": "LayeringEffectThin.MaximumSoilTemperature@0001mm",
+              "YFieldName": "LayeringEffectThick.MaximumSoilTemperature@0001mm",
               "X2FieldName": null,
               "Y2FieldName": null,
               "ShowInLegend": false,
@@ -18669,7 +18688,6 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
-      "GraphsPerPage": 6,
       "Name": "Initialisation Choices",
       "ResourceName": null,
       "Children": [
@@ -18705,7 +18723,6 @@
                   "Children": [
                     {
                       "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                      "CONSTANT_TEMPdepth": 10.0,
                       "Thickness": [
                         100.0,
                         150.0,
@@ -18746,7 +18763,6 @@
                   "Children": [
                     {
                       "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                      "CONSTANT_TEMPdepth": 10.0,
                       "Thickness": [],
                       "InitialValues": null,
                       "Name": "SoilTemperature",
@@ -18771,7 +18787,6 @@
                   "Children": [
                     {
                       "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                      "CONSTANT_TEMPdepth": 10.0,
                       "Thickness": [
                         100.0,
                         150.0,
@@ -18853,128 +18868,72 @@
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "SurfaceOrganicMatter.Residue",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "SurfaceOrganicMatter.Residue",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Leaf",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Leaf",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Stem",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Stem",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Stolon",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Stolon",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Leaf",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Leaf",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Stem",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Stem",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Stolon",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Stolon",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     }
                   ],
                   "Name": "Forages",
@@ -19735,6 +19694,8 @@
                             300.0,
                             300.0
                           ],
+                          "ParticleSizeSand": null,
+                          "ParticleSizeSilt": null,
                           "ParticleSizeClay": [
                             20.0,
                             15.0,
@@ -19744,8 +19705,6 @@
                             5.0,
                             5.0
                           ],
-                          "ParticleSizeSand": null,
-                          "ParticleSizeSilt": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -20043,7 +20002,6 @@
                         },
                         {
                           "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                          "CONSTANT_TEMPdepth": 10.0,
                           "Thickness": [
                             100.0,
                             150.0,
@@ -20189,13 +20147,13 @@
                       "$type": "Models.Report, Models",
                       "VariableNames": [
                         "[Clock].Today as Date",
-                        "[Soil].SoilTemperature.AverageSoilTemp[1] as AveSoilTemp@0050mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[1] as AveSoilTemp@0075mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[3] as AveSoilTemp@0100mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[3] as AveSoilTemp@0350mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[5] as AveSoilTemp@0725mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[6] as AveSoilTemp@1000mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[7] as AveSoilTemp@1300mm"
+                        "[Soil].SoilTemperature.AverageSoilTemperature[1] as AveSoilTemp@0050mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[1] as AveSoilTemp@0075mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[3] as AveSoilTemp@0100mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[3] as AveSoilTemp@0350mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[5] as AveSoilTemp@0725mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[6] as AveSoilTemp@1000mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[7] as AveSoilTemp@1300mm"
                       ],
                       "EventNames": [
                         "[Clock].EndOfDay"
@@ -20218,7 +20176,6 @@
             {
               "$type": "Models.Core.Folder, Models",
               "ShowInDocs": true,
-              "GraphsPerPage": 6,
               "Name": "Shortterm Plots",
               "ResourceName": null,
               "Children": [
@@ -20501,7 +20458,6 @@
             {
               "$type": "Models.Core.Folder, Models",
               "ShowInDocs": true,
-              "GraphsPerPage": 6,
               "Name": "Longterm Plots",
               "ResourceName": null,
               "Children": [
@@ -20792,7 +20748,6 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
-      "GraphsPerPage": 6,
       "Name": "Initialisation Time of Year",
       "ResourceName": null,
       "Children": [
@@ -20878,128 +20833,72 @@
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "SurfaceOrganicMatter.Residue",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "SurfaceOrganicMatter.Residue",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Leaf",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Leaf",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Stem",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Stem",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Stolon",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Stolon",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Leaf",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Leaf",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Stem",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Stem",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Stolon",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Stolon",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     }
                   ],
                   "Name": "Forages",
@@ -21761,6 +21660,8 @@
                             300.0,
                             300.0
                           ],
+                          "ParticleSizeSand": null,
+                          "ParticleSizeSilt": null,
                           "ParticleSizeClay": [
                             20.0,
                             15.0,
@@ -21770,8 +21671,6 @@
                             5.0,
                             5.0
                           ],
-                          "ParticleSizeSand": null,
-                          "ParticleSizeSilt": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -22069,7 +21968,6 @@
                         },
                         {
                           "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                          "CONSTANT_TEMPdepth": 10.0,
                           "Thickness": [],
                           "InitialValues": null,
                           "Name": "SoilTemperature",
@@ -22199,13 +22097,13 @@
                       "$type": "Models.Report, Models",
                       "VariableNames": [
                         "[Clock].Today as Date",
-                        "[Soil].SoilTemperature.AverageSoilTemp[1] as AveSoilTemp@0050mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[1] as AveSoilTemp@0075mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[3] as AveSoilTemp@0100mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[3] as AveSoilTemp@0350mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[5] as AveSoilTemp@0725mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[6] as AveSoilTemp@1000mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[7] as AveSoilTemp@1300mm"
+                        "[Soil].SoilTemperature.AverageSoilTemperature[1] as AveSoilTemp@0050mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[1] as AveSoilTemp@0075mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[3] as AveSoilTemp@0100mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[3] as AveSoilTemp@0350mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[5] as AveSoilTemp@0725mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[6] as AveSoilTemp@1000mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[7] as AveSoilTemp@1300mm"
                       ],
                       "EventNames": [
                         "",
@@ -22509,7 +22407,6 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
-      "GraphsPerPage": 6,
       "Name": "Resetting SoilTemperature",
       "ResourceName": null,
       "Children": [
@@ -22545,7 +22442,7 @@
                   "Children": [
                     {
                       "$type": "Models.Operations, Models",
-                      "Operation": [],
+                      "OperationsList": [],
                       "Name": "Operations",
                       "ResourceName": null,
                       "Children": [],
@@ -22568,7 +22465,7 @@
                   "Children": [
                     {
                       "$type": "Models.Operations, Models",
-                      "Operation": [
+                      "OperationsList": [
                         {
                           "$type": "Models.Operation, Models",
                           "Enabled": true,
@@ -22647,128 +22544,72 @@
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "SurfaceOrganicMatter.Residue",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "SurfaceOrganicMatter.Residue",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Leaf",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Leaf",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Stem",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Stem",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Stolon",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Stolon",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Leaf",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Leaf",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Stem",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Stem",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Stolon",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Stolon",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     }
                   ],
                   "Name": "Forages",
@@ -22805,7 +22646,7 @@
                   "Children": [
                     {
                       "$type": "Models.Operations, Models",
-                      "Operation": [],
+                      "OperationsList": [],
                       "Name": "Operations",
                       "ResourceName": null,
                       "Children": [],
@@ -23538,6 +23379,8 @@
                             300.0,
                             300.0
                           ],
+                          "ParticleSizeSand": null,
+                          "ParticleSizeSilt": null,
                           "ParticleSizeClay": [
                             20.0,
                             15.0,
@@ -23547,8 +23390,6 @@
                             5.0,
                             5.0
                           ],
-                          "ParticleSizeSand": null,
-                          "ParticleSizeSilt": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -23846,7 +23687,6 @@
                         },
                         {
                           "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                          "CONSTANT_TEMPdepth": 10.0,
                           "Thickness": [],
                           "InitialValues": null,
                           "Name": "SoilTemperature",
@@ -23976,13 +23816,13 @@
                       "$type": "Models.Report, Models",
                       "VariableNames": [
                         "[Clock].Today as Date",
-                        "[Soil].SoilTemperature.AverageSoilTemp[1] as AveSoilTemp@0050mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[1] as AveSoilTemp@0075mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[3] as AveSoilTemp@0100mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[3] as AveSoilTemp@0350mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[5] as AveSoilTemp@0725mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[6] as AveSoilTemp@1000mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[7] as AveSoilTemp@1300mm"
+                        "[Soil].SoilTemperature.AverageSoilTemperature[1] as AveSoilTemp@0050mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[1] as AveSoilTemp@0075mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[3] as AveSoilTemp@0100mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[3] as AveSoilTemp@0350mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[5] as AveSoilTemp@0725mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[6] as AveSoilTemp@1000mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[7] as AveSoilTemp@1300mm"
                       ],
                       "EventNames": [
                         "[Clock].EndOfDay"
@@ -24285,7 +24125,6 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
-      "GraphsPerPage": 6,
       "Name": "SensibilityTests - Clay",
       "ResourceName": null,
       "Children": [
@@ -24681,6 +24520,8 @@
                             999999.0,
                             999999.0
                           ],
+                          "ParticleSizeSand": null,
+                          "ParticleSizeSilt": null,
                           "ParticleSizeClay": [
                             9.0,
                             9.0,
@@ -24691,8 +24532,6 @@
                             "NaN",
                             "NaN"
                           ],
-                          "ParticleSizeSand": null,
-                          "ParticleSizeSilt": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -24841,7 +24680,6 @@
                         },
                         {
                           "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                          "CONSTANT_TEMPdepth": 0.0,
                           "Thickness": null,
                           "InitialValues": null,
                           "Name": "SoilTemperature",
@@ -24959,48 +24797,48 @@
                         "[Weather].MaxT as MaxT",
                         "[Weather].MinT as MinT",
                         "",
-                        "[Soil].SoilTemperature.AverageSoilTemp[1] as AverageSoilTemp@0012mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[2] as AverageSoilTemp@0050mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[3] as AverageSoilTemp@0100mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[4] as AverageSoilTemp@0160mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[5] as AverageSoilTemp@0300mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[6] as AverageSoilTemp@0500mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[7] as AverageSoilTemp@0750mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[8] as AverageSoilTemp@1000mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[9] as AverageSoilTemp@1250mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[10] as AverageSoilTemp@1500mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[11] as AverageSoilTemp@1700mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[12] as AverageSoilTemp@1900mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[13] as AverageSoilTemp@2250mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[14] as AverageSoilTemp@2750mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[15] as AverageSoilTemp@3250mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[16] as AverageSoilTemp@3750mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[17] as AverageSoilTemp@4250mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[18] as AverageSoilTemp@4700mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[19] as AverageSoilTemp@5000mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[1] as AverageSoilTemp@0012mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[2] as AverageSoilTemp@0050mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[3] as AverageSoilTemp@0100mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[4] as AverageSoilTemp@0160mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[5] as AverageSoilTemp@0300mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[6] as AverageSoilTemp@0500mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[7] as AverageSoilTemp@0750mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[8] as AverageSoilTemp@1000mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[9] as AverageSoilTemp@1250mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[10] as AverageSoilTemp@1500mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[11] as AverageSoilTemp@1700mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[12] as AverageSoilTemp@1900mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[13] as AverageSoilTemp@2250mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[14] as AverageSoilTemp@2750mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[15] as AverageSoilTemp@3250mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[16] as AverageSoilTemp@3750mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[17] as AverageSoilTemp@4250mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[18] as AverageSoilTemp@4700mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[19] as AverageSoilTemp@5000mm",
                         "",
                         "",
                         "",
                         "",
-                        "[Soil].SoilTemperature.MaxSoilTemp[1] as MaxSoilTemp@0012mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[2] as MaxSoilTemp@0050mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[3] as MaxSoilTemp@0100mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[4] as MaxSoilTemp@0160mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[5] as MaxSoilTemp@0300mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[6] as MaxSoilTemp@0500mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[7] as MaxSoilTemp@0750mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[8] as MaxSoilTemp@1000mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[9] as MaxSoilTemp@1250mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[10] as MaxSoilTemp@1500mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[11] as MaxSoilTemp@1700mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[12] as MaxSoilTemp@1900mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[13] as MaxSoilTemp@2250mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[14] as MaxSoilTemp@2750mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[15] as MaxSoilTemp@3250mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[16] as MaxSoilTemp@3750mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[17] as MaxSoilTemp@4250mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[18] as MaxSoilTemp@4700mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[19] as MaxSoilTemp@5000mm"
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[1] as MaxSoilTemp@0012mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[2] as MaxSoilTemp@0050mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[3] as MaxSoilTemp@0100mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[4] as MaxSoilTemp@0160mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[5] as MaxSoilTemp@0300mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[6] as MaxSoilTemp@0500mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[7] as MaxSoilTemp@0750mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[8] as MaxSoilTemp@1000mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[9] as MaxSoilTemp@1250mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[10] as MaxSoilTemp@1500mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[11] as MaxSoilTemp@1700mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[12] as MaxSoilTemp@1900mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[13] as MaxSoilTemp@2250mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[14] as MaxSoilTemp@2750mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[15] as MaxSoilTemp@3250mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[16] as MaxSoilTemp@3750mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[17] as MaxSoilTemp@4250mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[18] as MaxSoilTemp@4700mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[19] as MaxSoilTemp@5000mm"
                       ],
                       "EventNames": [
                         "Clock.Today >= new DateTime(2005, 1, 1)",
@@ -25536,7 +25374,6 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
-      "GraphsPerPage": 6,
       "Name": "SensibilityTests - Depth of Lower Boundary",
       "ResourceName": null,
       "Children": [
@@ -25873,17 +25710,12 @@
                         "        [EventSubscribe(\"StartOfSimulation\")]",
                         "        private void OnStartOfSimulation(object sender, EventArgs e)",
                         "        {",
-                        "        \tsoilTemperature.CONSTANT_TEMPdepth = LowerBCDepth;",
+                        "        \tsoilTemperature.DepthToConstantTemperature = LowerBCDepth*1000.0;",
                         "        }",
                         "    }",
                         "}"
                       ],
-                      "Parameters": [
-                        {
-                          "Key": "LowerBCDepth",
-                          "Value": "20"
-                        }
-                      ],
+                      "Parameters": null,
                       "Name": "SetLowerBCDepth",
                       "ResourceName": null,
                       "Children": [],
@@ -25944,14 +25776,14 @@
                             800.0,
                             9000.0
                           ],
+                          "ParticleSizeSand": null,
+                          "ParticleSizeSilt": null,
                           "ParticleSizeClay": [
                             10.0,
                             10.0,
                             10.0,
                             10.0
                           ],
-                          "ParticleSizeSand": null,
-                          "ParticleSizeSilt": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -26080,7 +25912,6 @@
                         },
                         {
                           "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                          "CONSTANT_TEMPdepth": 0.0,
                           "Thickness": null,
                           "InitialValues": null,
                           "Name": "SoilTemperature",
@@ -26199,32 +26030,32 @@
                         "[Weather].MaxT as MaxT",
                         "[Weather].MinT as MinT",
                         "",
-                        "[Soil].SoilTemperature.AverageSoilTemp[1] as AverageSoilTemp@0012mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[2] as AverageSoilTemp@0050mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[3] as AverageSoilTemp@0100mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[4] as AverageSoilTemp@0160mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[5] as AverageSoilTemp@0300mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[6] as AverageSoilTemp@0500mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[7] as AverageSoilTemp@0750mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[8] as AverageSoilTemp@1000mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[9] as AverageSoilTemp@1250mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[10] as AverageSoilTemp@1500mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[11] as AverageSoilTemp@1700mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[12] as AverageSoilTemp@1900mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[20] as AverageSoilTemp@10000mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[1] as AverageSoilTemp@0012mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[2] as AverageSoilTemp@0050mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[3] as AverageSoilTemp@0100mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[4] as AverageSoilTemp@0160mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[5] as AverageSoilTemp@0300mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[6] as AverageSoilTemp@0500mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[7] as AverageSoilTemp@0750mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[8] as AverageSoilTemp@1000mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[9] as AverageSoilTemp@1250mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[10] as AverageSoilTemp@1500mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[11] as AverageSoilTemp@1700mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[12] as AverageSoilTemp@1900mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[20] as AverageSoilTemp@10000mm",
                         "",
-                        "[Soil].SoilTemperature.MaxSoilTemp[1] as MaxSoilTemp@0012mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[2] as MaxSoilTemp@0050mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[3] as MaxSoilTemp@0100mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[4] as MaxSoilTemp@0160mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[5] as MaxSoilTemp@0300mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[6] as MaxSoilTemp@0500mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[7] as MaxSoilTemp@0750mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[8] as MaxSoilTemp@1000mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[9] as MaxSoilTemp@1250mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[10] as MaxSoilTemp@1500mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[11] as MaxSoilTemp@1700mm",
-                        "[Soil].SoilTemperature.MaxSoilTemp[12] as MaxSoilTemp@1900mm"
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[1] as MaxSoilTemp@0012mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[2] as MaxSoilTemp@0050mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[3] as MaxSoilTemp@0100mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[4] as MaxSoilTemp@0160mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[5] as MaxSoilTemp@0300mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[6] as MaxSoilTemp@0500mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[7] as MaxSoilTemp@0750mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[8] as MaxSoilTemp@1000mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[9] as MaxSoilTemp@1250mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[10] as MaxSoilTemp@1500mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[11] as MaxSoilTemp@1700mm",
+                        "[Soil].SoilTemperature.MaximumSoilTemperature[12] as MaxSoilTemp@1900mm"
                       ],
                       "EventNames": [
                         "Clock.Today >= new DateTime(2005, 1, 1)",
@@ -26886,7 +26717,6 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
-      "GraphsPerPage": 6,
       "Name": "Comparison of Temperature Models",
       "ResourceName": null,
       "Children": [
@@ -26902,7 +26732,6 @@
         {
           "$type": "Models.Core.Folder, Models",
           "ShowInDocs": true,
-          "GraphsPerPage": 6,
           "Name": "Wheat in Australia",
           "ResourceName": null,
           "Children": [
@@ -27260,9 +27089,9 @@
                             300.0,
                             300.0
                           ],
-                          "ParticleSizeClay": null,
                           "ParticleSizeSand": null,
                           "ParticleSizeSilt": null,
+                          "ParticleSizeClay": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -28060,6 +27889,8 @@
                             300.0,
                             300.0
                           ],
+                          "ParticleSizeSand": null,
+                          "ParticleSizeSilt": null,
                           "ParticleSizeClay": [
                             30.0,
                             30.0,
@@ -28069,8 +27900,6 @@
                             30.0,
                             30.0
                           ],
-                          "ParticleSizeSand": null,
-                          "ParticleSizeSilt": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -28356,7 +28185,6 @@
                         },
                         {
                           "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                          "CONSTANT_TEMPdepth": 10.0,
                           "Thickness": [],
                           "InitialValues": null,
                           "Name": "SoilTemperature",
@@ -28496,8 +28324,8 @@
                         "[Clock].Today as Date",
                         "[Wheat].AboveGround.Wt as Biomass",
                         "[Wheat].Grain.Total.Wt as Grain",
-                        "[Soil].SoilTemperature.AverageSoilTemp[1] as AveSoilTemp@0100mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[7] as AveSoilTemp@1250mm"
+                        "[Soil].SoilTemperature.AverageSoilTemperature[1] as AveSoilTemp@0100mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[7] as AveSoilTemp@1250mm"
                       ],
                       "EventNames": [
                         "Clock.Today >= new DateTime(1991, 1, 1)"
@@ -28912,7 +28740,6 @@
         {
           "$type": "Models.Core.Folder, Models",
           "ShowInDocs": true,
-          "GraphsPerPage": 6,
           "Name": "Pasture in New Zealand",
           "ResourceName": null,
           "Children": [
@@ -28981,147 +28808,73 @@
                   "Parameters": [
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "",
-                      "IsLive": true,
-                      "DigestibilityString": "",
-                      "FractionConsumable": "NaN",
-                      "MinimumAmount": "NaN",
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "",
-                      "IsLive": false,
-                      "DigestibilityString": "",
-                      "FractionConsumable": "NaN",
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "SurfaceOrganicMatter.Residue",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "SurfaceOrganicMatter.Residue",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Leaf",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Leaf",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Stem",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Stem",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Stolon",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Stolon",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Leaf",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Leaf",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Stem",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Stem",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Stolon",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Stolon",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     }
                   ],
                   "Name": "Forages",
@@ -29865,6 +29618,8 @@
                             300.0,
                             300.0
                           ],
+                          "ParticleSizeSand": null,
+                          "ParticleSizeSilt": null,
                           "ParticleSizeClay": [
                             20.0,
                             15.0,
@@ -29874,8 +29629,6 @@
                             5.0,
                             5.0
                           ],
-                          "ParticleSizeSand": null,
-                          "ParticleSizeSilt": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -30388,147 +30141,73 @@
                   "Parameters": [
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "",
-                      "IsLive": true,
-                      "DigestibilityString": "",
-                      "FractionConsumable": "NaN",
-                      "MinimumAmount": "NaN",
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "",
-                      "IsLive": false,
-                      "DigestibilityString": "",
-                      "FractionConsumable": "NaN",
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "SurfaceOrganicMatter.Residue",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "SurfaceOrganicMatter.Residue",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Leaf",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Leaf",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Stem",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Stem",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPRyegrass.Stolon",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPRyegrass.Stolon",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Leaf",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Leaf",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Stem",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Stem",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     },
                     {
                       "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
                       "Name": "AGPWhiteClover.Stolon",
-                      "IsLive": true,
-                      "DigestibilityString": "0.7",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 100.0,
-                      "UseDigestibilityFromModel": false
-                    },
-                    {
-                      "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
-                      "Name": "AGPWhiteClover.Stolon",
-                      "IsLive": false,
-                      "DigestibilityString": "0.3",
-                      "FractionConsumable": 1.0,
-                      "MinimumAmount": 0.0,
-                      "UseDigestibilityFromModel": false
+                      "LiveDigestibility": "0.7",
+                      "DeadDigestibility": "0.3",
+                      "LiveFractionConsumable": 1.0,
+                      "DeadFractionConsumable": 1.0,
+                      "LiveMinimumBiomass": 100.0,
+                      "DeadMinimumBiomass": 0.0
                     }
                   ],
                   "Name": "Forages",
@@ -31272,6 +30951,8 @@
                             300.0,
                             300.0
                           ],
+                          "ParticleSizeSand": null,
+                          "ParticleSizeSilt": null,
                           "ParticleSizeClay": [
                             20.0,
                             15.0,
@@ -31281,8 +30962,6 @@
                             5.0,
                             5.0
                           ],
-                          "ParticleSizeSand": null,
-                          "ParticleSizeSilt": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -31580,7 +31259,6 @@
                         },
                         {
                           "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                          "CONSTANT_TEMPdepth": 10.0,
                           "Thickness": [],
                           "InitialValues": null,
                           "Name": "SoilTemperature",
@@ -31712,8 +31390,8 @@
                         "[Clock].Today as Date",
                         "[AGPRyegrass].AboveGroundWt + [AGPWhiteClover].AboveGroundWt as Biomass  ",
                         "Sum of ([AGPRyegrass].HarvestedWt + [AGPWhiteClover].HarvestedWt) from 1-Jul to [Clock].Today as HarvestedWt  ",
-                        "[Soil].SoilTemperature.AverageSoilTemp[1] as AveSoilTemp@0100mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[7] as AveSoilTemp@1250mm"
+                        "[Soil].SoilTemperature.AverageSoilTemperature[1] as AveSoilTemp@0100mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[7] as AveSoilTemp@1250mm"
                       ],
                       "EventNames": [
                         "Clock.Today >= new DateTime(1990, 7, 1)"
@@ -32128,7 +31806,6 @@
         {
           "$type": "Models.Core.Folder, Models",
           "ShowInDocs": true,
-          "GraphsPerPage": 6,
           "Name": "MaizeSoybean in Iowa",
           "ResourceName": null,
           "Children": [
@@ -32139,21 +31816,21 @@
               "ResourceName": null,
               "Children": [
                 {
-                  "$type": "Models.Climate.Weather, Models",
-                  "ConstantsFile": null,
-                  "FileName": "COBS.met",
-                  "ExcelWorkSheetName": "",
-                  "Name": "Weather",
+                  "$type": "Models.Clock, Models",
+                  "Start": "1990-01-01T00:00:00",
+                  "End": "2013-12-31T00:00:00",
+                  "Name": "Clock",
                   "ResourceName": null,
                   "Children": [],
                   "Enabled": true,
                   "ReadOnly": false
                 },
                 {
-                  "$type": "Models.Clock, Models",
-                  "Start": "1990-01-01T00:00:00",
-                  "End": "2013-12-31T00:00:00",
-                  "Name": "Clock",
+                  "$type": "Models.Climate.Weather, Models",
+                  "ConstantsFile": null,
+                  "FileName": "WeatherFiles\\COBS.met",
+                  "ExcelWorkSheetName": "",
+                  "Name": "Weather",
                   "ResourceName": null,
                   "Children": [],
                   "Enabled": true,
@@ -32291,7 +31968,7 @@
                     },
                     {
                       "$type": "Models.Operations, Models",
-                      "Operation": [
+                      "OperationsList": [
                         {
                           "$type": "Models.Operation, Models",
                           "Enabled": true,
@@ -32461,19 +32138,6 @@
                             320.0,
                             300.0
                           ],
-                          "ParticleSizeClay": [
-                            25.67,
-                            25.67,
-                            26.43,
-                            28.09,
-                            28.5,
-                            29.0,
-                            29.0,
-                            27.0,
-                            27.0,
-                            27.0,
-                            27.0
-                          ],
                           "ParticleSizeSand": [
                             38.29,
                             38.29,
@@ -32499,6 +32163,19 @@
                             36.0,
                             36.0,
                             36.0
+                          ],
+                          "ParticleSizeClay": [
+                            25.67,
+                            25.67,
+                            26.43,
+                            28.09,
+                            28.5,
+                            29.0,
+                            29.0,
+                            27.0,
+                            27.0,
+                            27.0,
+                            27.0
                           ],
                           "Rocks": null,
                           "Texture": null,
@@ -32886,6 +32563,8 @@
                           "A": 0.0,
                           "DTHC": 0.0,
                           "DTHP": 0.0,
+                          "eo_time": "06:00",
+                          "eo_durn": 720.0,
                           "Diagnostics": false,
                           "Name": "Swim",
                           "ResourceName": null,
@@ -33162,21 +32841,21 @@
               "ResourceName": null,
               "Children": [
                 {
-                  "$type": "Models.Climate.Weather, Models",
-                  "ConstantsFile": null,
-                  "FileName": "COBS.met",
-                  "ExcelWorkSheetName": "",
-                  "Name": "Weather",
+                  "$type": "Models.Clock, Models",
+                  "Start": "1990-01-01T00:00:00",
+                  "End": "2013-12-31T00:00:00",
+                  "Name": "Clock",
                   "ResourceName": null,
                   "Children": [],
                   "Enabled": true,
                   "ReadOnly": false
                 },
                 {
-                  "$type": "Models.Clock, Models",
-                  "Start": "1990-01-01T00:00:00",
-                  "End": "2013-12-31T00:00:00",
-                  "Name": "Clock",
+                  "$type": "Models.Climate.Weather, Models",
+                  "ConstantsFile": null,
+                  "FileName": "WeatherFiles\\COBS.met",
+                  "ExcelWorkSheetName": "",
+                  "Name": "Weather",
                   "ResourceName": null,
                   "Children": [],
                   "Enabled": true,
@@ -33314,7 +32993,7 @@
                     },
                     {
                       "$type": "Models.Operations, Models",
-                      "Operation": [
+                      "OperationsList": [
                         {
                           "$type": "Models.Operation, Models",
                           "Enabled": true,
@@ -33484,19 +33163,6 @@
                             320.0,
                             300.0
                           ],
-                          "ParticleSizeClay": [
-                            25.67,
-                            25.67,
-                            26.43,
-                            28.09,
-                            28.5,
-                            29.0,
-                            29.0,
-                            27.0,
-                            27.0,
-                            27.0,
-                            27.0
-                          ],
                           "ParticleSizeSand": [
                             38.29,
                             38.29,
@@ -33522,6 +33188,19 @@
                             36.0,
                             36.0,
                             36.0
+                          ],
+                          "ParticleSizeClay": [
+                            25.67,
+                            25.67,
+                            26.43,
+                            28.09,
+                            28.5,
+                            29.0,
+                            29.0,
+                            27.0,
+                            27.0,
+                            27.0,
+                            27.0
                           ],
                           "Rocks": null,
                           "Texture": null,
@@ -33909,6 +33588,8 @@
                           "A": 0.0,
                           "DTHC": 0.0,
                           "DTHP": 0.0,
+                          "eo_time": "06:00",
+                          "eo_durn": 720.0,
                           "Diagnostics": false,
                           "Name": "Swim",
                           "ResourceName": null,
@@ -34141,7 +33822,6 @@
                         },
                         {
                           "$type": "Models.Soils.SoilTemp.SoilTemperature, Models",
-                          "CONSTANT_TEMPdepth": 10.0,
                           "Thickness": [],
                           "InitialValues": null,
                           "Name": "SoilTemperature",
@@ -34160,8 +33840,8 @@
                         "[Clock].Today as Date",
                         "[Maize].Grain.Wt * 10 + [Soybean].Grain.Wt * 10 as Biomass",
                         "[Maize].AboveGround.Wt * 10 + [Soybean].AboveGround.Wt * 10 as Grain",
-                        "[Soil].SoilTemperature.AverageSoilTemp[4] as AveSoilTemp@0100mm",
-                        "[Soil].SoilTemperature.AverageSoilTemp[10] as AveSoilTemp@1250mm"
+                        "[Soil].SoilTemperature.AverageSoilTemperature[4] as AveSoilTemp@0100mm",
+                        "[Soil].SoilTemperature.AverageSoilTemperature[10] as AveSoilTemp@1250mm"
                       ],
                       "EventNames": [
                         "Clock.Today >= new DateTime(2008, 1, 1)"

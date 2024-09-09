@@ -140,7 +140,7 @@ namespace Models.Soils
                     double[] dul = SoilUtilities.MapConcentration(Physical.DUL, Physical.Thickness, Thickness, Physical.DUL.Last());
                     double[] sat = SoilUtilities.MapConcentration(Physical.SAT, Physical.Thickness, Thickness, Physical.SAT.Last());
                     double[] thickness = Physical.Thickness;
-                    
+
                     if (FilledFromTop)
                         InitialValues = DistributeAmountWaterFromTop(value, thickness, airdry, RelativeToLL, dul, sat, RelativeToXF);
                     else
@@ -260,7 +260,7 @@ namespace Models.Soils
                         }
                         else
                         {
-                            
+
                             var paw = MathUtilities.Subtract(InitialValuesMM, RelativeToLLMM);
                             if (paw == null)
                                 newFractionFull = 0;
@@ -543,7 +543,7 @@ namespace Models.Soils
                     double water = (excessWater / (sw.Length - fullLayers));
 
                     //reset excess water
-                    excessWater = 0; 
+                    excessWater = 0;
                     for (int layer = 0; layer < sw.Length; layer++)
                     {
                         if (sw[layer] < max[layer]) //only do unfilled layers
@@ -619,69 +619,6 @@ namespace Models.Soils
             return sw;
         }
 
-        /// <summary>Gets the model ready for running in a simulation.</summary>
-        /// <param name="targetThickness">Target thickness.</param>
-        public void Standardise(double[] targetThickness)
-        {
-            SetThickness(targetThickness);
-            Reset();
-        }
-
-        /// <summary>Sets the sample thickness.</summary>
-        /// <param name="thickness">The thickness to change the sample to.</param>
-        private void SetThickness(double[] thickness)
-        {
-            if (!MathUtilities.AreEqual(thickness, Thickness))
-            {
-                if (InitialValues != null)
-                    InitialValues = MapSW(InitialValues, Thickness, thickness);
-
-                Thickness = thickness;
-            }
-        }
-
-        /// <summary>Map soil water from one layer structure to another.</summary>
-        /// <param name="fromValues">The from values.</param>
-        /// <param name="fromThickness">The from thickness.</param>
-        /// <param name="toThickness">To thickness.</param>
-        /// <returns></returns>
-        private double[] MapSW(double[] fromValues, double[] fromThickness, double[] toThickness)
-        {
-            if (fromValues == null || fromThickness == null)
-                return null;
-
-            // convert from values to a mass basis with a dummy bottom layer.
-            List<double> values = new List<double>();
-            values.AddRange(fromValues);
-            values.Add(MathUtilities.LastValue(fromValues) * 0.8);
-            values.Add(MathUtilities.LastValue(fromValues) * 0.4);
-            values.Add(0.0);
-            List<double> thickness = new List<double>();
-            thickness.AddRange(fromThickness);
-            thickness.Add(MathUtilities.LastValue(fromThickness));
-            thickness.Add(MathUtilities.LastValue(fromThickness));
-            thickness.Add(3000);
-
-            // Get the first crop ll or ll15.
-            var firstCrop = (Physical as IModel).FindChild<SoilCrop>();
-            double[] LowerBound;
-            if (Physical != null && firstCrop != null)
-                LowerBound = SoilUtilities.MapConcentration(firstCrop.LL, Physical.Thickness, thickness.ToArray(), MathUtilities.LastValue(firstCrop.LL));
-            else
-                LowerBound = SoilUtilities.MapConcentration(Physical.LL15, Physical.Thickness, thickness.ToArray(), Physical.LL15.Last());
-            if (LowerBound == null)
-                throw new Exception("Cannot find crop lower limit or LL15 in soil");
-
-            // Make sure all SW values below LastIndex don't go below CLL.
-            int bottomLayer = fromThickness.Length - 1;
-            for (int i = bottomLayer + 1; i < thickness.Count; i++)
-                values[i] = Math.Max(values[i], LowerBound[i]);
-
-            double[] massValues = MathUtilities.Multiply(values.ToArray(), thickness.ToArray());
-
-            // Convert mass back to concentration and return
-            return MathUtilities.Divide(SoilUtilities.MapMass(massValues, thickness.ToArray(), toThickness), toThickness);
-        }
 
         /// <summary>
         /// Get all soil crop names as strings from the relevant Soil this water node is a child of as well as LL15 (default value).

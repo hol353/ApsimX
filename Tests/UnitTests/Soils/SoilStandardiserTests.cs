@@ -68,7 +68,7 @@
             };
             Utilities.InitialiseModel(soil);
 
-            soil.Standardise();
+            soil.Sanitise();
 
             var physical = soil.FindChild<Physical>();
             var soilOrganicMatter = soil.FindChild<Organic>();
@@ -142,7 +142,7 @@
             };
             Utilities.InitialiseModel(soil);
 
-            soil.Standardise();
+            soil.Sanitise();
 
             var physical = soil.FindChild<Physical>();
             var soilOrganicMatter = soil.FindChild<Organic>();
@@ -162,7 +162,7 @@
             Soil soil = CreateSimpleSoil();
             Utilities.InitialiseModel(soil);
 
-            soil.Standardise();
+            soil.Sanitise();
 
             var chemical = soil.FindChild<Chemical>();
             var organic = soil.FindChild<Organic>();

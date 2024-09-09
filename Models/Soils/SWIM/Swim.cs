@@ -380,7 +380,7 @@ namespace Models.Soils
         /// <summary>Time of evaporation (hh:mm).</summary>
         [Description("Time of evaporation (hh:mm). Default: 06:00")]
         public string eo_time { get; set; } = "06:00";
-        
+
         /// <summary>Duration of evaporation (min).</summary>
         [Description("Duration of evaporation (min). Default: 720")]
         public double eo_durn { get; set; } = 720;
@@ -484,17 +484,17 @@ namespace Models.Soils
         ///<summary>Pore Interaction Index for shape of the K(theta) curve for soil hydraulic conductivity</summary>
         [JsonIgnore]
         [Units("-")]
-        public double[] PoreInteractionIndex 
-        { 
-            get 
-            { 
-                return HP.PoreInteractionIndex; 
-            } 
-            set 
-            { 
+        public double[] PoreInteractionIndex
+        {
+            get
+            {
+                return HP.PoreInteractionIndex;
+            }
+            set
+            {
                 HP.PoreInteractionIndex = value;
                 HP.SetupKCurve(n, physical.LL15, physical.DUL, physical.SAT, physical.KS, KDul, PSIDul);
-            } 
+            }
         }
 
         /// <summary>
@@ -956,13 +956,6 @@ namespace Models.Soils
         public void Tillage(string tillageType)
         {
             throw new NotImplementedException("SWIM doesn't implement a tillage method");
-        }
-
-        /// <summary>Gets the model ready for running in a simulation.</summary>
-        /// <param name="targetThickness">Target thickness.</param>
-        public void Standardise(double[] targetThickness)
-        {
-
         }
 
         /// <summary>

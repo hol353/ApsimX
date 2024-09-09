@@ -29,7 +29,7 @@ namespace UnitTests.Core
             path = PathUtilities.GetAbsolutePath(path, null);
             Simulations sims = FileFormat.ReadFromFile<Simulations>(path, e => throw e, false).NewModel as Simulations;
             foreach (Soil soil in sims.FindAllDescendants<Soil>())
-                soil.Standardise();
+                soil.Sanitise();
             DataStore storage = sims.FindDescendant<DataStore>();
             storage.UseInMemoryDB = true;
             Simulation sim = sims.FindDescendant<Simulation>();

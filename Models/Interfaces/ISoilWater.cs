@@ -107,7 +107,7 @@ namespace Models.Interfaces
         double WaterTable { get; set; }
 
         /// <summary>Sets the water table.</summary>
-        /// <param name="InitialDepth">The initial depth.</param> 
+        /// <param name="InitialDepth">The initial depth.</param>
         void SetWaterTable(double InitialDepth);
 
         /// <summary>The efficiency (0-1) that solutes move down with water.</summary>
@@ -124,9 +124,5 @@ namespace Models.Interfaces
 
         ///<summary>Perform tillage</summary>
         void Tillage(string tillageType);
-
-        /// <summary>Gets the model ready for running in a simulation.</summary>
-        /// <param name="targetThickness">Target thickness.</param>
-        void Standardise(double[] targetThickness);
     }
 }
