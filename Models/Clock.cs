@@ -190,6 +190,8 @@ namespace Models
         public event EventHandler DoReportCalculations;
         /// <summary>Occurs at end of each day</summary>
         public event EventHandler DoReport;
+        /// <summary>Crop2ML</summary>
+        public event EventHandler Crop2MLProcess;
 
         /// <summary>
         /// Occurs each day when when dcaps performs its calculations. This must happen
@@ -355,6 +357,7 @@ namespace Models
                 if (Today.DayOfWeek == DayOfWeek.Sunday && StartOfWeek != null)
                     StartOfWeek.Invoke(this, args);
 
+                Crop2MLProcess?.Invoke(this, EventArgs.Empty);
                 if (DoManagement != null)
                     DoManagement.Invoke(this, args);
 

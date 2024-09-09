@@ -8,12 +8,12 @@ namespace Models.WaterModel
 {
 
     /// <summary>
-    /// When water content in any layer is below SAT but above DUL, a fraction of the water drains to the next 
-    /// deepest layer each day. 
-    /// 
+    /// When water content in any layer is below SAT but above DUL, a fraction of the water drains to the next
+    /// deepest layer each day.
+    ///
     /// Flux = SWCON x (SW - DUL)
-    /// 
-    /// Infiltration or water movement into any layer that exceeds the saturation capacity of the layer automatically 
+    ///
+    /// Infiltration or water movement into any layer that exceeds the saturation capacity of the layer automatically
     /// cascades to the next layer.
     /// </summary>
     [Serializable]
@@ -75,12 +75,12 @@ namespace Models.WaterModel
                         w_drain = 0.0;
 
                     // Calculate EXCESS Flow and DRAIN Flow (combined into Flux)
-                    // if there is EXCESS Amount, 
+                    // if there is EXCESS Amount,
                     if (w_excess > 0.0)
                     {
-                        if (soilPhysical.KS == null)
+                        if (soilPhysical.KS == null || soilPhysical.KS.Length == 0)
                         {
-                            //! all this excess goes on down 
+                            //! all this excess goes on down
                             w_out = w_excess + w_drain;
                             flux[i] = w_out;
                         }
@@ -103,7 +103,7 @@ namespace Models.WaterModel
                             // Starting from the layer above the current layer,
                             // Move up to the surface, layer by layer and use the
                             // backup to fill the space still remaining between
-                            // the new sw_dep (that you calculated on the way down) 
+                            // the new sw_dep (that you calculated on the way down)
                             // and sat for that layer. Once the backup runs out
                             // it will keep going but you will be adding 0.
                             if (i > 0)
@@ -122,7 +122,7 @@ namespace Models.WaterModel
                     }
                     else
                     {
-                        // there is no EXCESS Amount so only do DRAIN Flow   
+                        // there is no EXCESS Amount so only do DRAIN Flow
                         w_out = w_drain;
                         flux[i] = w_drain;
                         newSWmm[i] = SW[i] + w_in - w_out;

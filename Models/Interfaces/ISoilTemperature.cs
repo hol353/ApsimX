@@ -1,4 +1,6 @@
-﻿namespace Models.Interfaces
+﻿using System;
+
+namespace Models.Interfaces
 {
     /// <summary>
     /// This interface describes a soil temperature model.
@@ -25,6 +27,9 @@
 
         /// <summary>Returns the daily maximum temperature of soil surface (oC)</summary>
         double MaximumSoilSurfaceTemperature { get; }
+
+        /// <summary>Event invoke when the soil temperature has changed</summary>
+        event EventHandler SoilTemperatureChanged;
 
     }
 }

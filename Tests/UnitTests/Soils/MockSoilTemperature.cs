@@ -17,5 +17,7 @@ namespace UnitTests.Soils
         public double MinimumSoilSurfaceTemperature { get; }
         public double[] MaximumSoilTemperature { get; }
         public double MaximumSoilSurfaceTemperature { get; }
+
+        public event EventHandler SoilTemperatureChanged;
     }
 }
