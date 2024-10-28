@@ -1,13 +1,5 @@
-using System;
 using NUnit.Framework;
-using APSIM.Interop.Markdown;
 using APSIM.Interop.Documentation;
-using APSIM.Interop.Markdown.Renderers;
-using System.Collections.Generic;
-using Document = MigraDocCore.DocumentObjectModel.Document;
-using Paragraph = MigraDocCore.DocumentObjectModel.Paragraph;
-using FormattedText = MigraDocCore.DocumentObjectModel.FormattedText;
-using Text = MigraDocCore.DocumentObjectModel.Text;
 using System.IO;
 using APSIM.Shared.Utilities;
 using Models.Core.ApsimFile;
@@ -16,6 +8,7 @@ using System.Reflection;
 using Newtonsoft.Json.Linq;
 using Models.PMF;
 using APSIM.Shared.Documentation;
+using APSIM.Documentation.Models;
 
 namespace UnitTests.Interop.Documentation
 {
@@ -37,7 +30,7 @@ namespace UnitTests.Interop.Documentation
 
             var links = new Links();
             links.Resolve(model, allLinks: true, recurse: true, throwOnFail: false);
-            var tags = new Section($"The APSIM {model.Name} model", model.Document());
+            var tags = new Section($"The APSIM {model.Name} model", AutoDocumentation.Document(model));
 
             var writer = new PdfWriter(new PdfOptions(imagePath, null));
             writer.Write("test.pdf", new ITag[] { tags });

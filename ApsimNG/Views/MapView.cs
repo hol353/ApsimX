@@ -12,7 +12,7 @@ using System.IO;
 using System.Linq;
 using Utility;
 using ApsimCoordinate = Models.Mapping.Coordinate;
-using MapTag = Models.Mapping.MapTag;
+using MapTag = APSIM.Interop.Mapping.MapTag;
 using Mapsui.Extensions;
 
 namespace UserInterface.Views

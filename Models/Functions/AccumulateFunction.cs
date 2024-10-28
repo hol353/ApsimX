@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Reflection;
 using Models.Core;
-using Models.PMF.Library;
 using Models.PMF.Phen;
 using System.Linq;
-using APSIM.Shared.Documentation;
 
 namespace Models.Functions
 {
@@ -70,15 +66,6 @@ namespace Models.Functions
         [Description("(optional) Fraction to remove on Prun")]
         public double FractionRemovedOnPrune { get; set; }
 
-        /// <summary>String list of child functions</summary>
-        public string ChildFunctionList
-        {
-            get
-            {
-                return AutoDocumentation.ChildFunctionList(this.FindAllChildren<IFunction>().ToList());
-            }
-        }
-
         /// <summary>Called when [simulation commencing].</summary>
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
@@ -126,16 +113,6 @@ namespace Models.Functions
         public double Value(int arrayIndex = -1)
         {
             return AccumulatedValue;
-        }
-
-        /// <summary>Writes documentation for this function by adding to the list of documentation tags.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            yield return new Paragraph($"*{Name}* = Accumulated {ChildFunctionList} between {StartStageName.ToLower()} and {EndStageName.ToLower()}");
-
-            foreach (var child in Children)
-                foreach (var tag in child.Document())
-                    yield return tag;
         }
 
         /// <summary>Called when [cut].</summary>

@@ -914,6 +914,11 @@ namespace APSIM.Shared.Utilities
             /// Root mean square error to Standard deviation Ratio
             /// </summary>
             public double RSR;
+
+            /// <summary>
+            /// Root mean square error to (observed) Mean Ratio
+            /// </summary>
+            public double RMR;
         };
 
         /// <summary>
@@ -940,7 +945,6 @@ namespace APSIM.Shared.Utilities
             double SumOfSquaredResiduals = 0;   //SUM i=1->n  ((P(i) - O(i)) ^ 2)
             double SumOfResiduals = 0;          //SUM i=1->n   (P(i) - O(i))
             double SumOfAbsResiduals = 0;       //SUM i=1->n  |(P(i) - O(i))|
-            double SumOfSquaredOPResiduals = 0; //SUM i=1->n  ((O(i) - P(i)) ^ 2)
             double SumOfSquaredSD = 0;          //SUM i=1->n  ((O(i) - Omean) ^ 2)
 
             stats.Name = name;
@@ -973,7 +977,6 @@ namespace APSIM.Shared.Utilities
                     SumOfSquaredResiduals += Math.Pow(yValue - xValue, 2);
                     SumOfResiduals += yValue - xValue;
                     SumOfAbsResiduals += Math.Abs(yValue - xValue);
-                    SumOfSquaredOPResiduals += Math.Pow(yValue - xValue, 2);
 
                     Num_points++;
                 }
@@ -1021,7 +1024,8 @@ namespace APSIM.Shared.Utilities
             stats.ME =  1.0 / (double)stats.n * SumOfResiduals;           // Mean error
             stats.MAE = 1.0 / (double)stats.n * SumOfAbsResiduals;        // Mean Absolute Error
             stats.RSR = stats.RMSE / Math.Sqrt((1.0 / (stats.n - 1)) * SumOfSquaredSD);         // Root mean square error to Standard deviation Ratio
-            
+            stats.RMR = stats.RMSE / Xbar;         // Root mean square error to Mean Ratio
+
             return stats;
         }
 

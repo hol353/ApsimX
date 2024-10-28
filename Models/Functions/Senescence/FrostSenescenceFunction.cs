@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Utilities;
 using Models.Core;
 using Models.Interfaces;
@@ -94,23 +92,6 @@ namespace Models.Functions
             message.AppendLine($"\tMin Temp     = {weather.MinT}");
             message.AppendLine($"\tSenesced LAI = {leaf.LAI - 0.01}");
             return message.ToString();
-        }
-
-        /// <summary>Document the model.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            List<ITag> senescenceTags = new List<ITag>();
-
-            senescenceTags.Add(new Paragraph($"FrostKill: {frostKill.Value()} °C"));
-            senescenceTags.Add(new Paragraph($"FrostKillSevere: {frostKillSevere.Value()} °C"));
-
-            senescenceTags.Add(new Paragraph($"If minimum temperature falls below FrostKillSevere then all LAI is removed causing plant death"));
-            senescenceTags.Add(new Paragraph($"If the minimum temperature is above FrostKillSevere, but below FrostKill, then the effect on the plant will depend on which phenologiacl stage the plant is in:"));
-            senescenceTags.Add(new Paragraph($"  Before Floral Initiation: Nearly all of the LAI will be removed, but if not under any other stress, the plant can survive."));
-            senescenceTags.Add(new Paragraph($"  Before Flowering: All of the LAI will be removed, casuing plant death."));
-            senescenceTags.Add(new Paragraph($"  After Flowering: The leaf is not damaged."));
-
-            yield return new Section(Name, senescenceTags);
         }
     }
 }

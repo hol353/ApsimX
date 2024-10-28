@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using APSIM.Shared.Utilities;
-using DocumentFormat.OpenXml.Office2010.ExcelAc;
+using APSIM.Shared.Documentation;
 using Models.Soils;
 
 namespace Models.Core
@@ -813,10 +813,10 @@ namespace Models.Core
         }
 
         /// <summary>Return the summary comments from the source code.</summary>
-        public override string Summary { get { return AutoDocumentation.GetSummary(property); } }
+        public override string Summary { get { return CodeDocumentation.GetSummary(property); } }
 
         /// <summary>Return the remarks comments from the source code.</summary>
-        public override string Remarks { get { return AutoDocumentation.GetRemarks(property); } }
+        public override string Remarks { get { return CodeDocumentation.GetRemarks(property); } }
 
         /// <summary>Get the full name of the property.</summary>
         public string GetFullName()

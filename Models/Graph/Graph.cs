@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Graphing;
 using Models.Core;
 using Models.Core.Run;
@@ -163,7 +162,7 @@ namespace Models
         /// Get all series definitions using the GraphPage API - which will
         /// load the series' data in parallel.
         /// </summary>
-        private IEnumerable<SeriesDefinition> GetSeriesDefinitions()
+        public IEnumerable<SeriesDefinition> GetSeriesDefinitions()
         {
             // Using the graphpage API - this will load each series' data in parallel.
             GraphPage page = new GraphPage();
@@ -383,50 +382,16 @@ namespace Models
         }
 
         /// <summary>
-        /// Document the model, and any child models which should be documented.
-        /// </summary>
-        /// <remarks>
-        /// It is a mistake to call this method without first resolving links.
-        /// </remarks>
-        public override IEnumerable<ITag> Document()
-        {
-            try
-            {
-                return new[] { ToGraph() };
-            }
-            catch (Exception err)
-            {
-                Console.Error.WriteLine(err);
-                return Enumerable.Empty<ITag>();
-            }
-        }
-
-        /// <summary>
-        /// Generated a 'standardised' graph.
-        /// </summary>
-        public APSIM.Shared.Documentation.Graph ToGraph()
-        {
-            return ToGraph(GetSeriesDefinitions());
-        }
-
-        /// <summary>
         /// Generated a 'standardised' graph, using the given series definitions.
         /// This is used to speed up the loading of pages of graphs - where we
         /// will load data for all series definitions in parallel ahead of time.
         /// </summary>
         public APSIM.Shared.Documentation.Graph ToGraph(IEnumerable<SeriesDefinition> definitions)
         {
-            try
-            {
-                LegendConfiguration legend = new LegendConfiguration(LegendOrientation, LegendPosition, !LegendOutsideGraph);
-                var xAxis = Axis.FirstOrDefault(a => a.Position == AxisPosition.Bottom || a.Position == AxisPosition.Top);
-                var yAxis = Axis.FirstOrDefault(a => a.Position == AxisPosition.Left || a.Position == AxisPosition.Right);
-                return new APSIM.Shared.Documentation.Graph(Name, FullPath, GetSeries(definitions), xAxis, yAxis, legend);
-            }
-            catch (Exception err)
-            {
-                throw new Exception($"Unable to draw graph {FullPath}", err);
-            }
+            LegendConfiguration legend = new LegendConfiguration(this.LegendOrientation, this.LegendPosition, !this.LegendOutsideGraph);
+            var xAxis = this.Axis.FirstOrDefault(a => a.Position == AxisPosition.Bottom || a.Position == AxisPosition.Top);
+            var yAxis = this.Axis.FirstOrDefault(a => a.Position == AxisPosition.Left || a.Position == AxisPosition.Right);
+            return new APSIM.Shared.Documentation.Graph(this.Name, this.FullPath, this.GetSeries(definitions), xAxis, yAxis, legend);
         }
     }
 }

@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.PMF.Organs;
 using Models.PMF.Struct;
@@ -97,12 +95,5 @@ namespace Models.PMF.Phen
             ResetPhase();
         }
 
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            yield return new Paragraph($"The *{Name}* phase goes from the *{Start}* stage to the *{End}* stage, which occurs when all leaves have fully senesced.");
-        }
     }
 }

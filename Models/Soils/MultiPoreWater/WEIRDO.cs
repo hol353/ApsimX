@@ -784,19 +784,6 @@ namespace Models.Soils
 
         #region Water Balance Methods
 
-        /// <summary>Gets the model ready for running in a simulation.</summary>
-        /// <param name="targetThickness">Target thickness.</param>
-        public void Standardise(double[] targetThickness)
-        {
-            CFlow = MathUtilities.Multiply_Value(CFlow, 1e-10);
-            CFlow = SoilUtilities.MapConcentration(CFlow, Thickness, targetThickness, CFlow[CFlow.Length - 1]);
-            XFlow = SoilUtilities.MapConcentration(XFlow, Thickness, targetThickness, XFlow[XFlow.Length - 1]);
-            PsiBub = SoilUtilities.MapConcentration(PsiBub, Thickness, targetThickness, PsiBub[PsiBub.Length - 1]);
-            UpperRepellentWC = SoilUtilities.MapConcentration(UpperRepellentWC, Thickness, targetThickness, UpperRepellentWC[UpperRepellentWC.Length - 1]);
-            LowerRepellentWC = SoilUtilities.MapConcentration(LowerRepellentWC, Thickness, targetThickness, LowerRepellentWC[LowerRepellentWC.Length - 1]);
-            MinRepellancyFactor = SoilUtilities.MapConcentration(MinRepellancyFactor, Thickness, targetThickness, MinRepellancyFactor[MinRepellancyFactor.Length - 1]);
-            Thickness = targetThickness;
-        }
 
         private void doPrecipitation()
         {

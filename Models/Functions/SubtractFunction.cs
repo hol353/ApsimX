@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using Models.Core;
 
 namespace Models.Functions
@@ -36,13 +35,6 @@ namespace Models.Functions
                 }
             }
             return returnValue;
-        }
-
-        /// <summary>Writes documentation for this function by adding to the list of documentation tags.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (var tag in MultiplyFunction.DocumentMathFunction('-', Name, Children))
-                yield return tag;
         }
     }
 }

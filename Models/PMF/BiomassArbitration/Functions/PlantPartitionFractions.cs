@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Models.Core;
 using Models.Functions;
-using Models.PMF.Interfaces;
 
 namespace Models.PMF
 {
@@ -71,53 +70,6 @@ namespace Models.PMF
 
             if ((PartitionFractions.Sum(x => x.Value) < 0.99) || (PartitionFractions.Sum(x => x.Value) > 1.01))
                 throw new Exception("Sum of partitioning fractions in " + this.FullPath + "does not add to 1");
-        }
-
-
-
-
-
-        /// <summary>Writes documentation for this function by adding to the list of documentation tags.</summary>
-        /// <param name="tags">The list of tags to add to.</param>
-        /// <param name="headingLevel">The level (e.g. H2) of the headings.</param>
-        /// <param name="indent">The level of indentation 1, 2, 3 etc.</param>
-        public void Document(List<AutoDocumentation.ITag> tags, int headingLevel, int indent)
-        {
-
-            // add a heading
-            tags.Add(new AutoDocumentation.Heading(Name, headingLevel));
-
-            // get description of this class
-            AutoDocumentation.DocumentModelSummary(this, tags, headingLevel, indent, false);
-
-            // write memos
-            foreach (IModel memo in this.FindAllChildren<Memo>())
-                AutoDocumentation.DocumentModel(memo, tags, headingLevel + 1, indent);
-
-            // find parent organ's name
-            if (Parent == null)
-                return;
-            string organName = "";
-            bool seekingParentOrgan = true;
-            IModel parentClass = this.Parent;
-            while (seekingParentOrgan)
-            {
-                if (parentClass is IOrgan)
-                {
-                    seekingParentOrgan = false;
-                    organName = (parentClass as IOrgan).Name;
-                    if (parentClass is IPlant)
-                        throw new Exception(Name + "cannot find parent organ to get Structural and Storage N status");
-                }
-                parentClass = parentClass.Parent;
-            }
-
-            // add a description of the equation for this function
-            tags.Add(new AutoDocumentation.Paragraph("<i>" + Name + " = [" + organName + "].maximumNconc × (["
-                + organName + "].Live.Wt + potentialAllocationWt) - [" + organName + "].Live.N</i>", indent));
-            tags.Add(new AutoDocumentation.Paragraph("The demand for storage N is further reduced by a factor specified by the ["
-                + organName + "].NitrogenDemandSwitch.", indent));
-
         }
     }
 }

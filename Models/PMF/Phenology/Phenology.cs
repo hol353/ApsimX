@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.Functions;
 using Models.PMF.Interfaces;
-using Models.PMF.Struct;
 using Newtonsoft.Json;
 
 namespace Models.PMF.Phen
@@ -601,43 +599,6 @@ namespace Models.PMF.Phen
             currentPhaseIndex = 0;
             foreach (IPhase phase in phases)
                 phase.ResetPhase();
-        }
-
-        /// <summary>Writes documentation for this function by adding to the list of documentation tags.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            // Write description of this class from summary and remarks XML documentation.
-            foreach (var tag in GetModelDescription())
-                yield return tag;
-
-            // Write memos.
-            foreach (var tag in DocumentChildren<Memo>())
-                yield return tag;
-
-            // Document thermal time function.
-            yield return new Section("ThermalTime", thermalTime.Document());
-
-            // Write a table containing phase numers and start/end stages.
-            yield return new Paragraph("**List of stages and phases used in the simulation of crop phenological development**");
-            yield return new Table(GetPhaseTable());
-
-            // Document Phases
-            foreach (var phase in FindAllChildren<IPhase>())
-                yield return new Section(phase.Name, phase.Document());
-
-            // Document Constants
-            var constantTags = new List<ITag>();
-            foreach (var constant in FindAllChildren<Constant>())
-                foreach (var tag in constant.Document())
-                    constantTags.Add(tag);
-            yield return new Section("Constants", constantTags);
-
-            // Document everything else.
-            foreach (var phase in Children.Where(child => !(child is IPhase) &&
-                                                          !(child is Memo) &&
-                                                          !(child is Constant) &&
-                                                          child != thermalTime))
-                yield return new Section(phase.Name, phase.Document());
         }
     }
 }

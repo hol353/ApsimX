@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Utilities;
 using Models.Core;
 using Models.Functions;
@@ -261,18 +259,6 @@ namespace Models.PMF
         public EnergyBalance()
         {
         }
-
-        /// <summary>Writes documentation for this function by adding to the list of documentation tags.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (var tag in GetModelDescription())
-                yield return tag;
-
-            // Document everything else.
-            foreach (var child in Children)
-                yield return new Section(child.Name, child.Document());
-        }
-
 
         /// <summary>Called when [simulation commencing].</summary>
         /// <param name="sender">The sender.</param>

@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using APSIM.Shared.Utilities;
-using DocumentFormat.OpenXml.EMMA;
 using Models.Core.ApsimFile;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using Models.Core;
 
 namespace Models.Functions
 {
     /// <summary>
-    /// A linear interpolation model.
+    /// A linear interpolation model, where an 
     /// </summary>
     [Serializable]
     [ViewName("UserInterface.Views.PropertyView")]
@@ -106,23 +105,6 @@ namespace Models.Functions
         public double ValueForX(double XValue)
         {
             return XYPairs.ValueIndexed(XValue);
-        }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            XYPairs.XVariableName = "XValue";
-            var xValue = XYPairs.Parent.FindChild("XValue");
-            if (xValue is VariableReference)
-                XYPairs.XVariableName = (xValue as VariableReference).VariableName;
-
-            // fixme - the graph and table should be next to each other.
-            yield return new Paragraph($"*{Name}* is calculated using linear interpolation");
-
-            foreach (var tag in XYPairs.Document())
-                yield return tag;
         }
     }
 }

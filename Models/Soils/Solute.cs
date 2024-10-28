@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Utilities;
 using Models.Core;
-using Models.Interfaces;
-using Models.Utilities;
 using Newtonsoft.Json;
 
 namespace Models.Soils
@@ -198,53 +194,7 @@ namespace Models.Soils
                 kgha[i] += delta[i];
         }
 
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (ITag tag in DocumentChildren<Memo>())
-                yield return tag;
 
-            foreach (ITag tag in GetModelDescription())
-                yield return tag;
-        }
-
-        /// <summary>Gets the model ready for running in a simulation.</summary>
-        /// <param name="targetThickness">Target thickness.</param>
-        public void Standardise(double[] targetThickness)
-        {
-            // Define default ppm value to use below bottom layer of this solute if necessary.
-            double defaultValue = 0;
-
-            SetThickness(targetThickness, defaultValue);
-
-            if (FIP != null) FIP = MathUtilities.FillMissingValues(FIP, Thickness.Length, FIP.Last());
-            if (Exco != null) Exco = MathUtilities.FillMissingValues(Exco, Thickness.Length, Exco.Last());
-            InitialValues = MathUtilities.FillMissingValues(InitialValues, Thickness.Length, defaultValue);
-            Reset();
-        }
-
-        /// <summary>Sets the sample thickness.</summary>
-        /// <param name="thickness">The thickness to change the sample to.</param>
-        /// <param name="defaultValue">Default value for missing values.</param>
-        private void SetThickness(double[] thickness, double defaultValue)
-        {
-            if (!MathUtilities.AreEqual(thickness, Thickness))
-            {
-                if (Exco != null)
-                    Exco = SoilUtilities.MapConcentration(Exco, Thickness, thickness, 0.2);
-                if (FIP != null)
-                    FIP = SoilUtilities.MapConcentration(FIP, Thickness, thickness, 0.2);
-
-                if (InitialValuesUnits == UnitsEnum.kgha)
-                    InitialValues = SoilUtilities.kgha2ppm(Thickness, SoluteBD, InitialValues);
-                InitialValues = SoilUtilities.MapConcentration(InitialValues, Thickness, thickness, defaultValue);
-                Thickness = thickness;
-                if (InitialValuesUnits == UnitsEnum.kgha)
-                    InitialValues = SoilUtilities.ppm2kgha(Thickness, SoluteBD, InitialValues);
-            }
-        }
 
         /// <summary>The soil physical node.</summary>
         protected IPhysical Physical

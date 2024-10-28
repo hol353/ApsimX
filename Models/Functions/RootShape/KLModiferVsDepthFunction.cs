@@ -1,10 +1,5 @@
-﻿using APSIM.Shared.Documentation;
-using Models.Core;
+﻿using Models.Core;
 using System;
-using System.Collections.Generic;
-using APSIM.Shared.Utilities;
-using System.Data;
-using Models.Soils;
 
 namespace Models.Functions
 {

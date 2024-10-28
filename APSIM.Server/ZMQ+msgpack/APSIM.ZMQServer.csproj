@@ -14,7 +14,7 @@
   </PropertyGroup>  
 
   <ItemGroup>
-    <PackageReference Include="MessagePack" Version="2.5.108" />
+    <PackageReference Include="MessagePack" Version="2.5.187" />
     <PackageReference Include="NetMQ" Version="4.0.1.12" />
     <ProjectReference Include="../../Models/Models.csproj" />
     <ProjectReference Include="../../APSIM.Shared/APSIM.Shared.csproj" />

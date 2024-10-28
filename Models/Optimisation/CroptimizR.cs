@@ -16,7 +16,6 @@ using APSIM.Shared.Utilities;
 using Models.Core;
 using Models.Core.ApsimFile;
 using Models.Core.Run;
-using Models.Interfaces;
 using Models.Sensitivity;
 using Models.Storage;
 using Models.Utilities;
@@ -110,7 +109,7 @@ namespace Models.Optimisation
         /// Random seed to be used. Set to null for random results.
         /// </summary>
         [Description("Random seed (optional)")]
-        [Tooltip("Optional random seed. Iff set, results will be the same for each execution. Leave empty for randomised results.")]
+        [Tooltip("Optional random seed. If set, results will be the same for each execution. Leave empty for randomised results.")]
         public int? RandomSeed { get; set; }
 
         /// <summary>

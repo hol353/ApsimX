@@ -433,8 +433,12 @@ namespace UserInterface.Presenters
         /// <param name="changedModel">The model with changes</param>
         private void OnModelChanged(object changedModel)
         {
-            dataProvider = ModelToSheetDataProvider.ToSheetDataProvider(changedModel as IModel);
-            Refresh();
+            IModel changed = changedModel as IModel;
+            if (changed != null)
+            {
+                dataProvider = ModelToSheetDataProvider.ToSheetDataProvider(changedModel as IModel);
+                Refresh();
+            }
         }
 
         /// <summary>Save the contents of the grid to the model.</summary>

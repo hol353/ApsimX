@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using Models.Core;
 
 namespace Models.Functions
@@ -61,34 +59,6 @@ namespace Models.Functions
         public double Function(double dX, double Xo, double b)
         {
             return 1 / (1 + Math.Exp(-(dX - Xo) / b));
-        }
-        
-            /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            yield return new Paragraph($"{Name} is calcualted using a sigmoid function of the form y = Ymax * 1 / 1 + e^-(Xvalue - Xo) / b^.");
-
-            // Document Ymax.
-            yield return new Paragraph($"{nameof(Ymax)} is calculated as:");
-            foreach (ITag tag in Ymax.Document())
-                yield return tag;
-
-            // Document x0.
-            yield return new Paragraph($"{nameof(Xo)} is calculated as:");
-            foreach (ITag tag in Xo.Document())
-                yield return tag;
-
-            // Document b.
-            yield return new Paragraph($"{nameof(b)} is calculated as:");
-            foreach (ITag tag in b.Document())
-                yield return tag;
-
-            // Document x value.
-            yield return new Paragraph($"{nameof(XValue)} is calculated as:");
-            foreach (ITag tag in XValue.Document())
-                yield return tag;
         }
     }
 }

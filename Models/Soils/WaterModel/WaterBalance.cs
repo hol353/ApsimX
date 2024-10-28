@@ -13,14 +13,14 @@ namespace Models.WaterModel
 {
 
     /// <summary>
-    /// The SoilWater module is a cascading water balance model that owes much to its precursors in 
-    /// CERES (Jones and Kiniry, 1986) and PERFECT(Littleboy et al, 1992). 
-    /// The algorithms for redistribution of water throughout the soil profile have been inherited from 
+    /// The SoilWater module is a cascading water balance model that owes much to its precursors in
+    /// CERES (Jones and Kiniry, 1986) and PERFECT(Littleboy et al, 1992).
+    /// The algorithms for redistribution of water throughout the soil profile have been inherited from
     /// the CERES family of models.
     ///
-    /// The water characteristics of the soil are specified in terms of the lower limit (ll15), 
-    /// drained upper limit(dul) and saturated(sat) volumetric water contents. Water movement is 
-    /// described using separate algorithms for saturated or unsaturated flow. It is notable that 
+    /// The water characteristics of the soil are specified in terms of the lower limit (ll15),
+    /// drained upper limit(dul) and saturated(sat) volumetric water contents. Water movement is
+    /// described using separate algorithms for saturated or unsaturated flow. It is notable that
     /// redistribution of solutes, such as nitrate- and urea-N, is carried out in this module.
     ///
     /// Modifications adopted from PERFECT include:
@@ -28,17 +28,17 @@ namespace Models.WaterModel
     /// * small rainfall events are lost as first stage evaporation rather than by the slower process of second stage evaporation, and
     /// * specification of the second stage evaporation coefficient(cona) as an input parameter, providing more flexibility for describing differences in long term soil drying due to soil texture and environmental effects.
     ///
-    /// The module is interfaced with SurfaceOrganicMatter and crop modules so that simulation of the soil water balance 
+    /// The module is interfaced with SurfaceOrganicMatter and crop modules so that simulation of the soil water balance
     /// responds to change in the status of surface residues and crop cover(via tillage, decomposition and crop growth).
     ///
     /// Enhancements beyond CERES and PERFECT include:
     /// * the specification of swcon for each layer, being the proportion of soil water above dul that drains in one day
     /// * isolation from the code of the coefficients determining diffusivity as a function of soil water
     ///   (used in calculating unsaturated flow).Choice of diffusivity coefficients more appropriate for soil type have been found to improve model performance.
-    /// * unsaturated flow is permitted to move water between adjacent soil layers until some nominated gradient in 
+    /// * unsaturated flow is permitted to move water between adjacent soil layers until some nominated gradient in
     ///   soil water content is achieved, thereby accounting for the effect of gravity on the fully drained soil water profile.
     ///
-    /// SoilWater is called by APSIM on a daily basis, and typical of such models, the various processes are calculated consecutively. 
+    /// SoilWater is called by APSIM on a daily basis, and typical of such models, the various processes are calculated consecutively.
     /// This contrasts with models such as SWIM that solve simultaneously a set of differential equations that describe the flow processes.
     /// </summary>
     [ValidParent(ParentType = typeof(Soil))]
@@ -97,7 +97,7 @@ namespace Models.WaterModel
         [Link(ByName = true)]
         ISolute urea = null;
 
-        [Link(ByName = true, IsOptional = true)]  
+        [Link(ByName = true, IsOptional = true)]
         ISolute cl = null;
 
         /// <summary>Irrigation information.</summary>
@@ -433,7 +433,7 @@ namespace Models.WaterModel
 
         /// <summary>Amount of Cl leaching from the deepest soil layer (kg /ha)</summary>
         [JsonIgnore]
-        public double LeachCl { get { if (FlowCl == null) return 0; else return FlowCl.Last(); } }  
+        public double LeachCl { get { if (FlowCl == null) return 0; else return FlowCl.Last(); } }
 
         /// <summary>Amount of N leaching as NO3 from each soil layer (kg /ha)</summary>
         [JsonIgnore]
@@ -555,7 +555,7 @@ namespace Models.WaterModel
             // Saturated flow.
             Flux = saturatedFlow.Values;
 
-            // Add backed up water to runoff. 
+            // Add backed up water to runoff.
             Water[0] = Water[0] - saturatedFlow.backedUpSurface;
 
             // Now reduce the infiltration amount by what backed up.
@@ -850,7 +850,7 @@ namespace Models.WaterModel
         }
 
         /// <summary>Sets the water table.</summary>
-        /// <param name="InitialDepth">The initial depth.</param> 
+        /// <param name="InitialDepth">The initial depth.</param>
         public void SetWaterTable(double InitialDepth)
         {
             WaterTable = InitialDepth;
@@ -911,39 +911,11 @@ namespace Models.WaterModel
             throw new NotImplementedException();
         }
 
-        /// <summary>Gets the model ready for running in a simulation.</summary>
-        /// <param name="targetThickness">Target thickness.</param>
-        public void Standardise(double[] targetThickness)
+        /// <summary>Set the physical node.</summary>
+        /// <remarks>I'm not sure why this is necessary</remarks>
+        public void SetPhysical(Physical physical)
         {
-            SetThickness(targetThickness);
-        }
-
-        /// <summary>Sets the soil water thickness.</summary>
-        /// <param name="thickness">Thickness to change soil water to.</param>
-        private void SetThickness(double[] thickness)
-        {
-            if (!MathUtilities.AreEqual(thickness, Thickness))
-            {
-                KLAT = SoilUtilities.MapConcentration(KLAT, Thickness, thickness, MathUtilities.LastValue(KLAT));
-                SWCON = SoilUtilities.MapConcentration(SWCON, Thickness, thickness, 0.0);
-
-                Thickness = thickness;
-            }
-            if (SWCON == null)
-                SWCON = MathUtilities.CreateArrayOfValues(0.3, Thickness.Length);
-            MathUtilities.ReplaceMissingValues(SWCON, 0.0);
-        }
-
-
-        /// <summary>The soil physical node.</summary>
-        private Physical Physical
-        {
-            get
-            {
-                if (physical == null)
-                    physical = FindInScope<Physical>();
-                return physical;
-            }
+            this.physical = physical;
         }
     }
 }

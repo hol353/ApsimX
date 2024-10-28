@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Graphing;
 
 namespace APSIM.Shared.Documentation.Tags

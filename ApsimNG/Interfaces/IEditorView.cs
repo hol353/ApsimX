@@ -147,5 +147,15 @@ namespace UserInterface.Interfaces
 
         /// <summary>Gets or sets the widget visibility.</summary>
         bool Visible { get; set; }
+
+        /// <summary>
+        /// Hide the TextEditor
+        /// </summary>
+        public void Hide();
+
+        /// <summary>
+        /// Show the Text Editor
+        /// </summary>
+        public void Show();
     }
 }

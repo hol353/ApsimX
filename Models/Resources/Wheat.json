@@ -1,7 +1,7 @@
 {
   "$type": "Models.Core.Simulations, Models",
   "ExplorerWidth": 0,
-  "Version": 180,
+  "Version": 183,
   "Name": "Simulations",
   "Children": [
     {
@@ -3625,7 +3625,7 @@
               "ReadOnly": false
             },
             {
-              "$type": "Models.PMF.Organs.Leaf+LeafCohortParameters, Models",
+              "$type": "Models.PMF.Organs.LeafCohortParameters, Models",
               "ExpansionStressValue": 0.0,
               "CellDivisionStressValue": 0.0,
               "LagAccelerationValue": 0.0,

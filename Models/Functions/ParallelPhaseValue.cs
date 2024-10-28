@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
-using DocumentFormat.OpenXml.Office.CoverPageProps;
 using Models.Core;
 using Models.PMF.Phen;
-using Models.PMF.SimplePlantModels;
 
 namespace Models.Functions
 {

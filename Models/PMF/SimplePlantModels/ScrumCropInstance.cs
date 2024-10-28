@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using APSIM.Shared.Utilities;
 using Models.Core;
 using Models.Climate;
 using Models.Functions;
@@ -9,7 +8,6 @@ using Models.Interfaces;
 using Models.PMF.Interfaces;
 using Models.PMF.Phen;
 using Models.Surface;
-//using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace Models.PMF.SimplePlantModels
 {

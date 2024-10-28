@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Utilities;
 using Models.Core;
 
@@ -157,19 +156,6 @@ namespace Models.Functions
                 return fn.Results;
             else
                 return fn.Result;
-        }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            string st = Expression.Replace(".Value()", "");
-            st = st.Replace("*", "x");
-            yield return new Paragraph($"{Name} = {st}");
-
-            foreach (ITag tag in DocumentChildren<Memo>())
-                yield return tag;
         }
     }
 }

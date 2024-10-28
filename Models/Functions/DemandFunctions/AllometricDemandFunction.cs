@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using Models.Core;
 
 namespace Models.Functions.DemandFunctions
@@ -39,20 +37,6 @@ namespace Models.Functions.DemandFunctions
             double Target = Const * Math.Pow(XValue.Value(arrayIndex), Power);
             returnValue = Math.Max(0.0, Target - YValue.Value(arrayIndex));
             return returnValue;
-        }
-
-        /// <summary>Document the model.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            // Write description of this class from summary and remarks XML documentation.
-            foreach (var tag in GetModelDescription())
-                yield return tag;
-
-            yield return new Paragraph($"YValue = {Const} * XValue ^ {Power}");
-
-            foreach (var child in Children)
-                foreach (var tag in child.Document())
-                    yield return tag;
         }
     }
 }

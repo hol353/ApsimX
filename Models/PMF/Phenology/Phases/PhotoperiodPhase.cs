@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.Functions;
 using Newtonsoft.Json;
@@ -92,16 +89,5 @@ namespace Models.PMF.Phen
         /// <summary>Resets the phase.</summary>
         public void ResetPhase() { }
 
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            // Write description of this class.
-            StringBuilder text = new StringBuilder($"This phase goes from {Start} to {End}. ");
-            text.Append("The phase ends when photoperiod has a reaches a critical photoperiod with a given direction (Increasing/Decreasing). ");
-            text.Append($"The base model uses a critical photoperiod of {CricialPhotoperiod} hours ({PPDirection}).");
-            yield return new Paragraph(text.ToString());
-        }
     }
 }

@@ -1,20 +1,14 @@
-
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml;
+using CMPServices;
+using APSIM.Shared.Utilities;
 
 //Classes for I/O of the generic parameter set class, TParameterSet.           
-
 namespace Models.GrazPlan
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Text;
-    using System.Xml;
-    using System.Resources;
-    using CMPServices;
-    using CommandLine.Text;
-    using Models.Core;
-    using APSIM.Shared.Utilities;
+    
 
     /// <summary>
     /// Class that wraps the XML param reader

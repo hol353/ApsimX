@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Utilities;
 using Models.Core;
 using Models.Functions;
@@ -128,15 +126,5 @@ namespace Models.PMF.Phen
             SowLayer = SoilUtilities.LayerIndexOfDepth(soilPhysical.Thickness, plant.SowingData.Depth);
         }
 
-        /// <summary>Writes documentation for this function by adding to the list of documentation tags.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            // Write a table containing phase numers and start/end stages.
-            yield return new Paragraph($"The phase goes from {Start.ToLower()} to {End.ToLower()} and assumes {End.ToLower()} will be reached on the day after sowing or the first day thereafter when the extractable soil water at sowing depth is greater than zero.");
-
-            // Write memos.
-            foreach (var tag in DocumentChildren<Memo>())
-                yield return tag;
-        }
     }
 }

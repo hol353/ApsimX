@@ -1,4 +1,3 @@
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Graphing;
 using APSIM.Shared.Utilities;
 using Models.Core;
@@ -411,25 +410,5 @@ namespace Models.Soils.Nutrients
             (FOM as CompositeNutrientPool).Calculate();
         }
 
-        /// <inheritdoc/>
-        public override IEnumerable<ITag> Document()
-        {
-            yield return new Section(Name, GetModelDescription());
-        }
-
-        /// <summary>
-        /// Get a description of the model from the summary, structure, pools, and solute
-        /// xml documentation comments in the source code.
-        /// </summary>
-        /// <remarks>
-        /// Note that the returned tags are inside sections.
-        /// </remarks>
-        public new IEnumerable<ITag> GetModelDescription()
-        {
-            yield return new Paragraph(CodeDocumentation.GetSummary(GetType()));
-            yield return new Section("Structure", new Paragraph(CodeDocumentation.GetCustomTag(GetType(),"structure")));
-            yield return new Section("Pools", new Paragraph(CodeDocumentation.GetCustomTag(GetType(),"pools")));
-            yield return new Section("Solutes", new Paragraph(CodeDocumentation.GetCustomTag(GetType(),"solutes")));
-        }
     }
 }

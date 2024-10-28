@@ -1,7 +1,6 @@
 {
   "$type": "Models.Core.Simulations, Models",
-  "ExplorerWidth": 300,
-  "Version": 160,
+  "Version": 183,
   "Name": "Simulations",
   "ResourceName": null,
   "Children": [
@@ -43,7 +42,7 @@
         {
           "$type": "Models.Climate.Weather, Models",
           "ConstantsFile": null,
-          "FileName": "%root%\\Tests\\WeatherFiles\\lincoln.met",
+          "FileName": "%root%/Tests/WeatherFiles/lincoln.met",
           "ExcelWorkSheetName": "",
           "Name": "Weather",
           "ResourceName": null,
@@ -79,7 +78,7 @@
           "NightInterceptionFraction": 0.5,
           "ReferenceHeight": 2.0,
           "Name": "MicroClimate",
-          "ResourceName": null,
+          "ResourceName": "MicroClimate",
           "Children": [],
           "Enabled": true,
           "ReadOnly": false
@@ -140,9 +139,9 @@
                     210.0,
                     230.0
                   ],
-                  "ParticleSizeClay": null,
                   "ParticleSizeSand": null,
                   "ParticleSizeSilt": null,
+                  "ParticleSizeClay": null,
                   "Rocks": null,
                   "Texture": null,
                   "BD": [
@@ -771,6 +770,7 @@
                 "Enabled": true,
                 "ReadOnly": false
               },
+              "CanopyType": "PastureSpecies",
               "LightProfile": null,
               "InitialShootDM": 1500.0,
               "InitialRootDM": 450.0,
@@ -854,6 +854,7 @@
                 "Enabled": true,
                 "ReadOnly": false
               },
+              "CanopyType": "PastureSpecies",
               "LightProfile": null,
               "InitialShootDM": 500.0,
               "InitialRootDM": 150.0,
@@ -937,6 +938,7 @@
                 "Enabled": true,
                 "ReadOnly": false
               },
+              "CanopyType": "PastureSpecies",
               "LightProfile": null,
               "InitialShootDM": 0.0,
               "InitialRootDM": 0.0,
@@ -1020,6 +1022,7 @@
                 "Enabled": true,
                 "ReadOnly": false
               },
+              "CanopyType": "PastureSpecies",
               "LightProfile": null,
               "InitialShootDM": 0.0,
               "InitialRootDM": 0.0,
@@ -1103,6 +1106,7 @@
                 "Enabled": true,
                 "ReadOnly": false
               },
+              "CanopyType": "PastureSpecies",
               "LightProfile": null,
               "InitialShootDM": 0.0,
               "InitialRootDM": 0.0,
@@ -1186,6 +1190,7 @@
                 "Enabled": true,
                 "ReadOnly": false
               },
+              "CanopyType": "PastureSpecies",
               "LightProfile": null,
               "InitialShootDM": 0.0,
               "InitialRootDM": 0.0,
@@ -1269,6 +1274,7 @@
                 "Enabled": true,
                 "ReadOnly": false
               },
+              "CanopyType": "PastureSpecies",
               "LightProfile": null,
               "InitialShootDM": 0.0,
               "InitialRootDM": 0.0,
@@ -1352,6 +1358,7 @@
                 "Enabled": true,
                 "ReadOnly": false
               },
+              "CanopyType": "PastureSpecies",
               "LightProfile": null,
               "InitialShootDM": 0.0,
               "InitialRootDM": 0.0,
@@ -1435,6 +1442,7 @@
                 "Enabled": true,
                 "ReadOnly": false
               },
+              "CanopyType": "PastureSpecies",
               "LightProfile": null,
               "InitialShootDM": 0.0,
               "InitialRootDM": 0.0,
@@ -1518,6 +1526,7 @@
                 "Enabled": true,
                 "ReadOnly": false
               },
+              "CanopyType": "PastureSpecies",
               "LightProfile": null,
               "InitialShootDM": 0.0,
               "InitialRootDM": 0.0,
@@ -1601,6 +1610,7 @@
                 "Enabled": true,
                 "ReadOnly": false
               },
+              "CanopyType": "PastureSpecies",
               "LightProfile": null,
               "InitialShootDM": 0.0,
               "InitialRootDM": 0.0,
@@ -1664,16 +1674,6 @@
               "MinimumGreenRootProp": 0.5,
               "Name": "TallFescue",
               "ResourceName": "AGPTallFescue",
-              "Children": [],
-              "Enabled": true,
-              "ReadOnly": false
-            },
-            {
-              "$type": "Models.Manager, Models",
-              "Code": "using System;\nusing System.Collections.Generic;\nusing System.Xml.Serialization;\nusing System.Text;\nusing System.IO;\nusing Models.Core;\nusing Models.PMF;\nusing Models.Soils;\nusing APSIM.Shared.Documentation;\nusing APSIM.Shared.Documentation.Tags;\nusing APSIM.Shared.Utilities;\nusing Models.Interfaces;\nusing System.Data;\nusing System.Linq;\n\nnamespace Models\n{\n    [Serializable]\n    public class Script : Model\n    {\n        /// <summary>Writes documentation for this function by adding to the list of documentation tags.</summary>\n        public override IEnumerable<ITag> Document()\n        {\n        \tList<ITag> tags = new List<ITag>();\n        \tIEnumerable<AgPasture.PastureSpecies> models = FindAllInScope<AgPasture.PastureSpecies>();\n\n            DataTable table = new DataTable();\n            table.Columns.Add(\"Parameter name\");\n            if (models.Any())\n            {\n                foreach (var model in models)\n                    table.Columns.Add(model.Name);\n\t\t\t\t//System.Diagnostics.Debugger.Break();\n                var parameterNames = Resource.GetModelParameterNames(models.First().ResourceName);\n\n                foreach (var parameterName in parameterNames)\n                {\n                    var row = table.NewRow();\n                    row[\"Parameter name\"] = parameterName;\n                    foreach (var model in models)\n                    {\n                    \tIVariable variable = model.FindByPath(parameterName);\n                    \tif (variable != null)\n                    \t{\n\t\t                    var value = variable.Value;\n\t\t                    // ReflectionUtilities.GetValueOfFieldOrProperty(parameterName, model);\n\t\t                    if (value != null)\n\t\t                    {\n\t\t                        if (value is double[])\n\t\t                            value = StringUtilities.BuildString(value as double[], \"f4\");\n\t\t                        row[model.Name] = value.ToString();\n\t\t                    }\n\t\t                }\n                    }\n                    table.Rows.Add(row);\n                }\n            }\n            tags.Add(new Table(table));\n\n            return tags;\n        }\n    }\n}\n",
-              "Parameters": [],
-              "Name": "Manager",
-              "ResourceName": null,
               "Children": [],
               "Enabled": true,
               "ReadOnly": false

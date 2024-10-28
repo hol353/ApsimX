@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.PMF.Phen;
 
@@ -82,14 +81,6 @@ namespace Models.Functions
         private void OnPlantEnding(object sender, EventArgs e)
         {
             AccumulatedValue = 0;
-        }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            yield return new Paragraph($"**{Name}** is a daily accumulation of the values of functions listed below and set to zero each time the {ResetStageName} is passed.");
         }
     }
 }

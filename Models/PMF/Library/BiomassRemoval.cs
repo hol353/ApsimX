@@ -1,11 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Data;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.Interfaces;
 using Models.PMF.Interfaces;
-using Models.Soils;
 using Models.Soils.Nutrients;
 using Models.Surface;
 

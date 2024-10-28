@@ -12,6 +12,7 @@ using System.Reflection;
 using UnitTests.Storage;
 using Shared.Utilities;
 using Models.Logging;
+using APSIM.Documentation.Models;
 
 namespace UnitTests.ManagerTests
 {
@@ -506,7 +507,7 @@ namespace UnitTests.ManagerTests
             //should work
             testManager = createManager(true, false, true, true);
             List<ITag> tags = new List<ITag>();
-            foreach (ITag tag in testManager.Document())
+            foreach (ITag tag in AutoDocumentation.Document(testManager))
                 tags.Add(tag);
             Assert.That(tags.Count, Is.EqualTo(1));
 

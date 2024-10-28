@@ -24,7 +24,7 @@ namespace Models.Core.ApsimFile
     public class Converter
     {
         /// <summary>Gets the latest .apsimx file format version.</summary>
-        public static int LatestVersion { get { return 180; } }
+        public static int LatestVersion { get { return 183; } }
 
         /// <summary>Converts a .apsimx string to the latest version.</summary>
         /// <param name="st">XML or JSON string to convert.</param>
@@ -5765,6 +5765,77 @@ namespace Models.Core.ApsimFile
                 bool changeMade = manager.Replace(".Operation.", ".OperationsList.", true);
                 if (changeMade)
                     manager.Save();
+            }
+        }
+
+        /// <summary>
+        /// Renames Models.PMF.Organs.Leaf+LeafCohortParameters to Models.PMF.Organs.LeafCohortParameters.
+        /// LeafCohortParameters class was moved from the Leaf.cs to LeafCohortParameters.cs.
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="fileName"></param>
+        private static void UpgradeToVersion181(JObject root, string fileName)
+        {
+            foreach (JObject leafCohortParametersObject in JsonUtilities.ChildrenRecursively(root, "Models.PMF.Organs.Leaf+LeafCohortParameters"))
+                leafCohortParametersObject["$type"] = leafCohortParametersObject["$type"].ToString().Replace("Models.PMF.Organs.Leaf+LeafCohortParameters", "Models.PMF.Organs.LeafCohortParameters");
+        }
+
+        /// <summary>
+        /// Renames Models.PMF.Organs.Leaf+LeafCohortParameters to Models.PMF.Organs.LeafCohortParameters.
+        /// LeafCohortParameters class was moved from the Leaf.cs to LeafCohortParameters.cs.
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="fileName"></param>
+        private static void UpgradeToVersion182(JObject root, string fileName)
+        {
+            foreach (JToken water in JsonUtilities.ChildrenRecursively(root, "Water"))
+            {
+                JToken relTo = water.SelectToken("RelativeTo");
+                if (relTo != null)
+                {
+                    string cropsoil = water["RelativeTo"].ToString();
+                    if (cropsoil.EndsWith("Soil"))
+                    {
+                        cropsoil = cropsoil.Substring(0, cropsoil.Length-4);
+                        water["RelativeTo"] = cropsoil;
+                    }
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Reparents graphs incorrectly placed under a Simulation under an Experiment
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="fileName"></param>
+        private static void UpgradeToVersion183(JObject root, string fileName)
+        {
+            foreach (JObject graph in JsonUtilities.ChildrenRecursively(root, "Graph"))
+            {
+                var graphParent = JsonUtilities.Parent(graph);
+                if(JsonUtilities.Type(graphParent) == "Simulation")
+                {
+                    var simParent = JsonUtilities.Parent(graphParent);
+                    if(JsonUtilities.Type(simParent) == "Experiment")
+                    {
+                        JsonUtilities.RemoveChild((JObject)graphParent, graph["Name"].ToString());
+                        var experimentChildren = (simParent as JObject).Children();
+
+                        bool duplicateGraphExists = false;
+                        var experiment = FileFormat.ReadFromString<Experiment>(simParent.ToString(), e => throw e, false).NewModel as Experiment;
+                        foreach(IModel child in experiment.Children)
+                        {
+                            // TODO: Needs to not add a graph to an experiment if another object
+                            // has the same name. Slurp has an existing irrigation graph (that doesn't work) 
+                            // that causes issues.
+                            if (child.Name.Equals(graph["Name"].ToString()))
+                                duplicateGraphExists = true;
+                        }
+
+                        if (duplicateGraphExists == false)
+                            JsonUtilities.AddChild((JObject)simParent, graph);
+                    }
+                }
             }
         }
     }

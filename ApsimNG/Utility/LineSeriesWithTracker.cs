@@ -4,7 +4,6 @@
     using APSIM.Shared.Graphing;
     using APSIM.Shared.Utilities;
     using OxyPlot;
-    using OxyPlot.Series;
 
     /// <summary>
     /// A line series with a better tracker.

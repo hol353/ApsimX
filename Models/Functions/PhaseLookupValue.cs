@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.PMF.Phen;
 
@@ -71,23 +70,6 @@ namespace Models.Functions
             {
                 return Phenology.Between(startStageIndex, endStageIndex);
             }
-        }
-
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            // Write memos.
-            foreach (var tag in DocumentChildren<Memo>())
-                yield return tag;
-
-            yield return new Paragraph($"{Name} has a value between {Start} and {End} calculated as:");
-
-            // Write memos.
-            foreach (var tag in DocumentChildren<IModel>())
-                yield return tag;
         }
 
         /// <summary>Called when [simulation commencing].</summary>

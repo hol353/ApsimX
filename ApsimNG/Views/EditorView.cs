@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -341,6 +340,8 @@ namespace UserInterface.Views
             
             textEditor = new SourceView();
             textEditor.DragDataReceived += TextEditorDragDataReceived;
+            textEditor.AutoIndent = true;
+            textEditor.InsertSpacesInsteadOfTabs = true;
             searchSettings = new SearchSettings();
             searchContext = new SearchContext(textEditor.Buffer, searchSettings);
 
@@ -693,7 +694,6 @@ namespace UserInterface.Views
         {
             try
             {
-                //textEditor.Document.ReadOnly = false;
                 textEditor.GrabFocus();
             }
             catch (Exception err)
@@ -909,6 +909,22 @@ namespace UserInterface.Views
                 }
             };
             return null;
+        }
+
+        /// <summary>
+        /// Hide the Text Editor
+        /// </summary>
+        public void Hide()
+        {
+            textEditor.Visible = false;
+        }
+
+        /// <summary>
+        /// Show the Text Editor
+        /// </summary>
+        public void Show()
+        {
+            textEditor.Visible = true;
         }
 
         /// <summary>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.PMF.Interfaces;
 using Models.PMF.Phen;
@@ -194,20 +193,6 @@ namespace Models.PMF
 
                 return n;
             }
-        }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (ITag tag in base.Document())
-                yield return tag;
-
-            yield return new Paragraph($"{Name} summarises the following biomass objects:");
-
-            string st = string.Join(Environment.NewLine, OrganNames.Select(o => $"* {o}"));
-            yield return new Paragraph(st);
         }
     }
 }

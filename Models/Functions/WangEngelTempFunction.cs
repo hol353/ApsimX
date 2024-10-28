@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.Interfaces;
 
@@ -77,18 +74,6 @@ namespace Models.Functions
             }
 
             return RelEff / RelEffRefTemp;
-        }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            StringBuilder text = new StringBuilder();
-            text.Append($"{Name} is calculated using a Wang and Engel beta function which has a value of zero ");
-            text.Append($"below {MinTemp} {Units} increasing to a maximum value at {OptTemp} {Units} and ");
-            text.Append($"decreasing to zero again at {MaxTemp} {Units} ([WangEngel1998]).");
-            yield return new Paragraph(text.ToString());
         }
     }
 }

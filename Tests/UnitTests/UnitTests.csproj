@@ -39,6 +39,7 @@
     <ProjectReference Include="..\..\APSIM.Server\V1\APSIM.Server.csproj" />
     <ProjectReference Include="..\..\APSIM.Interop\APSIM.Interop.csproj" />
     <ProjectReference Include="..\..\Gtk.Sheet\Gtk.Sheet.csproj" />
+    <ProjectReference Include="..\..\APSIM.Documentation\APSIM.Documentation.csproj" />
 
     <!-- nuget -->
     <PackageReference Include="NUnit" Version="4.1.0" />

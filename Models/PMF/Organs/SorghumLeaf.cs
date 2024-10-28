@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Utilities;
 using Models.Core;
 using Models.Functions;
@@ -1199,77 +1198,6 @@ namespace Models.PMF.Organs
 
             Clear();
         }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (var tag in GetModelDescription())
-                yield return tag;
-
-            // Write memos.
-            foreach (var tag in DocumentChildren<Memo>())
-                yield return tag;
-
-            foreach (ITag tag in culms.Document())
-                yield return tag;
-            // List the parameters, properties, and processes from this organ that need to be documented:
-
-            var tags = new List<ITag>();
-            tags.Add(new Paragraph("Aboveground biomass accumulation is simulated as the minimum of light-limited or water-limited growth. In the absence of water limitation, biomass accumulation is the product of the amount of intercepted radiation (IR) and its conversion efficiency, the radiation use efficiency (RUE). "));
-            tags.Add(new Paragraph("Under water limitation, aboveground biomass accumulation is the product of realized transpiration and its conversion efficiency, biomass produced per unit of water transpired, or transpiration efficiency(TE)"));
-            yield return new Section("Dry Matter Fixation", tags);
-
-            var rueTags = new List<ITag>();
-            rueTags.AddRange(extinctionCoefficientFunction.Document());
-            rueTags.AddRange(photosynthesis.Document());
-            yield return new Section("Radiation Use Efficiency", rueTags);
-
-            //tags.AddRange(potentialBiomassTEFunction.Document());
-            yield return new Section("Transpiration Efficiency", potentialBiomassTEFunction.Document());
-
-            // Document initial DM weight.
-            yield return new Paragraph($"Initial DM mass = {InitialDMWeight} gm^-2^");
-
-            // Document DM demands.
-            List<ITag> dmDemandsTags = new List<ITag>();
-            dmDemandsTags.Add(new Paragraph("The dry matter demand for the organ is calculated as defined in DMDemands, based on the DMDemandFunction and partition fractions for each biomass pool."));
-            dmDemandsTags.AddRange(dmDemands.Document());
-            yield return new Section("Dry Matter Demand", dmDemandsTags);
-
-            // Document N demands.
-            List<ITag> nDemandTags = new List<ITag>();
-            nDemandTags.Add(new Paragraph("The N demand is calculated as defined in NDemands, based on DM demand the N concentration of each biomass pool."));
-            nDemandTags.AddRange(nDemands.Document());
-            yield return new Section("Nitrogen Demand", nDemandTags);
-
-
-            // Document DM retranslocation.
-            yield return new Section("DM Retranslocation Factor", new Paragraph($"{Name} does not retranslocate non-structural DM."));
-
-            // Document N supplies.
-            yield return new Section("Nitrogen Supply", new Paragraph($"{Name} does not reallocate N when senescence of the organ occurs."));
-
-            // Document N retranslocation.
-            yield return new Section("Nitrogen Retranslocation Factor", new Paragraph($"{Name} does not retranslocate non-structural N."));
-
-            // todo: document LAI(/CoverTot?).
-            List<ITag> canopyTags = new List<ITag>();
-            canopyTags.AddRange(numberOfLeaves.Document());
-            //canopyTags.AddRange(dltLaifun.Document());
-            canopyTags.AddRange(heightFunction.Document());
-            yield return new Section("Canopy Properties", canopyTags);
-
-            // Document senescence and detachment.
-            List<ITag> senescenceTags = new List<ITag>();
-            senescenceTags.AddRange(LightSenescence.Document());
-            senescenceTags.AddRange(WaterSenescence.Document());
-            senescenceTags.AddRange(FrostSenescence.Document());
-
-            senescenceTags.Add(new Section("Biomass Removal", biomassRemovalModel.Document()));
-
-            yield return new Section("Senescence and Detachment", senescenceTags);
-        }
+        
     }
 }

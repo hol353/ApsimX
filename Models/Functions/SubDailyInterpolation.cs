@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.Interfaces;
 using Newtonsoft.Json;
@@ -81,26 +80,5 @@ namespace Models.Functions
             foreach (double sdt in SubDailyInput)
                 SubDailyResponse.Add(Response.ValueIndexed(sdt));
         }
-
-        /// <summary>Writes documentation for this function by adding to the list of documentation tags.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            yield return new Paragraph($"{Name} is the {agregationMethod.ToString().ToLower()} of sub-daily values from a {Response.GetType().Name}.");
-
-            // Write memos.
-            foreach (var tag in DocumentChildren<Memo>())
-                yield return tag;
-
-            foreach (var tag in (InterpolationMethod as IModel).Document())
-                yield return tag;
-
-            yield return new Paragraph($"Each of the interpolated {InterpolationMethod.OutputValueType}s are then passed into the following Response and the {agregationMethod} taken to give daily {Name}");
-
-            var xyPairs = Response as XYPairs;
-            xyPairs.XVariableName ??= "Air temperature (oC)";
-            foreach (var tag in (Response as IModel).Document())
-                yield return tag;
-        }
     }
-
 }

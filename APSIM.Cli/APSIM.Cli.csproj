@@ -13,6 +13,7 @@
     <ProjectReference Include="../APSIM.Shared/APSIM.Shared.csproj" />
     <ProjectReference Include="../APSIM.Interop/APSIM.Interop.csproj" />
     <ProjectReference Include="../Models/Models.csproj" />
+    <ProjectReference Include="../APSIM.Documentation/APSIM.Documentation.csproj" />
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
   </ItemGroup>
 

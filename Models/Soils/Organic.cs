@@ -106,44 +106,5 @@ namespace Models.Soils
 
         /// <summary>FOM metadata</summary>
         public string[] FOMMetadata { get; set; }
-
-        /// <summary>Gets the model ready for running in a simulation.</summary>
-        /// <param name="targetThickness">Target thickness.</param>
-        public void Standardise(double[] targetThickness)
-        {
-            SetThickness(targetThickness);
-            if (CarbonUnits == CarbonUnitsEnum.WalkleyBlack)
-            {
-                Carbon = SoilUtilities.OCWalkleyBlackToTotal(Carbon);
-                CarbonUnits = CarbonUnitsEnum.Total;
-            }
-
-            if (!MathUtilities.ValuesInArray(Carbon))
-                Carbon = null;
-            if (Carbon != null)
-                Carbon = MathUtilities.FixArrayLength(Carbon, Thickness.Length);
-        }
-
-        /// <summary>Sets the soil organic matter thickness.</summary>
-        /// <param name="targetThickness">Thickness to change soil water to.</param>
-        private void SetThickness(double[] targetThickness)
-        {
-            if (!MathUtilities.AreEqual(targetThickness, Thickness))
-            {
-                FBiom = SoilUtilities.MapConcentration(FBiom, Thickness, targetThickness, MathUtilities.LastValue(FBiom));
-                FInert = SoilUtilities.MapConcentration(FInert, Thickness, targetThickness, MathUtilities.LastValue(FInert));
-                Carbon = SoilUtilities.MapConcentration(Carbon, Thickness, targetThickness, MathUtilities.LastValue(Carbon));
-                SoilCNRatio = SoilUtilities.MapConcentration(SoilCNRatio, Thickness, targetThickness, MathUtilities.LastValue(SoilCNRatio));
-                FOM = SoilUtilities.MapMass(FOM, Thickness, targetThickness, false);
-                Thickness = targetThickness;
-            }
-
-            if (FBiom != null)
-                MathUtilities.ReplaceMissingValues(FBiom, MathUtilities.LastValue(FBiom));
-            if (FInert != null)
-                MathUtilities.ReplaceMissingValues(FInert, MathUtilities.LastValue(FInert));
-            if (Carbon != null)
-                MathUtilities.ReplaceMissingValues(Carbon, MathUtilities.LastValue(Carbon));
-        }
     }
 }

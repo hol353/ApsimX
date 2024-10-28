@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using Models.Climate;
 using Models.Core;
 using Models.Interfaces;
@@ -209,17 +207,6 @@ namespace Models.Functions.SupplyFunctions
 
             }
             return GrossPhotosynthesis;
-        }
-
-        /// <summary>Document the model.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            // Write description of this class from summary and remarks XML documentation.
-            foreach (var tag in GetModelDescription())
-                yield return tag;
-
-            foreach (var tag in DocumentChildren<IModel>())
-                yield return tag;
         }
     }
 }

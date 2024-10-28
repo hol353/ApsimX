@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.PMF;
 using Models.PMF.Phen;
@@ -45,17 +43,6 @@ namespace Models.Functions.DemandFunctions
             double CurrentOrganWt = Math.Max(StartWt, Live.Wt / OrganNumber.Value(arrayIndex));
             double OrganDemand = CurrentOrganWt * RelativeGrowthRate.Value(arrayIndex);
             return OrganDemand * OrganNumber.Value(arrayIndex);
-        }
-
-        /// <summary>Document the model.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            // Write description of this class from summary and remarks XML documentation.
-            foreach (var tag in GetModelDescription())
-                yield return tag;
-
-            foreach (var tag in DocumentChildren<IModel>())
-                yield return tag;
         }
     }
 }

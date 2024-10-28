@@ -3,7 +3,6 @@ using System.Linq;
 using System.Collections.Generic;
 using Models.Core;
 using Newtonsoft.Json;
-using APSIM.Shared.Documentation;
 
 namespace Models.Agroforestry
 {
@@ -134,12 +133,6 @@ namespace Models.Agroforestry
             else
                     return 1.0;
 
-        }
-
-        /// <summary>Writes documentation for this cultivar by adding to the list of documentation tags.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            throw new NotImplementedException("tbi");
         }
     }
 }

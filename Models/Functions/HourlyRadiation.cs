@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.Interfaces;
 using Newtonsoft.Json;
@@ -89,14 +88,6 @@ namespace Models.Functions
             else if (t > setHour) weight = 0;
             return weight;
         }
-
-        /// <summary>Writes documentation for this function</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (var tag in GetModelDescription())
-                yield return tag;
-        }
-
     }
 
 }

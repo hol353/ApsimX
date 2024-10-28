@@ -861,5 +861,17 @@ namespace Models.Core.ApsimFile
 
             return null;
         }
+
+        /// <summary>
+        /// Adds a JObject child to another JObject.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="child"></param>
+        public static void AddChild(JObject node, JObject child)
+        {
+            var children = node["Children"] as JArray;
+            children.Add(child);
+        }
+
     }
 }

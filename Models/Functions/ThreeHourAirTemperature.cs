@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.Interfaces;
 using Newtonsoft.Json;
@@ -72,13 +71,5 @@ namespace Models.Functions
                 throw new Exception("Incorrect number of subdaily temperature estimations in " + this.Name + " temperature interpolation");
             return trfs;
         }
-
-        /// <summary>Writes documentation for this function</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (var tag in GetModelDescription())
-                yield return tag;
-        }
     }
-
 }

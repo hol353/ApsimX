@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Newtonsoft.Json;
 
@@ -23,6 +22,7 @@ namespace Models.PMF
     [ValidParent(ParentType = typeof(Folder))]
     [ValidParent(ParentType = typeof(ModelOverrides))]
     [ValidParent(ParentType = typeof(Sugarcane))]
+    [ValidParent(ParentType = typeof(AgPasture.PastureSpecies))]
     public class Cultivar : Model, ILineEditor
     {
         /// <summary>Default constructor.</summary>
@@ -67,11 +67,14 @@ namespace Models.PMF
         /// <summary>
         /// Return all names by which this cultivar is known.
         /// </summary>
-        public IEnumerable<string> GetNames()
+        public List<string> GetNames()
         {
-            yield return Name;
+            List<string> names = new List<string>();
+            names.Add(Name);
             foreach (string name in FindAllChildren<Alias>().Select(a => a.Name))
-                yield return name;
+                names.Add(name);
+                
+            return names;
         }
 
         /// <summary>Apply commands.</summary>
@@ -102,17 +105,6 @@ namespace Models.PMF
         private void OnSimulationCompleted(object sender, EventArgs e)
         {
             Unapply();
-        }
-
-        /// <summary>Document the model.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            if (Command != null && Command.Any())
-            {
-                yield return new Paragraph($"{Name} overrides the following properties:");
-                foreach (string command in Command)
-                    yield return new Paragraph(command);
-            }
         }
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using Models.Core;
 
 namespace Models.Functions
@@ -51,20 +49,6 @@ namespace Models.Functions
                 return TrueValue.Value(arrayIndex);
             else
                 return FalseValue.Value(arrayIndex);
-        }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            yield return new Paragraph($"If {PropertyName} = {StringValue} Then");
-            foreach (ITag tag in TrueValue.Document())
-                yield return tag;
-
-            yield return new Paragraph("Else");
-            foreach (ITag tag in FalseValue.Document())
-                yield return tag;
         }
     }
 }

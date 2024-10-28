@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using Models.Core;
-using Models.PMF.Phen;
 
 namespace Models.Functions.DemandFunctions
 {
@@ -58,17 +55,6 @@ namespace Models.Functions.DemandFunctions
                 cumDelta += relativeArea.ValueIndexed(currNodeNumber - branchNodeLag[i]);
             }
             return cumDelta * plantNumber.Value() * areaLargestLeaf.Value() * lAR.Value();
-        }
-
-        /// <summary>Document the model.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            // Write description of this class from summary and remarks XML documentation.
-            foreach (var tag in GetModelDescription())
-                yield return tag;
-
-            foreach (var tag in DocumentChildren<IModel>())
-                yield return tag;
         }
     }
 }

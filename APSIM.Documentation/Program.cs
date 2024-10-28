@@ -104,8 +104,7 @@ namespace APSIM.Documentation
                 StandardTutorialRow("Parameter sensitivity (SOBOL)", "Sensitivity_SobolMethod"),
                 StandardTutorialRow("Parameter sensitivity (Factorial ANOVA)", "Sensitivity_FactorialANOVA"),
                 StandardTutorialRow("Predicted/Observed data handling", "PredictedObserved"),
-                StandardTutorialRow("Report", "Report"),
-                CustomModelRow("Clock", "Clock")
+                StandardTutorialRow("Report", "Report")
             };
             return new DocumentationTable("Tutorials", cols, rows);
         }
@@ -127,6 +126,7 @@ namespace APSIM.Documentation
                 StandardPmfPlantRow("Canola", new ExternalDocument("Video", "https://www.youtube.com/watch?v=kz3w5nOtdqM")),
                 StandardPmfPlantRow("Chicory"),
                 StandardPmfPlantRow("Chickpea"),
+                CustomModelRow("Clock", "Clock"),
                 StandardPmfPlantRow("Eucalyptus"),
                 StandardPmfPlantRow("FodderBeet"),
                 StandardPmfPlantRow("Gliricidia"),
@@ -294,7 +294,7 @@ namespace APSIM.Documentation
             Console.WriteLine($"Creating documentation for {name}");
             string model = Path.Combine(resources, modelResourceFile);
             string validation = Path.Combine(Program.validation, Path.GetFileNameWithoutExtension(validationFile), validationFile);
-            IEnumerable<string> files = new string[2] { model, validation };
+            IEnumerable<string> files = new string[1] { validation };
 
             string paramsFileName = $"{Path.GetFileNameWithoutExtension(outFile)}-parameters.pdf";
 

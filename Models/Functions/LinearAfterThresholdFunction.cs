@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
-using APSIM.Shared.Utilities;
 using Models.Core;
 
 namespace Models.Functions
@@ -78,15 +75,6 @@ namespace Models.Functions
                 return 0;
             else
                 return Math.Max(0.0, (x - XTrigger)) * Slope;
-        }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            yield return new Paragraph($"*{Name}* is calculated as a function of *{StringUtilities.RemoveTrailingString(XProperty, ".Value()")}*");
-            yield return new Paragraph($"*Trigger value {XTrigger} Gradient {Slope}*");
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 
 namespace Models.Core
 {
@@ -305,12 +304,5 @@ namespace Models.Core
         /// </summary>
         void OnPreLink();
 
-        /// <summary>
-        /// Document the model, and any child models which should be documented.
-        /// </summary>
-        /// <remarks>
-        /// It is a mistake to call this method without first resolving links.
-        /// </remarks>
-        IEnumerable<ITag> Document();
     }
 }

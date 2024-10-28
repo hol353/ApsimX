@@ -1,6 +1,6 @@
 {
   "$type": "Models.Core.Simulations, Models",
-  "Version": 176,
+  "Version": 181,
   "Name": "Simulations",
   "ResourceName": null,
   "Children": [
@@ -618,9 +618,9 @@
                     300.0,
                     300.0
                   ],
-                  "ParticleSizeClay": null,
                   "ParticleSizeSand": null,
                   "ParticleSizeSilt": null,
+                  "ParticleSizeClay": null,
                   "Rocks": null,
                   "Texture": null,
                   "BD": [
@@ -1253,6 +1253,7 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
+      "GraphsPerPage": 6,
       "Name": "Reporting Basics",
       "ResourceName": null,
       "Children": [
@@ -1272,6 +1273,7 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
+      "GraphsPerPage": 6,
       "Name": "Dealing with outputs that have layers",
       "ResourceName": null,
       "Children": [
@@ -1291,12 +1293,13 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
+      "GraphsPerPage": 6,
       "Name": "Reporting at Intervals Beyond Every Day",
       "ResourceName": null,
       "Children": [
         {
           "$type": "Models.Memo, Models",
-          "Text": "***Note well** – reporting at aggregations other than every day can become complex. It is recommended that the results be critically evaluated to ensure that the reporting specified is as intended.*\n\nAPSIM allows reporting at various intervals. Several of these methods have been described above. In addition to the usual [Clock].EndOfDay for daily reporting, [Clock] also has events of EndOfWeek, EndOfMonth, EndOfYear and EndOfSimulation. When the reporting is not every day then it is necessary to consider what the aggregation of the output should be. Some variables would usually be reported as their value on the day – many state variables (e.g. plant biomass) are like this. Others are almost always wanted to be summed over the interval since the last report – drainage and evaporation are good examples here. \n\nAPSIM provides several ways to construct the aggregations. Not all the aggregations will be sensible for all outputs and it is up to the user to ensure the sensibility of the instructions to Report. For example, it makes no physical sense to sum the biomass of a plant in a monthly aggregation. It would make sense to report the value at the end of the month or to report the increase (difference) in biomass from the start to the end and it might make sense to report an average biomass. These issues must be considered when constructing more complex Report specifications. The general syntax of aggregated reporting is:\n\n\t\t\tAggregationType of [Model].Variable from Start to End as Label\n\nThe new elements here are *AggregationType*, *Start* and *End*.\n\n##AggregationType\nAggregationType can be any of:\n\n-\tSum of\n\n-\tMean of\n\n-\tMin of \n\n-\tMax of\n\n-\tFirst of\n\n-\tLast of \n\n-\tDiff of\n\nMost of these are self-evident. First and Last are chronological values. Diff is the increase in the output variable over the reporting interval – if the variable decreases then it will have a negative value.\n\n##Start\nThe most useful form of *Start* is *[ReportName].DateOfLastOutput* where the first part is the name of the current Report component. *DateOfLastOutput* is pretty much as stated. Other *Start* constructs might be a general, e.g. *1-jan*, or specific, e.g. *1-jan-1982*, date. *Start* can also be an event, e.g. *[Wheat].sowing* or *[Clock].StartOfYear*. When *Start* is a Clock or Report event the aggregation always starts at the start of the day. For events created by crop or other models the event can happen at any point of the day and it is not always clear without careful examination if the current-day calculations and updates will be included or excluded. This is user-beware.\n\n##End\n*[Clock].Today* is the most useful *End* specification. This means that the end of the aggregation will be controlled by the Report frequency. *End* can also be an event, e.g. *[Wheat].Harvesting* or a general or specific date. As with *Start* and events, treat these with caution. Always consider the interaction between the aggregation interval and the report frequency. For example if the report frequency is *[Clock].EndOfMonth*:\n\t\t\t\n\t\t\tSum of [Weather].Rain from [Report].DateOfLastOutput to [Clock].Today \nwill produce a monthly rainfall total while\n\t\t\t\n\t\t\tSum of [Weather].Rain from 1-jan to [Clock].Today \nwill produce a cumulative rainfall as the months of the year progress and the accumulation will reset again on the next 1-Jan.\n\n##Some examples\nThe figures below show some aggregation examples of daily, weekly, monthly and annual aggregation reporting maximum temperature in various ways. Note that an aggregation to the end of the simulation is also possible. See the accompanying example *Report.apsimx* for details of these aggregations.\n\n\n",
+          "Text": "***Note well** – reporting at aggregations other than every day can become complex. It is recommended that the results be critically evaluated to ensure that the reporting specified is as intended.*\n\nAPSIM allows reporting at various intervals. Several of these methods have been described above. In addition to the usual [Clock].EndOfDay for daily reporting, [Clock] also has events of EndOfWeek, EndOfMonth, EndOfYear and EndOfSimulation. When the reporting is not every day then it is necessary to consider what the aggregation of the output should be. Some variables would usually be reported as their value on the day – many state variables (e.g. plant biomass) are like this. Others are almost always wanted to be summed over the interval since the last report – drainage and evaporation are good examples here. \n\nAPSIM provides several ways to construct the aggregations. Not all the aggregations will be sensible for all outputs and it is up to the user to ensure the sensibility of the instructions to Report. For example, it makes no physical sense to sum the biomass of a plant in a monthly aggregation. It would make sense to report the value at the end of the month or to report the increase (difference) in biomass from the start to the end and it might make sense to report an average biomass. These issues must be considered when constructing more complex Report specifications. The general syntax of aggregated reporting is:\n\n\t\t\tAggregationType of [Model].Variable from Start to End as Label\n\nThe new elements here are *AggregationType*, *Start* and *End*.\n\n## AggregationType\nAggregationType can be any of:\n\n-\tSum of\n\n-\tMean of\n\n-\tMin of \n\n-\tMax of\n\n-\tFirst of\n\n-\tLast of \n\n-\tDiff of\n\nMost of these are self-evident. First and Last are chronological values. Diff is the increase in the output variable over the reporting interval – if the variable decreases then it will have a negative value.\n\n## Start\nThe most useful form of *Start* is *[ReportName].DateOfLastOutput* where the first part is the name of the current Report component. *DateOfLastOutput* is pretty much as stated. Other *Start* constructs might be a general, e.g. *1-jan*, or specific, e.g. *1-jan-1982*, date. *Start* can also be an event, e.g. *[Wheat].sowing* or *[Clock].StartOfYear*. When *Start* is a Clock or Report event the aggregation always starts at the start of the day. For events created by crop or other models the event can happen at any point of the day and it is not always clear without careful examination if the current-day calculations and updates will be included or excluded. This is user-beware.\n\n## End\n*[Clock].Today* is the most useful *End* specification. This means that the end of the aggregation will be controlled by the Report frequency. *End* can also be an event, e.g. *[Wheat].Harvesting* or a general or specific date. As with *Start* and events, treat these with caution. Always consider the interaction between the aggregation interval and the report frequency. For example if the report frequency is *[Clock].EndOfMonth*:\n\t\t\t\n\t\t\tSum of [Weather].Rain from [Report].DateOfLastOutput to [Clock].Today \nwill produce a monthly rainfall total while\n\t\t\t\n\t\t\tSum of [Weather].Rain from 1-jan to [Clock].Today \nwill produce a cumulative rainfall as the months of the year progress and the accumulation will reset again on the next 1-Jan.\n\n## Some examples\nThe figures below show some aggregation examples of daily, weekly, monthly and annual aggregation reporting maximum temperature in various ways. Note that an aggregation to the end of the simulation is also possible. See the accompanying example *Report.apsimx* for details of these aggregations.\n\n\n",
           "Name": "Reporting that is Aggregated in Time",
           "ResourceName": null,
           "Children": [],
@@ -1620,12 +1623,14 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
+      "GraphsPerPage": 6,
       "Name": "More Reporting Examples",
       "ResourceName": null,
       "Children": [
         {
           "$type": "Models.Core.Folder, Models",
           "ShowInDocs": true,
+          "GraphsPerPage": 6,
           "Name": "Perennial Crop Example",
           "ResourceName": null,
           "Children": [
@@ -2966,6 +2971,8 @@
                             300.0,
                             300.0
                           ],
+                          "ParticleSizeSand": null,
+                          "ParticleSizeSilt": null,
                           "ParticleSizeClay": [
                             20.0,
                             15.0,
@@ -2975,8 +2982,6 @@
                             5.0,
                             5.0
                           ],
-                          "ParticleSizeSand": null,
-                          "ParticleSizeSilt": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -3634,6 +3639,7 @@
             {
               "$type": "Models.Core.Folder, Models",
               "ShowInDocs": true,
+              "GraphsPerPage": 6,
               "Name": "Getting Annual Patterns of Herbage Accumulation",
               "ResourceName": null,
               "Children": [
@@ -3750,6 +3756,7 @@
             {
               "$type": "Models.Core.Folder, Models",
               "ShowInDocs": true,
+              "GraphsPerPage": 6,
               "Name": "Working with Soil Carbon",
               "ResourceName": null,
               "Children": [
@@ -3906,6 +3913,7 @@
             {
               "$type": "Models.Core.Folder, Models",
               "ShowInDocs": true,
+              "GraphsPerPage": 6,
               "Name": "Daily and Monthly Leaching",
               "ResourceName": null,
               "Children": [
@@ -4055,6 +4063,7 @@
         {
           "$type": "Models.Core.Folder, Models",
           "ShowInDocs": true,
+          "GraphsPerPage": 6,
           "Name": "Annual Crop Example",
           "ResourceName": null,
           "Children": [
@@ -4538,9 +4547,9 @@
                             300.0,
                             300.0
                           ],
-                          "ParticleSizeClay": null,
                           "ParticleSizeSand": null,
                           "ParticleSizeSilt": null,
+                          "ParticleSizeClay": null,
                           "Rocks": null,
                           "Texture": null,
                           "BD": [
@@ -5038,6 +5047,7 @@
             {
               "$type": "Models.Core.Folder, Models",
               "ShowInDocs": true,
+              "GraphsPerPage": 6,
               "Name": "Comparing Rainfall during the Crop and All Year",
               "ResourceName": null,
               "Children": [
@@ -5154,6 +5164,7 @@
             {
               "$type": "Models.Core.Folder, Models",
               "ShowInDocs": true,
+              "GraphsPerPage": 6,
               "Name": "Soil Water storage during the Cropping Phase",
               "ResourceName": null,
               "Children": [
@@ -5328,6 +5339,7 @@
             {
               "$type": "Models.Core.Folder, Models",
               "ShowInDocs": true,
+              "GraphsPerPage": 6,
               "Name": "Reporting Yield and When Things Can Seem to Go Wrong",
               "ResourceName": null,
               "Children": [
@@ -5510,6 +5522,7 @@
     {
       "$type": "Models.Core.Folder, Models",
       "ShowInDocs": true,
+      "GraphsPerPage": 6,
       "Name": "Grouping",
       "ResourceName": null,
       "Children": [
@@ -5995,7 +6008,7 @@
                 },
                 {
                   "$type": "Models.Operations, Models",
-                  "Operation": null,
+                  "OperationsList": null,
                   "Name": "IrrigationSchedule",
                   "ResourceName": null,
                   "Children": [],
@@ -6129,9 +6142,9 @@
                         210.0,
                         230.0
                       ],
-                      "ParticleSizeClay": null,
                       "ParticleSizeSand": null,
                       "ParticleSizeSilt": null,
+                      "ParticleSizeClay": null,
                       "Rocks": null,
                       "Texture": null,
                       "BD": [
@@ -6719,7 +6732,78 @@
             },
             {
               "$type": "Models.ForageDigestibility.Forages, Models",
-              "Parameters": null,
+              "Parameters": [
+                {
+                  "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
+                  "Name": "SurfaceOrganicMatter.Residue",
+                  "LiveDigestibility": "0.7",
+                  "DeadDigestibility": "0.3",
+                  "LiveFractionConsumable": 1.0,
+                  "DeadFractionConsumable": 1.0,
+                  "LiveMinimumBiomass": 100.0,
+                  "DeadMinimumBiomass": 0.0
+                },
+                {
+                  "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
+                  "Name": "AGPRyegrass.Leaf",
+                  "LiveDigestibility": "FromModel",
+                  "DeadDigestibility": "FromModel",
+                  "LiveFractionConsumable": 1.0,
+                  "DeadFractionConsumable": 1.0,
+                  "LiveMinimumBiomass": 100.0,
+                  "DeadMinimumBiomass": 0.0
+                },
+                {
+                  "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
+                  "Name": "AGPRyegrass.Stem",
+                  "LiveDigestibility": "FromModel",
+                  "DeadDigestibility": "FromModel",
+                  "LiveFractionConsumable": 1.0,
+                  "DeadFractionConsumable": 1.0,
+                  "LiveMinimumBiomass": 100.0,
+                  "DeadMinimumBiomass": 0.0
+                },
+                {
+                  "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
+                  "Name": "AGPRyegrass.Stolon",
+                  "LiveDigestibility": "FromModel",
+                  "DeadDigestibility": "FromModel",
+                  "LiveFractionConsumable": 1.0,
+                  "DeadFractionConsumable": 1.0,
+                  "LiveMinimumBiomass": 100.0,
+                  "DeadMinimumBiomass": 0.0
+                },
+                {
+                  "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
+                  "Name": "AGPWhiteClover.Leaf",
+                  "LiveDigestibility": "FromModel",
+                  "DeadDigestibility": "FromModel",
+                  "LiveFractionConsumable": 1.0,
+                  "DeadFractionConsumable": 1.0,
+                  "LiveMinimumBiomass": 100.0,
+                  "DeadMinimumBiomass": 0.0
+                },
+                {
+                  "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
+                  "Name": "AGPWhiteClover.Stem",
+                  "LiveDigestibility": "FromModel",
+                  "DeadDigestibility": "FromModel",
+                  "LiveFractionConsumable": 1.0,
+                  "DeadFractionConsumable": 1.0,
+                  "LiveMinimumBiomass": 100.0,
+                  "DeadMinimumBiomass": 0.0
+                },
+                {
+                  "$type": "Models.ForageDigestibility.ForageMaterialParameters, Models",
+                  "Name": "AGPWhiteClover.Stolon",
+                  "LiveDigestibility": "FromModel",
+                  "DeadDigestibility": "FromModel",
+                  "LiveFractionConsumable": 1.0,
+                  "DeadFractionConsumable": 1.0,
+                  "LiveMinimumBiomass": 100.0,
+                  "DeadMinimumBiomass": 0.0
+                }
+              ],
               "Name": "Forages",
               "ResourceName": null,
               "Children": [],

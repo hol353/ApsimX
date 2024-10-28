@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Utilities;
 using Models.Core;
-using Models.Soils.Nutrients;
 
 namespace Models.Soils.NutrientPatching
 {
@@ -76,18 +73,6 @@ namespace Models.Soils.NutrientPatching
             for (int i = 0; i < delta.Length; i++)
                 kgha[i] += delta[i];
             SetKgHa(callingModelType, values);
-        }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (ITag tag in DocumentChildren<Memo>())
-                yield return tag;
-
-            yield return new Paragraph("This class used for this nutrient encapsulates the nitrogen within a mineral N pool.  Child functions provide information on flows of N from it to other mineral N pools, or losses from the system.");
-            yield return new Section("Mineral N Flows", DocumentChildren<NFlow>());
         }
 
         /// <summary>The soil physical node.</summary>

@@ -452,5 +452,25 @@ namespace UnitTests.Core.ApsimFile
           Assert.That(JsonUtilities.ChildWithName(result.Root, "Temperature"), Is.Not.Null);
           Assert.That(JsonUtilities.ChildWithName(result.Root, "Nutrient"), Is.Not.Null);
         }
+
+        [Test]
+        public void TestEnsure183_Removes_GraphsFromUnderExperiment()
+        {
+            string beforeJSON = ReflectionUtilities.GetResourceAsString("UnitTests.Core.ApsimFile.ConverterTest183FileBefore.apsimx");
+            ConverterReturnType converter = FileFormat.ReadFromString<Simulations>(beforeJSON, null, true, null);
+            Simulations actualModel = converter.NewModel as Simulations;
+            Assert.That(converter.DidConvert, Is.True);
+
+            string afterJSON = ReflectionUtilities.GetResourceAsString("UnitTests.Core.ApsimFile.ConverterTest183FileAfter.apsimx");
+            converter = FileFormat.ReadFromString<Simulations>(afterJSON, null, true, null);
+            Simulations expectedModel = converter.NewModel as Simulations;
+
+            string actual = FileFormat.WriteToString(actualModel);
+            string expected = FileFormat.WriteToString(expectedModel);
+
+            Assert.That(actual, Is.EqualTo(expected));
+
+            Assert.Pass();
+        }
     }
 }

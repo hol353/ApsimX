@@ -125,6 +125,10 @@ namespace Models.PostSimulationTools
                 if (PredictedTableName == null || ObservedTableName == null)
                     return;
 
+                DataTable dt = dataStore.Reader.GetDataUsingSql("SELECT * FROM _Simulations");
+                if (dt == null)
+                    throw new ApsimXException(this, "Datastore is empty, please re-run simulations");
+
                 // If neither the predicted nor obseved tables have been modified during
                 // the most recent simulations run, don't do anything.
                 if (dataStore?.Writer != null &&
@@ -138,10 +142,10 @@ namespace Models.PostSimulationTools
                     throw new ApsimXException(this, "Could not find model data table: " + PredictedTableName);
 
                 if (!predictedDataNames.Any())
-                    throw new Exception($"Predicted table '{PredictedTableName}' contains no data");
+                    throw new Exception($"Predicted table '{PredictedTableName}' does not exist. Check Reports and re-run simulation.");
 
                 if (!observedDataNames.Any())
-                    throw new Exception($"Observed table '{ObservedTableName}' contains no data");
+                    throw new Exception($"Observed table '{ObservedTableName}' does not exist. Check Inputs and refresh datastore.");
 
                 if (observedDataNames == null)
                     throw new ApsimXException(this, "Could not find observed data table: " + ObservedTableName);

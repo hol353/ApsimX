@@ -6,7 +6,6 @@ using Models.Core;
 namespace Models.Functions
 {
     /// <summary>
-    /// [DocumentMathFunction /]
     /// Returns special values if
     /// the numerator is 0 or if the denominator is 0.
     /// </summary>

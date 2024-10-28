@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using SkiaSharp;
-using Bitmap = System.Drawing.Bitmap;
 
 namespace APSIM.Shared.Documentation
 {
@@ -22,6 +20,12 @@ namespace APSIM.Shared.Documentation
     {
         private SkiaSharp.SKImage raster;
         private string resourceName;
+
+        /// <summary>The image to put into the doc.</summary>
+        public System.Drawing.Image image;
+
+        /// <summary>Unique name for image. Used to save image to temp folder.</summary>
+        public string name;
 
         /// <summary>The image to put into the doc.</summary>
         public SkiaSharp.SKImage GetRaster(string relativePath)

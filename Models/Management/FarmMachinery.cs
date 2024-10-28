@@ -1,16 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Models.Core;
-using Newtonsoft.Json;
 using System.Data;
-using Models.Utilities;
-using Models.Functions;
-using Models.Interfaces;
-using APSIM.Shared.JobRunning;
 using APSIM.Shared.Documentation.Extensions;
-using APSIM.Shared.Utilities;
 
 // TODO
 // replacement, lifetime, ageing

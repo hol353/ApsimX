@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.Functions;
 using Newtonsoft.Json;
@@ -75,17 +74,6 @@ namespace Models.PMF.Struct
         private void OnPlantEnding(object sender, EventArgs e)
         {
             Clear();
-        }
-
-        /// <summary>Writes documentation for this function by adding to the list of documentation tags.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (var child in FindAllChildren<Memo>())
-                foreach (var tag in child.Document())
-                    yield return tag;
-
-            foreach (var tag in GetModelDescription())
-                yield return tag;
         }
     }
 }

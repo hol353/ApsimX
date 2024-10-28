@@ -85,5 +85,15 @@ namespace APSIM.Shared.Documentation
                     throw new NotImplementedException($"Unknown axis position {position}");
             }
         }
+
+        /// <summary>Adds an ITag as a child of this ITag</summary>
+        public void Add(ITag tag) {
+            throw new Exception("Graph cannot have child tags");
+        }
+
+        /// <summary>Adds a list of ITags as a children of this ITag</summary>
+        public void Add(List<ITag> tags) {
+            throw new Exception("Graph cannot have child tags");
+        }
     }
 }

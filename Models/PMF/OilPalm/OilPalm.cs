@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Utilities;
 using Models.Core;
 using Models.Functions;
@@ -1777,32 +1776,5 @@ namespace Models.PMF.OilPalm
 
         }
 
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            // This should replicate the "old" oilpalm docs, but it
-            // may be better to eventually organise things a bit better
-            // (e.g. grouping certain types of models like cultivars
-            // into their own section.)
-            yield return new Section($"The APSIM Oil Palm Model", GetTags());
-        }
-
-        /// <summary>
-        /// Get tags for child models.
-        /// </summary>
-        private IEnumerable<ITag> GetTags()
-        {
-            foreach (IModel child in Children)
-            {
-                // Don't write memos or constants into their own section.
-                if (child is Memo || child is Constant)
-                    foreach (ITag tag in child.Document())
-                        yield return tag;
-                else
-                    yield return new Section(child.Name, child.Document());
-            }
-        }
     }
 }

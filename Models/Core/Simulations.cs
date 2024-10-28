@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Utilities;
 using Models.Core.ApsimFile;
 using Models.Core.Interfaces;
-using Models.Core.Run;
 using Models.Storage;
 using Newtonsoft.Json;
 
@@ -280,71 +278,5 @@ namespace Models.Core
                     }
             return fileNames;
         }
-
-        /// <summary>
-        /// Get a list of tags which describe the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (ITag tag in Children.SelectMany(c => c.Document()))
-                yield return tag;
-        }
-
-        /// <summary>Documents the specified model.</summary>
-        /// <param name="modelNameToDocument">The model name to document.</param>
-        /// <param name="tags">The auto doc tags.</param>
-        /// <param name="headingLevel">The starting heading level.</param>
-        public void DocumentModel(string modelNameToDocument, List<AutoDocumentation.ITag> tags, int headingLevel)
-        {
-            Simulation simulation = this.FindInScope<Simulation>();
-            if (simulation != null)
-            {
-                // Find the model of the right name.
-                IModel modelToDocument = simulation.FindInScope(modelNameToDocument);
-
-                // If not found then find a model of the specified type.
-                if (modelToDocument == null)
-                    modelToDocument = simulation.FindByPath("[" + modelNameToDocument + "]")?.Value as IModel;
-
-                // If the simulation has the same name as the model we want to document, dig a bit deeper
-                if (modelToDocument == simulation)
-                    modelToDocument = simulation.FindAllDescendants().Where(m => !m.IsHidden).ToList().FirstOrDefault(m => m.Name.Equals(modelNameToDocument, StringComparison.OrdinalIgnoreCase));
-
-                // If still not found throw an error.
-                if (modelToDocument != null)
-                {
-                    // Get the path of the model (relative to parentSimulation) to document so that 
-                    // when replacements happen below we will point to the replacement model not the 
-                    // one passed into this method.
-                    string pathOfSimulation = simulation.FullPath + ".";
-                    string pathOfModelToDocument = modelToDocument.FullPath.Replace(pathOfSimulation, "");
-
-                    // Clone the simulation
-                    SimulationDescription simDescription = new SimulationDescription(simulation);
-
-                    Simulation clonedSimulation = simDescription.ToSimulation();
-
-                    // Prepare the simulation for running - this perform misc cleanup tasks such
-                    // as removing disabled models, standardising the soil, resolving links, etc.
-                    clonedSimulation.Prepare();
-                    FindInScope<IDataStore>().Writer.Stop();
-                    // Now use the path to get the model we want to document.
-                    modelToDocument = clonedSimulation.FindByPath(pathOfModelToDocument)?.Value as IModel;
-
-                    if (modelToDocument == null)
-                        throw new Exception("Cannot find model to document: " + modelNameToDocument);
-
-                    // resolve all links in cloned simulation.
-                    Links.Resolve(clonedSimulation, true);
-
-                    // Document the model.
-                    AutoDocumentation.DocumentModel(modelToDocument, tags, headingLevel, 0, documentAllChildren: true);
-
-                    // Unresolve links.
-                    Links.Unresolve(clonedSimulation, true);
-                }
-            }
-        }
-
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Utilities;
 using Models.Core;
 using Newtonsoft.Json;
@@ -308,15 +306,6 @@ namespace Models.Storage
                 throw new NotImplementedException();
             }
             return "";
-        }
-
-        /// <summary>
-        /// Override the Document() function but do nothing.
-        /// This model does not show any documentation.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            yield break;
         }
     }
 }

@@ -74,7 +74,7 @@ namespace Models.Surface
         /// <summary>Has potential decomposition been calculated?</summary>
         private bool calculatedPotentialDecomposition;
 
-        private readonly double depthOfDecomposition = 100;  // 100mm 
+        private readonly double depthOfDecomposition = 100;  // 100mm
 
         /// <summary>The determinant of whether a residue type contributes to the calculation of contact factor (1 or 0)</summary>
         private int[] cf_contrib = new int[0];
@@ -247,6 +247,18 @@ namespace Models.Surface
         [Units("0-1")]
         public double wf { get { return MoistureFactor(); } }
 
+        /// <summary>Amount of carbon moved from surface residues to soil (kg/ha).</summary>
+        [Units("kg/ha")]
+        public double IncorporatedC { get; private set; }
+
+        /// <summary>Amount of nitrogen moved from surface residues to soil (kg/ha).</summary>
+        [Units("kg/ha")]
+        public double IncorporatedN { get; private set; }
+
+        /// <summary>Amount of phosphorus incorporated (kg/ha).</summary>
+        [Units("kg/ha")]
+        public double IncorporatedP { get; private set; }
+
         /// <summary>
         /// Fraction of incoming faeces to add.
         /// </summary>
@@ -269,7 +281,7 @@ namespace Models.Surface
         {
             get
             {
-                // Return an empty live material. Stock won't find the dead material unless there 
+                // Return an empty live material. Stock won't find the dead material unless there
                 // is matching live material.
                 yield return new DamageableBiomass("SurfaceOrganicMatter.Residue", new Biomass(), isLive: true);
                 yield return new DamageableBiomass("SurfaceOrganicMatter.Residue", new Biomass()
@@ -428,9 +440,13 @@ namespace Models.Surface
 
             for (int i = 0; i < surfaceResidue.C.Count; i++)
             {
-                surfaceResidue.Add(i, c: totalC * (surfaceResidue.LayerFraction[i] / totalLayerFraction),
-                                      n: totalN * (surfaceResidue.LayerFraction[i] / totalLayerFraction),
+                double amountCToSoil = totalC * (surfaceResidue.LayerFraction[i] / totalLayerFraction);
+                double amountNToSoil = totalN * (surfaceResidue.LayerFraction[i] / totalLayerFraction);
+                surfaceResidue.Add(i, c: amountCToSoil,
+                                      n: amountNToSoil,
                                       p: 0);
+                IncorporatedC += amountCToSoil;
+                IncorporatedN += amountNToSoil;
             }
             surfaceResidue.DoFlow();
         }
@@ -472,7 +488,7 @@ namespace Models.Surface
             data.OMP = p;
             this.AddFaeces(data);
         }
-        
+
         /// <summary>
         /// "cover1" and "cover2" are numbers between 0 and 1 which
         /// indicate what fraction of sunlight is intercepted by the
@@ -561,6 +577,9 @@ namespace Models.Surface
         {
             calculatedPotentialDecomposition = false;
             Incorporated = null;
+            IncorporatedC = 0;
+            IncorporatedN = 0;
+            IncorporatedP = 0;
         }
 
         /// <summary>Get irrigation information from an Irrigated event.</summary>
@@ -1083,6 +1102,13 @@ namespace Models.Surface
 
                     SurfOM[i].Lying[pool].P = SurfOM[i].Lying[pool].P * (1.0 - fIncorp);
                     SurfOM[i].Standing[pool].P = SurfOM[i].Standing[pool].P * (1.0 - fIncorp);
+
+                    IncorporatedC += SurfOM[i].Lying[pool].C;
+                    IncorporatedN += SurfOM[i].Lying[pool].N;
+                    IncorporatedP += SurfOM[i].Lying[pool].P;
+                    IncorporatedC += SurfOM[i].Standing[pool].C;
+                    IncorporatedN += SurfOM[i].Standing[pool].N;
+                    IncorporatedP += SurfOM[i].Standing[pool].P;
                 }
             }
 
@@ -1177,7 +1203,7 @@ namespace Models.Surface
                 amountStanding += SurfOM[SOMindex].Standing[i].amount;
             }
 
-            //Very Important Note,  #FixMe,  The following variables have been programmed to get the plumbing working so microclimate deals with 
+            //Very Important Note,  #FixMe,  The following variables have been programmed to get the plumbing working so microclimate deals with
             //interception of radiation and precipitation from residues but have been set to 0 to reproduce existing behaviour until such time
             //that models can be parameterised to include redisue interception accurately
             SurfOM[SOMindex].CanopyLying.LAITotal = 0;//= areaLying;
@@ -1248,7 +1274,7 @@ namespace Models.Surface
         {
             if (mass > 0 )
             {
-                
+
                 double fractionToRemove = MathUtilities.Bound(MathUtilities.Divide(mass, Wt, 0), 0, 1);
                 if (fractionToRemove > 0)
                 {

@@ -69,7 +69,7 @@ namespace APSIM.Documentation.Models
         /// <param name="model">Model to be documented.</param>
         protected virtual IEnumerable<ITag> DocumentModel(IModel model)
         {
-            return model.Document();
+            return AutoDocumentation.Document(model);
         }
 
         /// <summary>

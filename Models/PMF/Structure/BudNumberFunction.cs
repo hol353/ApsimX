@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.Functions;
 using Models.PMF.Phen;
@@ -44,17 +42,6 @@ namespace Models.PMF.Struct
                 structure.PrimaryBudNo = Plant.SowingData.BudNumber * FractionOfBudBurst.Value();
                 structure.TotalStemPopn = structure.MainStemPopn;
             }
-        }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        /// <returns></returns>
-        public override IEnumerable<ITag> Document()
-        {
-            yield return new Paragraph($"Each time {SetStage} occurs, bud number on each main-stem is set to:");
-            yield return new Paragraph($"*{FractionOfBudBurst.Name}* * *SowingData.BudNumber* (from manager at establishment)");
-            yield return new Section(FractionOfBudBurst.Name, FractionOfBudBurst.Document());
         }
     }
 }

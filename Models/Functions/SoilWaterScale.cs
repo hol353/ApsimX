@@ -17,7 +17,7 @@ namespace Models.Functions
     public class SoilWaterScale : Model, IFunction
     {
         /// <summary>Options for lower limit</summary>
-        public enum LowerLimit 
+        public enum LowerLimit
         {
             /// <summary>SoilCrop.LL</summary>
             LL,
@@ -39,14 +39,10 @@ namespace Models.Functions
 
         private Root root = null;
 
-        private double[] sats = null;
-        private double[] duls = null;
         private double[] lls = null;
 
         [EventSubscribe("StartOfSimulation")]
         private void OnStartOfSimulation(object sender, EventArgs e) {
-            sats = physical.SAT;
-            duls = physical.DUL;
             root = FindAncestor<Root>();
             if (LLModel == LowerLimit.LL)
             {
@@ -73,18 +69,18 @@ namespace Models.Functions
             if (arrayIndex >= soilwater.SW.Length)
                 throw new Exception($"Soil Water Scale ({Parent.Name}.{Name}): ArrayIndex {arrayIndex} is more than SoilWater SW length {soilwater.SW.Length}.");
 
-            if (arrayIndex >= sats.Length)
-                throw new Exception($"Soil Water Scale ({Parent.Name}.{Name}): ArrayIndex {arrayIndex} is invalid index for SAT array length {sats.Length}.");
+            if (arrayIndex >= physical.SAT.Length)
+                throw new Exception($"Soil Water Scale ({Parent.Name}.{Name}): ArrayIndex {arrayIndex} is invalid index for SAT array length {physical.SAT.Length}.");
 
-            if (arrayIndex >= duls.Length)
-                throw new Exception($"Soil Water Scale ({Parent.Name}.{Name}): ArrayIndex {arrayIndex} is invalid index for DUL array length {duls.Length}.");
+            if (arrayIndex >= physical.DUL.Length)
+                throw new Exception($"Soil Water Scale ({Parent.Name}.{Name}): ArrayIndex {arrayIndex} is invalid index for DUL array length {physical.DUL.Length}.");
 
             if (arrayIndex >= lls.Length)
                 throw new Exception($"Soil Water Scale ({Parent.Name}.{Name}): ArrayIndex {arrayIndex} is invalid index for LL array length {lls.Length}.");
 
             double sw = soilwater.SW[arrayIndex];
-            double sat = sats[arrayIndex];
-            double dul = duls[arrayIndex];
+            double sat = physical.SAT[arrayIndex];
+            double dul = physical.DUL[arrayIndex];
             double ll = lls[arrayIndex];
 
             double sws;

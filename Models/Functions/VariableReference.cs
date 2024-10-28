@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using APSIM.Shared.Documentation;
-using APSIM.Shared.Utilities;
 using Models.Core;
 
 namespace Models.Functions
@@ -64,15 +61,5 @@ namespace Models.Functions
                 return doubleValue;
             }
         }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            string variable = StringUtilities.RemoveTrailingString(VariableName, ".Value()");
-            yield return new Paragraph($"*{Name} = {variable}*");
-        }
-
     }
 }

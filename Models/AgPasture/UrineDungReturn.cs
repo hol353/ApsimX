@@ -2,15 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using APSIM.Shared.Utilities;
+using DocumentFormat.OpenXml.Drawing.Charts;
+using Models.Core;
 using Models.ForageDigestibility;
 using Models.Soils;
 using Models.Surface;
+
 
 namespace Models.AgPasture;
 
 /// <summary>
 /// This class encapsulates urine and dung deposition to the soil and lost to the simulation.
-/// </summary>
+/// </summary>4
+
 public class UrineDungReturn
 {
     /// <summary>
@@ -78,9 +82,12 @@ public class UrineDungReturn
     {
         if (deposition.UrineNToSoil > 0)
         {
-            int layer = SoilUtilities.LayerIndexOfDepth(thickness, depthUrineIsAdded);
+            //int layer = SoilUtilities.LayerIndexOfDepth(thickness, depthUrineIsAdded);
+            double[] ProportionOfCumThickness = new double[thickness.Length];
+            ProportionOfCumThickness = SoilUtilities.ProportionOfCumThickness(thickness, depthUrineIsAdded);
             var ureaDelta = new double[thickness.Length];
-            ureaDelta[layer] = deposition.UrineNToSoil;
+            for (int i = 0; i < thickness.Length; i++)
+                ureaDelta[i] = deposition.UrineNToSoil * ProportionOfCumThickness[i];
             urea.AddKgHaDelta(SoluteSetterType.Fertiliser, ureaDelta);
         }
     }

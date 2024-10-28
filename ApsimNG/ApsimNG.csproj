@@ -27,6 +27,7 @@
     <AzureFiles Include="../DeploymentSupport/global/**/*" />
 	
     <!-- Shared project references -->
+    <ProjectReference Include="..\APSIM.Documentation\APSIM.Documentation.csproj" />
     <ProjectReference Include="..\APSIM.Shared\APSIM.Shared.csproj" />
     <ProjectReference Include="..\APSIM.Interop\APSIM.Interop.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />

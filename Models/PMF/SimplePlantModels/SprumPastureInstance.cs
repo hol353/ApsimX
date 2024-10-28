@@ -1,9 +1,5 @@
-﻿using APSIM.Shared.Utilities;
-using DocumentFormat.OpenXml.Drawing.Charts;
-using Models.Climate;
-using Models.Core;
+﻿using Models.Core;
 using Models.Functions;
-using Models.PMF.Interfaces;
 using Models.PMF.Organs;
 using Models.PMF.Phen;
 using Models.Soils;

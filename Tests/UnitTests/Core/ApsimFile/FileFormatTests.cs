@@ -11,6 +11,7 @@
     using System.IO;
     using System.Reflection;
     using System.Linq;
+    using APSIM.Shared.Extensions.Collections;
 
     /// <summary>
     /// Test the writer's load/save .apsimx capability 
@@ -133,6 +134,22 @@
 
             int result = Models.Program.Main(new[] { fileName });
             Assert.That(result, Is.EqualTo(1));
+        }
+
+        /// <summary>Test that the example files can be loaded and saved without error.</summary>
+        [Test]
+        public void LoadAndSaveExamples()
+        {
+            bool allFilesHaveRootReference = true;
+            string binDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string exampleFileDirectory = Path.GetFullPath(Path.Combine(binDirectory, "..", "..", "..", "Examples"));
+            IEnumerable<string> exampleFileNames = Directory.GetFiles(exampleFileDirectory, "*.apsimx", SearchOption.AllDirectories);
+            foreach (string exampleFile in exampleFileNames)
+            {
+                Simulations sim = FileFormat.ReadFromFile<Simulations>(exampleFile, e => throw new Exception(), false).NewModel as Simulations;
+                FileFormat.WriteToString(sim);
+            }
+            Assert.That(allFilesHaveRootReference, Is.True);
         }
     }
 }

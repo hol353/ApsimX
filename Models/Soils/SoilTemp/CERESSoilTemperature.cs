@@ -1,6 +1,5 @@
 ﻿using System;
 using APSIM.Shared.Utilities;
-using DocumentFormat.OpenXml.Drawing.Charts;
 using Models.Core;
 using Models.Interfaces;
 
@@ -131,8 +130,26 @@ namespace Models.Soils
                 surf_temp[day] = ave_temp;
         }
 
-        /// <summary>Returns soil temperature for each layer (oc)</summary>
+        /// <summary>Soil temperature for each layer (oC)</summary>
         public double[] Value { get { return st; } }
+
+        /// <summary>Average soil temperature for each layer (oC)</summary>
+        public double[] AverageSoilTemperature { get { return st; } }
+
+        /// <summary>Average soil temperature for soil surface (oC)</summary>
+        public double AverageSoilSurfaceTemperature { get { return double.NaN; } }
+
+        /// <summary>Average soil temperature for each layer (oC)</summary>
+        public double[] MinimumSoilTemperature { get { return st; } }
+
+        /// <summary>Average soil temperature for soil surface (oC)</summary>
+        public double MinimumSoilSurfaceTemperature { get { return double.NaN; } }
+
+        /// <summary>Average soil temperature for each layer (oC)</summary>
+        public double[] MaximumSoilTemperature { get { return st; } }
+
+        /// <summary>Average soil temperature for soil surface (oC)</summary>
+        public double MaximumSoilSurfaceTemperature { get { return double.NaN; } }
 
         /// <summary>Called to perform soil temperature calculations</summary>
         /// <param name="sender">The sender.</param>

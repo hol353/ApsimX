@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 namespace APSIM.Shared.Utilities
@@ -37,6 +38,36 @@ namespace APSIM.Shared.Utilities
                     CumThickness[Layer] = Thickness[Layer] + CumThickness[Layer - 1];
             }
             return CumThickness;
+        }
+
+        /// <summary>Returns an array that gives the proportion of each layer contributing to a given depth.</summary>
+        /// <param name="Thickness">The thickness.</param>
+        /// <param name="GivenDepth">The supplied depth (mm).</param>
+        static public double[] ProportionOfCumThickness(double[] Thickness, double GivenDepth)
+        {
+            // ------------------------------------------------
+            // Return the proportion of the layer contributing to Given Depth - mm/mm
+            // ------------------------------------------------
+            
+            // find the layer in which GivenDepth lies
+            int GivenDepthLayer = LayerIndexOfClosestDepth(Thickness, GivenDepth);
+            
+            double[] ProportionOfCumThickness = new double[Thickness.Length];
+            double[] CumThickness = ToCumThickness(Thickness);
+
+            for (int i = 0; i < Thickness.Length; i++)
+            {
+                if (i < GivenDepthLayer)
+                    ProportionOfCumThickness[i] = Thickness[i] / GivenDepth;  // the entire layer in in the target depth
+                else if (i == GivenDepthLayer)
+                    if (i == 0)
+                        ProportionOfCumThickness[i] = (GivenDepth - 0) / GivenDepth;
+                    else
+                        ProportionOfCumThickness[i] = (GivenDepth - CumThickness[i-1]) / GivenDepth;  
+                else
+                    ProportionOfCumThickness[i] = 0.0;
+            }
+            return ProportionOfCumThickness;
         }
 
         /// <summary>Return the index of the layer that contains the specified depth.</summary>

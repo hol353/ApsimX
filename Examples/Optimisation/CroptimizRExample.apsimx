@@ -2530,7 +2530,7 @@
                 {
                   "$type": "Models.Climate.Weather, Models",
                   "ConstantsFile": null,
-                  "FileName": "%root%/Examples/Optimisation/APS6.met",
+                  "FileName": "APS6.met",
                   "ExcelWorkSheetName": null,
                   "Name": "Weather",
                   "ResourceName": null,

@@ -104,11 +104,11 @@ namespace APSIM.Documentation.Models
             rootNode.Links.Resolve(model, true, true, false);
 
             // Document the model.
-            IEnumerable<ITag> tags = model.Document();
+            IEnumerable<ITag> tags = AutoDocumentation.Document(model);
 
             // Document the rest of the file afterwards if necessary.
             if (documentRestOfFile)
-                tags = tags.AppendMany(rootNode.Document());
+                tags = tags.AppendMany(AutoDocumentation.Document(rootNode));
 
             // Write tags to document.
             foreach (ITag tag in tags)

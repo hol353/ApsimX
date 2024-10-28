@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using APSIM.Shared.Documentation;
 using APSIM.Shared.Utilities;
 using Models.Core;
 using Models.Functions;
@@ -25,8 +24,6 @@ namespace Models.PMF.Organs
     ///  These values are then given back to SimpleLeaf which uses them to calculate photosynthesis and soil water demand.
     /// </summary>
     /// <remarks>
-    /// NOTE: the summary above is used in the Apsim's autodoc.
-    /// 
     /// SimpleLeaf has two options to define the canopy: the user can either supply a function describing LAI or a function describing canopy cover directly.  From either of these functions SimpleLeaf can obtain the other property using the Beer-Lambert equation with the specified value of extinction coefficient.
     /// The effect of growth rate on transpiration is captured by the Fractional Growth Rate (FRGR) function, which is passed to the MicroClimate model.
     /// </remarks>
@@ -1130,109 +1127,5 @@ namespace Models.PMF.Organs
             Allocated.StorageN -= nitrogen.Reallocation;
         }
 
-
-        /// <summary>Writes documentation for this function by adding to the list of documentation tags.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (var tag in GetModelDescription())
-                yield return tag;
-
-            // Document memos.
-            foreach (var memo in FindAllChildren<Memo>())
-                foreach (var tag in memo.Document())
-                    yield return tag;
-
-            // List the parameters, properties, and processes from this organ that need to be documented:
-
-            yield return new Section("Initial Dry Matter", initialWt.Document());
-
-            // document DM demands
-            var dmDemandTags = new List<ITag>();
-            dmDemandTags.Add(new Paragraph("The dry matter demand for the organ is calculated as defined in DMDemands, based on the DMDemandFunction and partition fractions for each biomass pool."));
-            dmDemandTags.AddRange(dmDemands.Document());
-            yield return new Section("Dry Matter Demand", dmDemandTags);
-
-            // document N demands
-            var nDemandTags = new List<ITag>();
-            nDemandTags.Add(new Paragraph("The N demand is calculated as defined in NDemands, based on DM demand the N concentration of each biomass pool."));
-            nDemandTags.AddRange(nDemands.Document());
-            yield return new Section("Nitrogen Demand", nDemandTags);
-
-            // document N demands
-            var nConcTags = new List<ITag>();
-            nConcTags.AddRange(minimumNConc.Document());
-            nConcTags.AddRange(criticalNConc.Document());
-            nConcTags.AddRange(maximumNConc.Document());
-            yield return new Section("Nitrogen Concentration Thresholds", nDemandTags);
-
-            // document DM supplies
-            var dmSupplyTags = new List<ITag>();
-            dmSupplyTags.AddRange(dmReallocationFactor.Document());
-            dmSupplyTags.AddRange(dmRetranslocationFactor.Document());
-            yield return new Section("Dry Matter Supply", dmSupplyTags);
-
-            // document photosynthesis
-            yield return new Section("Photosynthesis", photosynthesis.Document());
-
-            // document N supplies
-            var nSupplyTags = new List<ITag>();
-            nSupplyTags.AddRange(nReallocationFactor.Document());
-            nSupplyTags.AddRange(nRetranslocationFactor.Document());
-            yield return new Section("Nitrogen Supply", nSupplyTags);
-
-            // document canopy
-            var canopyTags = new List<ITag>();
-            if (area != null)
-            {
-                canopyTags.Add(new Paragraph(Name + " has been defined with a LAIFunction, cover is calculated using the Beer-Lambert equation."));
-                canopyTags.AddRange(area.Document());
-            }
-            if (cover != null)
-            {
-                canopyTags.Add(new Paragraph(Name + " has been defined with a CoverFunction. LAI is calculated using an inverted Beer-Lambert equation"));
-                canopyTags.AddRange(cover.Document());
-            }
-            canopyTags.AddRange(extinctionCoefficient.Document());
-            canopyTags.AddRange(heightFunction.Document());
-            yield return new Section("Canopy Properties", canopyTags);
-
-            var stomatalConductanceTags = new List<ITag>();
-            stomatalConductanceTags.Add(new Paragraph("Stomatal Conductance (gs) is calculated for use within the micromet model by adjusting a value provided for an atmospheric CO2 concentration of 350 ppm. The impact of other stresses  (e.g. Temperature, N) are captured through the modifier, Frgr."));
-            stomatalConductanceTags.Add(new Paragraph("  gs = Gsmax350 x FRGR x stomatalConductanceCO2Modifier"));
-            stomatalConductanceTags.AddRange(stomatalConductanceCO2Modifier.Document());
-            yield return new Section("StomatalConductance", stomatalConductanceTags);
-
-            // document senescence and detachment
-            var senescenceTags = new List<ITag>();
-            if (senescenceRate is Constant senescenceRateConstant)
-            {
-                if (senescenceRateConstant.Value() == 0)
-                    senescenceTags.Add(new Paragraph(Name + " has senescence parameterised to zero so all biomass in this organ will remain alive."));
-                else
-                    senescenceTags.Add(new Paragraph(Name + " senesces " + senescenceRateConstant.Value() * 100 + "% of its live biomass each day, moving the corresponding amount of biomass from the live to the dead biomass pool."));
-            }
-            else
-            {
-                senescenceTags.Add(new Paragraph("The proportion of live biomass that senesces and moves into the dead pool each day is quantified by the SenescenceRate."));
-                senescenceTags.AddRange(senescenceRate.Document());
-            }
-
-            if (detachmentRate is Constant detachmentRateConstant)
-            {
-                if (detachmentRateConstant.Value() == 0)
-                    senescenceTags.Add(new Paragraph(Name + " has detachment parameterised to zero so all biomass in this organ will remain with the plant until a defoliation or harvest event occurs."));
-                else
-                    senescenceTags.Add(new Paragraph(Name + " detaches " + detachmentRateConstant.Value() * 100 + "% of its dead biomass each day, passing it to the surface organic matter model for decomposition."));
-            }
-            else
-            {
-                senescenceTags.Add(new Paragraph("The proportion of Biomass that detaches and is passed to the surface organic matter model for decomposition is quantified by the DetachmentRateFunction."));
-                senescenceTags.AddRange(detachmentRate.Document());
-            }
-            yield return new Section("Senescence and Detachment", senescenceTags);
-
-            if (biomassRemovalModel != null)
-                yield return new Section("Biomass removal", biomassRemovalModel.Document());
-        }
     }
 }

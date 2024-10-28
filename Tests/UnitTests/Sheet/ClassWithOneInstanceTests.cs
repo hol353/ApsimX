@@ -38,7 +38,7 @@ class ClassWithOneListPropertyTests
         Assert.That(dataProvider.GetCellContents(0, 1), Is.EqualTo("100-200"));
         Assert.That(dataProvider.GetCellState(0, 0), Is.EqualTo(SheetCellState.Normal));
         Assert.That(dataProvider.GetCellState(0, 1), Is.EqualTo(SheetCellState.Normal));
-    }   
+    }
 
     class ClassWithDynamicUnits
     {
@@ -84,7 +84,7 @@ class ClassWithOneListPropertyTests
                 X,
                 Y
             }
-            
+
             [Display]
             public string Depth { get; set; }
 
@@ -98,7 +98,7 @@ class ClassWithOneListPropertyTests
         var dataProvider = DataProviderFactory.Create(new ClassWithValidUnits());
         Assert.That(dataProvider.GetColumnUnits(0), Is.EqualTo("X"));
         Assert.That(dataProvider.GetColumnValidUnits(0), Is.EqualTo(new string[] { "X", "Y" }));
-    }  
+    }
 
     class ClassWithFormat
     {
@@ -128,7 +128,7 @@ class ClassWithOneListPropertyTests
         Assert.That(dataProvider.GetCellContents(0, 1), Is.EqualTo("2.00"));
         Assert.That(dataProvider.GetCellState(0, 0), Is.EqualTo(SheetCellState.Normal));
         Assert.That(dataProvider.GetCellState(0, 1), Is.EqualTo(SheetCellState.Normal));
-    }       
+    }
 
     class ClassWithReadonly
     {
@@ -146,7 +146,7 @@ class ClassWithOneListPropertyTests
             public double Value { get; }
         }
     }
-    
+
     /// <summary>Ensure readonly properties are found.</summary>
     [Test]
     public void TestReadonly()
@@ -154,7 +154,7 @@ class ClassWithOneListPropertyTests
         var dataProvider = DataProviderFactory.Create(new ClassWithReadonly());
         Assert.That(dataProvider.GetCellState(0, 0), Is.EqualTo(SheetCellState.ReadOnly));
         Assert.That(dataProvider.GetCellState(0, 1), Is.EqualTo(SheetCellState.ReadOnly));
-    }       
+    }
 
     class ClassWithMetadata
     {
@@ -174,7 +174,7 @@ class ClassWithOneListPropertyTests
         }
 
     }
-    
+
     /// <summary>Ensure metadata properties are found and used.</summary>
     [Test]
     public void TestMetadata()
@@ -182,7 +182,7 @@ class ClassWithOneListPropertyTests
         var dataProvider = DataProviderFactory.Create(new ClassWithMetadata());
         Assert.That(dataProvider.GetCellState(0, 0), Is.EqualTo(SheetCellState.Calculated));
         Assert.That(dataProvider.GetCellState(0, 1), Is.EqualTo(SheetCellState.Normal));
-    }  
+    }
 
     class ClassWithAlias
     {
@@ -191,7 +191,7 @@ class ClassWithOneListPropertyTests
         {
             new() { Value = 1 },
             new() { Value = 2 }
-        };        
+        };
 
         public class Layer
         {
@@ -199,16 +199,16 @@ class ClassWithOneListPropertyTests
             public double Value { get; set; }
         }
     }
-    
+
     /// <summary>Ensure alias is found and used.</summary>
     [Test]
     public void TestDisplayName()
     {
         var dataProvider = DataProviderFactory.Create(new ClassWithAlias());
         Assert.That(dataProvider.GetColumnName(0), Is.EqualTo("Alias"));
-    }   
+    }
 
-    class ClassWithNull 
+    class ClassWithNull
     {
         [Display]
         public List<Layer> Profile { get; set; } = null;
@@ -219,7 +219,7 @@ class ClassWithOneListPropertyTests
             public double Value { get; set; }
         }
     }
-    
+
     /// <summary>Ensure a null property can be handled.</summary>
     [Test]
     public void TestNullProperty()
@@ -236,7 +236,7 @@ class ClassWithOneListPropertyTests
         ClassWithReadonly model = new();
         var dataProvider = DataProviderFactory.Create(model);
 
-        dataProvider.SetCellContents(colIndices: new int[] { 0 }, 
+        dataProvider.SetCellContents(colIndices: new int[] { 0 },
                                      rowIndices: new int[] { 0 },
                                      values: new string[] { "ZZZZ" });
         Assert.That(dataProvider.GetCellContents(0, 0), Is.EqualTo("1"));
@@ -249,12 +249,12 @@ class ClassWithOneListPropertyTests
         ClassWithUnits model = new();
         var dataProvider = DataProviderFactory.Create(model);
 
-        dataProvider.SetCellContents(colIndices: new int[] { 0 }, 
+        dataProvider.SetCellContents(colIndices: new int[] { 0 },
                                      rowIndices: new int[] { 0 },
                                      values: new string[] { "ZZZZ" });
         Assert.That(model.Profile[0].Depth, Is.EqualTo("ZZZZ"));
         Assert.That(model.Profile[1].Depth, Is.EqualTo("100-200"));
-    }   
+    }
 
     /// <summary>Ensure we can add values to property.</summary>
     [Test]
@@ -263,7 +263,7 @@ class ClassWithOneListPropertyTests
         ClassWithUnits model = new();
         var dataProvider = DataProviderFactory.Create(model);
 
-        dataProvider.SetCellContents(colIndices: new int[] { 0 }, 
+        dataProvider.SetCellContents(colIndices: new int[] { 0 },
                                      rowIndices: new int[] { 2 },
                                      values: new string[] { "ZZZZ" });
         Assert.That(dataProvider.ColumnCount, Is.EqualTo(1));
@@ -275,7 +275,7 @@ class ClassWithOneListPropertyTests
         Assert.That(model.Profile[0].Depth, Is.EqualTo("0-100"));
         Assert.That(model.Profile[1].Depth, Is.EqualTo("100-200"));
         Assert.That(model.Profile[2].Depth, Is.EqualTo("ZZZZ"));
-    } 
+    }
 
     /// <summary>Ensure 'calculated' metadata properties change when data is set.</summary>
     [Test]
@@ -283,7 +283,7 @@ class ClassWithOneListPropertyTests
     {
         ClassWithMetadata model = new();
         var dataProvider = DataProviderFactory.Create(model);
-        dataProvider.SetCellContents(colIndices: new int[] { 0 }, 
+        dataProvider.SetCellContents(colIndices: new int[] { 0 },
                                      rowIndices: new int[] { 0, 1 },
                                      values: new string[] { "3.0", "4.0" });
         Assert.That(dataProvider.GetCellState(0, 0), Is.EqualTo(SheetCellState.Normal));
@@ -301,7 +301,7 @@ class ClassWithOneListPropertyTests
         bool invoked = false;
         dataProvider.CellChanged += (s, c, r, v) => invoked = true;
 
-        dataProvider.SetCellContents(colIndices: new int[] { 0 }, 
+        dataProvider.SetCellContents(colIndices: new int[] { 0 },
                                      rowIndices: new int[] { 1 },
                                      values: new string[] { "ZZZZ" });
 
@@ -317,14 +317,14 @@ class ClassWithOneListPropertyTests
     {
         ClassWithFormat model = new();
         var dataProvider = DataProviderFactory.Create(model);
-        dataProvider.SetCellContents(colIndices: new int[] { 0 }, 
+        dataProvider.SetCellContents(colIndices: new int[] { 0 },
                                      rowIndices: new int[] { 1 },
                                      values: new string[] { "" });
 
         Assert.That(model.Profile[1].Value, Is.NaN);
-    }    
+    }
 
-    class ClassWithMultipleProperties 
+    class ClassWithMultipleProperties
     {
         [Display]
         public List<Layer> Profile { get; set; } = new()
@@ -355,10 +355,11 @@ class ClassWithOneListPropertyTests
     [Test]
     public void DeleteEntireRow()
     {
-        var dataProvider = DataProviderFactory.Create(new ClassWithMultipleProperties());
+        var model = new ClassWithMultipleProperties();
+        var dataProvider = DataProviderFactory.Create(model);
 
-        dataProvider.DeleteRows(new int[] { 1, 2 }); 
-        
+        dataProvider.DeleteRows(new int[] { 1, 2 });
+
         Assert.That(dataProvider.ColumnCount, Is.EqualTo(4));
         Assert.That(dataProvider.RowCount, Is.EqualTo(2));
         Assert.That(dataProvider.GetCellContents(0, 0), Is.EqualTo("a1"));
@@ -369,6 +370,11 @@ class ClassWithOneListPropertyTests
         Assert.That(dataProvider.GetCellContents(1, 1), Is.EqualTo("b4"));
         Assert.That(dataProvider.GetCellContents(2, 1), Is.EqualTo("c4"));
         Assert.That(dataProvider.GetCellContents(3, 1), Is.EqualTo("d4"));
+
+        // Ensure model is also updated.
+        Assert.That(model.Profile.Count, Is.EqualTo(2));
+        Assert.That(model.Profile[0].A, Is.EqualTo("a1"));
+        Assert.That(model.Profile[1].A, Is.EqualTo("a4"));
     }
-   
+
 }

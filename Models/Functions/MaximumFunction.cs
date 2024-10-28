@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using Models.Core;
 
 namespace Models.Functions
@@ -27,21 +26,6 @@ namespace Models.Functions
                 ReturnValue = Math.Max(ReturnValue, F.Value(arrayIndex));
             }
             return ReturnValue;
-        }
-        /// <summary>String list of child functions</summary>
-        public string ChildFunctionList
-        {
-            get
-            {
-                return AutoDocumentation.ChildFunctionList(this.FindAllChildren<IFunction>().ToList());
-            }
-        }
-
-        /// <summary>Document the model.</summary>
-        public override IEnumerable<ITag> Document()
-        {
-            foreach (ITag tag in MinimumFunction.DocumentMinMaxFunction("Max", Name, Children))
-                yield return tag;
         }
     }
 }

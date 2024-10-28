@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using APSIM.Shared.Documentation;
 using Models.Core;
 using Models.PMF.Phen;
 
@@ -61,14 +60,6 @@ namespace Models.Functions
         public double Value(int arrayIndex = -1)
         {
             return accumulatedValue;
-        }
-
-        /// <summary>
-        /// Document the model.
-        /// </summary>
-        public override IEnumerable<ITag> Document()
-        {
-            yield return new Paragraph($"**{Name}** is a daily accumulation of the values of functions listed below between the {StartStageName} and {EndStageName} stages. Function values added to the accumulate total each day are:");
         }
 
         ///7. Private methods

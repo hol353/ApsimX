@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using APSIM.Documentation.Models;
 
 namespace APSIM.Cli
 {
@@ -108,7 +109,7 @@ namespace APSIM.Cli
                 string pdfFile = Path.ChangeExtension(file, ".pdf");
                 string directory = Path.GetDirectoryName(file);
                 PdfWriter writer = new PdfWriter(new PdfOptions(directory, null));
-                IEnumerable<ITag> tags = options.ParamsDocs ? new ParamsInputsOutputs(model).Document() : model.Document();
+                IEnumerable<ITag> tags = options.ParamsDocs ? new ParamsInputsOutputs(model).Document() : AutoDocumentation.Document(model);
                 // Make params/inputs/outputs docs landscape (they have some rather wide tables). Everything else, portrait.
                 bool vertical = !options.ParamsDocs;
                 writer.Write(pdfFile, tags, vertical);

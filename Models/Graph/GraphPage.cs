@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using APSIM.Shared.Utilities;
+using APSIM.Shared.Documentation;
 using Models.CLEM;
 using Models.Core;
 using Models.Core.Run;
@@ -13,7 +14,7 @@ namespace Models
 {
 
     /// <summary>Descibes a page of graphs for the tags system.</summary>
-    public class GraphPage : AutoDocumentation.ITag
+    public class GraphPage : ITag
     {
         /// <summary>The image to put into the doc.</summary>
         public List<Graph> Graphs { get; set; } = new List<Graph>();
